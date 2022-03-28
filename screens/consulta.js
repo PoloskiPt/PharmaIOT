@@ -73,7 +73,7 @@ export default function Consulta() {
     <View style={{backgroundColor: "rgb(94,147,174)", 
      shadowOffset: { width: 4, height: 4 }, 
     borderRadius:10, width:'29%', height:'90%', 
-    marginRight:'1%',shadowColor:"rgba(0,0,0,0.25)",flex:1,flexDirection:'row', borderColor:'red', borderWidth:2}}>
+    marginRight:'1%',shadowColor:"rgba(0,0,0,0.25)",flex:1,flexDirection:'row'}}>
      <View style={{width:'80%'}}>
      <RNPickerSelect
               
@@ -81,7 +81,8 @@ export default function Consulta() {
                 inputAndroid: { 
                 color: 'white',
                 textAlign:'left',
-                marginLeft:'5%',
+                fontSize: 12,
+                marginLeft:'6%',
                 height:'100%',
                 width: '90%',
                 borderWidth:2,
@@ -90,7 +91,7 @@ export default function Consulta() {
                inputIOS: {
                  color:'white',
                  textAlign:'left',
-                 marginLeft:'5%',
+                 marginLeft:'6%',
                  height:'100%'
                },
 
@@ -106,7 +107,7 @@ export default function Consulta() {
           />
      </View>
       
-      <View style={{width:'15%',alignSelf:'center'}}>
+      <View style={{width:'15%',alignSelf:'center',marginLeft:'3%'}}>
 
       <Icon name='caret-down-outline' style={{color:'white', alignSelf:'center'}} size={15}  type="Ionicons" />
 
@@ -119,38 +120,40 @@ export default function Consulta() {
      shadowOffset: { width: 4, height: 4 }, 
     borderRadius:10, width:'29%', height:'90%', 
     marginRight:'1%',shadowColor:"rgba(0,0,0,0.25)",flex:1,flexDirection:'row'}}>
-     <View style={{width:'89%'}}>
+     <View style={{width:'80%'}}>
      <RNPickerSelect            
               style={{ 
                 inputAndroid: { 
                 color: 'white',
                 textAlign:'left',
-                marginLeft:'5%',
+                fontSize: 12,
+                marginLeft:'6%',
                 height:'100%',
                 width: '100%',
                }, 
                inputIOS: {
                  color:'white',
                  textAlign:'left',
-                 marginLeft:'5%',
-                 height:'100%'
+                 marginLeft:'6%',
+                 height:'100%',
+                 fontSize: 12,
                },
 
           }}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => console.log(value)}
               items={[
-                { label: 'Armazém', value: 'football' },
-                { label: 'Gaveta_1', value: 'baseball' },
-                { label: 'Gaveta_2', value: 'hockey' },
+                { label: 'Mês Passado', value: 'football' },
+                { label: 'Últimos 7 dias', value: 'baseball' },
+                { label: 'Últimas 24 horas', value: 'hockey' },
               ]}
               placeholder={{ label: " ", value: "default" }}
           />
      </View>
       
-      <View style={{width:'9%', justifyContent:'center', marginRight:'2%'}}>
+      <View style={{width:'15%', justifyContent:'center',marginLeft:'3%'}}>
 
-      <Icon name='caret-down-outline' style={{color:'white'}} size={9}  type="Ionicons" />
+      <Icon name='caret-down-outline' style={{color:'white'}} size={15}  type="Ionicons" />
 
       </View>
 
@@ -159,16 +162,19 @@ export default function Consulta() {
      
     
       <FlatButton 
-         width = '20%'
+         
+         width = '29%'
          height = '90%'
          text="Exportar Relatório" 
          borderRadius={10} 
          textColor= "white"
          color="#5E93AE"
          textAlign="left" 
+         borderWidth={2}
+         borderColor="red"
          paddingVertical={10}
-         paddingHorizontal={10}
-         fontSize={14}
+         paddingHorizontal={6}
+         fontSize={12}
          onPress={() => alert('a exportar...')}         
          />     
  
@@ -187,9 +193,9 @@ export default function Consulta() {
       />
     
       <View style={{margin:20, flex:1, flexDirection:'row', borderWidth:1,borderColor:'red' }}>
-      <Text>De:</Text>
-      <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{fontWeight: 'bold', fontSize:15, borderWidth:1.5, borderColor:'#C4C4C4', alignItems:'center'}}>{text} 
-      <Icon name='calendar-outline' style={{height:40, width:40,color:'black'}} size={16}  type="Ionicons" /> </Text>  
+      <Text style={{marginRight:4}}>De</Text>
+      <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{fontWeight: 'bold', fontSize:15, borderWidth:1.5, paddingLeft:7.5,  borderColor:'#C4C4C4', alignItems:'center'}}>{text} 
+      <Icon name='calendar-outline' style={{color:'black',marginLeft:'3%'}} size={16} type="Ionicons" /> </Text>  
            
       </View>
       

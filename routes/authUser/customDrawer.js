@@ -5,8 +5,6 @@ import {DrawerNavigatorItems} from 'react-navigation-drawer';
 import { useNavigation } from '@react-navigation/native';
 import { borderColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
-
-
 function CustomDrawer({...props}){
 
 const navigation = useNavigation();    
@@ -31,8 +29,8 @@ const logout = () => {
                  <View style={styles.logoutContainer}>           
                  <TouchableWithoutFeedback onPress={logout}>     
                     <View style={styles.logoutContainerWrapper}>
-                         <Icon  name='log-out-outline' style={{height:40, width:40,color:'white'}} size={45}  type="Ionicons" />
-                            <Text style={styles.logoutLabel}>Sair</Text>
+                         <Icon  name='log-out-outline' style={{color:'white'}} size={45}  type="Ionicons" />
+                         <Text style={styles.logoutLabel}>Sair</Text>
                     </View>
                     </TouchableWithoutFeedback>    
                  </View>
@@ -43,7 +41,6 @@ const logout = () => {
 
 export default CustomDrawer;
 
-
 const styles = StyleSheet.create({
     drawerContainer:{
         backgroundColor: '#398BEA',
@@ -53,11 +50,13 @@ const styles = StyleSheet.create({
     },
     logoContainer:{
         marginTop: '20%',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '20%'
     },  
     logoText:{
         color: 'white',
-        fontSize: 44
+        fontSize: 44,
+        marginBottom: '5%'
     },
     logoImage:{
         height:44,
@@ -83,18 +82,19 @@ const styles = StyleSheet.create({
         display:'flex',
         flexDirection: 'row',
         marginTop: '10%',
+        height: '50%'
 },
 logoutContainer:{
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',  
-    marginLeft: '3  %'
+    marginLeft: '3%'
 },
 logoutLabel:{
     fontSize: 26,   
     color: 'white',
-    marginLeft: '5%',
+    marginLeft: '2%',
 },
 logoutContainerWrapper:{    
     flexDirection: 'row', 

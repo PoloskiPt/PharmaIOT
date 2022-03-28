@@ -4,12 +4,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import NotificationsModal from '../screens/notificationsModal';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-export default function Header( {navigation, title} ){
+export default function Header( {navigation, title, tipo} ){
     const navigation2 = useNavigation();
-   
+    const tipoHeader = {tipo};
     const openMenu = () => {
         navigation.openDrawer();
     }
@@ -20,22 +21,23 @@ export default function Header( {navigation, title} ){
             index: 0,
             routes: [{ name: 'notificationsModal' }],
           });*/
-          navigation2.navigate('notificationsModal');
-          
+          navigation2.navigate('notificationsModal');          
     }
 
     let headerIconSize = Platform.OS === 'android' ? 30 : 40;
 
-    return(
-        <View style={styles.header}>
-            <MaterialIcons name='menu' size={headerIconSize} onPress={openMenu} style={styles.iconHamburguer}/>
-            <View style={styles.headerTitle}>
-
-                <Text style={styles.headerText}>{title}</Text>
+   
+        return(
+            <View style={styles.header}>
+                <MaterialIcons name='menu' size={headerIconSize} onPress={openMenu} style={styles.iconHamburguer}/>
+                <View style={styles.headerTitle}>
+    
+                    <Text style={styles.headerText}>{title}</Text>
+                </View>
+                <MaterialIcons name='notifications' onPress={openNotifications} color="#FFBE72" size={headerIconSize} style={styles.iconNotifications}/>
             </View>
-            <MaterialIcons name='notifications' onPress={openNotifications} color="#FFBE72" size={headerIconSize} style={styles.iconNotifications}/>
-        </View>
-    )
+        )
+    
 }
 
 const styles = StyleSheet.create({

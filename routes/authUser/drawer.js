@@ -69,6 +69,14 @@ const RootDrawerNavigator = createDrawerNavigator({
 }, {
     contentComponent: CustomDrawer,
     initialRouteName: 'Monitorização',
+    swipeEnabled: false,
+    animationEnabled: false,
+    lazy: true,
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 0,
+      },
+    }),
     contentOptions: {
         itemsContainerStyle:{
             width: '100%',

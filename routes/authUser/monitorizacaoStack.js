@@ -10,7 +10,7 @@ const screens = {
         screen: Monitorizacao,
         navigationOptions: ({ navigation }) => {
             return {
-                header: () => <Header navigation ={navigation} title='Monitorização' />,
+                header: () => <Header navigation ={navigation} title='Monitorização' tipo='titulo'/>,
             }
         }
     },

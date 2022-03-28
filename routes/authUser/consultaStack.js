@@ -9,7 +9,7 @@ const screens = {
         screen: Consulta,
         navigationOptions: ({ navigation }) => {
             return {
-                header: () => <Header navigation ={navigation} title= 'Consulta' />,
+                header: () => <Header navigation ={navigation} title= 'Consulta' tipo='titulo'/>,
             }    
         }
     },

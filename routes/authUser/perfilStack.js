@@ -9,7 +9,7 @@ const screens = {
         screen: Perfil,
         navigationOptions: ({ navigation }) => {
             return {
-                header: () => <Header navigation ={navigation} title= 'Perfil' />,
+                header: () => <Header navigation ={navigation} title= 'Perfil' tipo='titulo'/>,
             }
         }
     },

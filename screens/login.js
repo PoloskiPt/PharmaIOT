@@ -1,14 +1,14 @@
-import React, {useState, useContext} from 'react';
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput} from 'react-native';
+import React, {useState, useContext, useEffect} from 'react';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput, Dimensions} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
 import CheckBox from 'react-native-check-box';
 import FlatButton from '../shared/button';
 import Navigator from '../routes/authUser/drawer';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from '../store/CredentialsContext';
+import { ActivityIndicator } from 'react-native-paper';
 
 export default function Login(){
 
@@ -19,6 +19,11 @@ const [passwordVisible, setPasswordVisible] = useState(true);
 const navigation = useNavigation();
 const img1 = require('../assets/eye-slash-solid.png');
 const [imageAsset, setImageAsset] = useState(img1);
+const [message, setMessage] = useState(null);
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const hideShowPassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -33,9 +38,15 @@ const hideShowPassword = () => {
     }
 }
 
-
+const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
+const [data, setData] = useState([]);
 const verificaUser = () => {
+    
+
+   
+    console.log(data);
     console.log(email);
+ 
     if(email === 'teste' && password == '1'){
       
         navigation.reset({
@@ -45,12 +56,40 @@ const verificaUser = () => {
           
     }
     else {
-        alert('utilizador não existe');
+        alert('utilizador não existe' + windowHeight);
     }
 }
 
-const loginPressed = () => {
-    //validate user
+//fazer Login
+async function login(){
+    
+    let reqs = await fetch(loginUrl,{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            pass: password
+        })
+    });
+
+    let ress = await reqs.json()
+    .then(console.log())
+    .catch((error) => alert(error))
+    //alert(ress);
+    //console.log(ress.status);
+    console.log(ress);
+   if(ress.status === true){
+    navigation.reset({
+        index: 0,
+        routes: [{name: 'homeScreen'}],
+      });
+   }else{
+        alert("Credenciais incorretas");
+   }
+   
 }
 
 
@@ -101,7 +140,9 @@ return(
                      </View>
              {/*Fim password section */} 
                   
-                  
+                  <View>
+                      {message && ( <Text>{message}</Text> )}
+                  </View>
 
                    <View style={loginStyles.lembrarDadosSection}>
                        <CheckBox 
@@ -111,22 +152,23 @@ return(
                        />
                        <Text style={loginStyles.lembrarDadosLabel}>Lembrar os meus dados</Text>
                    </View>   
-                
-                </View>    
-                                           
-                 <FlatButton 
-                 fontSize={20} 
-                 borderRadius={7.5} 
-                 text='Entrar' 
-                 textColor="white" 
-                 color="#398BEA" 
-                 onPress={verificaUser} 
-                 paddingVertical={14}
-                 paddingHorizontal={10}
-                 fontWeight='bold'
-                 textAlign = 'center'
-                 />  
-                   
+                           
+                   <FlatButton 
+                    fontSize={20} 
+                    borderRadius={7.5} 
+                    text='Entrar' 
+                    textColor="white" 
+                    color="#398BEA" 
+                    onPress={login} 
+                    paddingVertical={14}
+                    paddingHorizontal={10}
+                    fontWeight='bold'
+                    textAlign = 'center'
+                    />                  
+
+                </View>                       
+               
+                                                 
                 <View style={loginStyles.webConnectLogoContainer}>
                      <Image source={require('../assets/logo_2bWebConnect.png')}/>
                 </View> 
