@@ -137,6 +137,7 @@ export default function Consulta() {
                  marginLeft:'6%',
                  height:'100%',
                  fontSize: 12,
+                 height:'100%'
                },
 
           }}
