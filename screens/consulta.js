@@ -24,7 +24,6 @@ export default function Consulta() {
     console.warn("A date has been picked: ", date);
     hideDatePicker();
   };
-   
   
   const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -47,7 +46,6 @@ export default function Consulta() {
 
       setShow(true);
       setMode(currentMode);
-   
     }
 
   let cardHeight = Platform.OS === 'android'? '95%': "95%";
@@ -67,11 +65,11 @@ export default function Consulta() {
 
   return (
     <View style={globalStyles.container}>         
-       
+    
       <View style={{ height:'8%', width:'90%', marginTop:4, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
 
     <View style={{backgroundColor: "rgb(94,147,174)", 
-     shadowOffset: { width: 4, height: 4 }, 
+    shadowOffset: { width: 4, height: 4 }, 
     borderRadius:10, width:'29%', height:'90%', 
     marginRight:'1%',shadowColor:"rgba(0,0,0,0.25)",flex:1,flexDirection:'row'}}>
      <View style={{width:'80%'}}>
@@ -85,25 +83,24 @@ export default function Consulta() {
                 marginLeft:'6%',
                 height:'100%',
                 width: '90%',
-                borderWidth:2,
-                borderColor:'red'
                }, 
                inputIOS: {
-                 color:'white',
-                 textAlign:'left',
-                 marginLeft:'6%',
-                 height:'100%'
+                color:'white',
+                textAlign:'left',
+                marginLeft:'6%',
+                height:'100%'
                },
 
-          }}
+          }}  
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => console.log(value)}
+              placeholder={{ }}
               items={[
                 { label: 'Armazém', value: 'football' },
                 { label: 'Gaveta_1', value: 'baseball' },
                 { label: 'Gaveta_2', value: 'hockey' },
               ]}
-              placeholder={{ label: " ", value: "default" }}
+              
           />
      </View>
       
@@ -143,12 +140,12 @@ export default function Consulta() {
           }}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => console.log(value)}
+              placeholder={{ }}
               items={[
                 { label: 'Mês Passado', value: 'football' },
                 { label: 'Últimos 7 dias', value: 'baseball' },
                 { label: 'Últimas 24 horas', value: 'hockey' },
               ]}
-              placeholder={{ label: " ", value: "default" }}
           />
      </View>
       
@@ -197,7 +194,7 @@ export default function Consulta() {
       <Text style={{marginRight:4}}>De</Text>
       <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{fontWeight: 'bold', fontSize:15, borderWidth:1.5, paddingLeft:7.5,  borderColor:'#C4C4C4', alignItems:'center'}}>{text} 
       <Icon name='calendar-outline' style={{color:'black',marginLeft:'3%'}} size={16} type="Ionicons" /> </Text>  
-           
+      <Text style={{marginLeft:5}}>Até</Text>
       </View>
       
       {show && (

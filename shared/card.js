@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,Dimensions } from 'react-native';
 import { Platform } from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
 
 export default function Card(props){
     return(
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        height: Platform.OS === 'android'? "82%": "75%",
+        height: Platform.OS === 'android'? (windowHeight*0.70) : (windowHeight*0.5),
         width: Platform.OS === 'ios'? 340: 360,
         marginTop: Platform.OS === 'ios'? 150: 120,
         marginHorizontal: 4,

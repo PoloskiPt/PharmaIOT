@@ -97,11 +97,10 @@ logoutLabel:{
     marginLeft: '2%',
 },
 logoutContainerWrapper:{    
-    flexDirection: 'row', 
-    paddingBottom:10, 
+    flexDirection: 'row',  
     paddingLeft:10,
     width:'100%', 
-    height: '35%',
+    height: '90%',
     alignItems:'center', 
     justifyContent:'flex-start',
 },
