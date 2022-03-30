@@ -6,7 +6,7 @@ import { globalStyles } from '../styles/global';
 {ConfiguracoesCard}
 
 export default function Configuracoes({navigation}) {
-  
+
   return (
     <View style={globalStyles.container}>
       <ConfiguracoesCard>

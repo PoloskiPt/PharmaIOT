@@ -11,9 +11,11 @@ import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { borderColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { Platform, Image } from "react-native";
+import * as SecureStore from 'expo-secure-store';
+import React from "react";
 
 
-let teste = 'Igor Soares';
+let teste = 'Igor Soares'
 
 const RootDrawerNavigator = createDrawerNavigator({
     

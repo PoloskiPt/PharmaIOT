@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext,componentDidMount } from 'react';
 import Monitorizacao from './screens/monitorizacao';
 import AppLoading from 'expo-app-loading';
 import useFonts from './hooks/useFonts';
@@ -10,58 +10,45 @@ import Navigation from './routes/login/index';
 import { LogBox } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CredentialsContext} from './store/CredentialsContext';
-
+import * as SecureStore from 'expo-secure-store';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesature components, check out new Gestures system!",
 ]);
 
-
-
 export default function App() {
+
+  const [result, onChangeResult] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   
-  const [appReady, setAppReady] = useState(false);
 
- const [fontsLoaded, setFontsLoaded] = useState(false);
-
- const [storedCredentials, setStoredCredentials] = useState("");
-
- const checkLoginCredentials = () => {
-    AsyncStorage.getItem('flowerCribCredentials')
-    .then((result) => {
-      if(result !== null){
-          setStoredCredentials(JSON.parse(result));
-          console.log(result);
+  useEffect(() => {
+   
+    async function getValueFor(key){
+     
+      let result = await SecureStore.getItemAsync(key);
+      if(result){
+         onChangeResult(result);
+         setIsLoggedIn(true);
       }else{
-        setStoredCredentials(null);
+        onChangeResult(false);
+         setIsLoggedIn(false);
       }
-    })
-    .catch(error => console.log(error))
- }
+  }
 
-  const LoadFonts = async () => {
-    await useFonts(); // We have to await this call here
-  };
+    getValueFor('session');
+    //alert("app sessao " + result);
 
-  if (!appReady) {
-    return (
-      <AppLoading
-        startAsync={checkLoginCredentials}
-        onFinish={() => setAppReady(true)}
-        onError={(error) => console.log(error)}
-      />
-    );
-  } else {
+  }, []);
+
+  if(isLoggedIn === null) return null;
     
     return (     
-
-          <Navigation />
-            
+          <Navigation result={isLoggedIn}/>        
     );
-  }
+
   {/*<CredentialsContext.Provider value={{storedCredentials, setStoredCredentials}}>  </CredentialsContext.Provider>*/} 
   
 }

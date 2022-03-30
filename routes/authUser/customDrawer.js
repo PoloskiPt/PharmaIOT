@@ -3,13 +3,20 @@ import {View, Text, Image,Button, StyleSheet,TouchableWithoutFeedback, Dimension
 import Icon from 'react-native-vector-icons/Ionicons';
 import {DrawerNavigatorItems} from 'react-navigation-drawer';
 import { useNavigation } from '@react-navigation/native';
-import { borderColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import {deleteItem} from '../../store/functions';
+import * as SecureStore from 'expo-secure-store';
 
 function CustomDrawer({...props}){
+
+async function deleteItem(key){
+    await SecureStore.deleteItemAsync(key);
+}
 
 const navigation = useNavigation();    
 
 const logout = () => {
+    
+    deleteItem('session');
     navigation.reset({
         index: 0,
         routes: [{name: 'Login'}],

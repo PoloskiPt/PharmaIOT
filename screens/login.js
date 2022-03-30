@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, createContext} from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput, Dimensions} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
@@ -9,8 +9,29 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from '../store/CredentialsContext';
 import { ActivityIndicator } from 'react-native-paper';
+import md5 from 'md5';
+import * as SecureStore from 'expo-secure-store';
 
-export default function Login(){
+
+export default function Login(route){
+const [name, setName] = useState('');
+const [key, onChangeKey] = useState('');    
+const [value, onChangeValue] = useState('');    
+const [result, onChangeResult] = useState('');    
+
+async function save(key, value){
+    await SecureStore.setItemAsync(key, value);
+}
+
+async function getValueFor(key){
+    let result = await SecureStore.getItemAsync(key);
+    if(result){
+        onChangeResult(result);
+        //alert(result);
+    }else{
+        alert('Inválid key')
+    }
+}
 
 const [checkBoxState, setCheckBoxState]  = useState(false);
 const [email, setEmail] = useState('');
@@ -38,31 +59,15 @@ const hideShowPassword = () => {
     }
 }
 
+useEffect(() => {
+    console.log("login: " + JSON.stringify(route.params));
+}, [])
+
 const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
 const [data, setData] = useState([]);
-const verificaUser = () => {
-    
-
-   
-    console.log(data);
-    console.log(email);
- 
-    if(email === 'teste' && password == '1'){
-      
-        navigation.reset({
-            index: 0,
-            routes: [{name: 'homeScreen'}],
-          });
-          
-    }
-    else {
-        alert('utilizador não existe' + windowHeight);
-    }
-}
 
 //fazer Login
-async function login(){
-    
+async function login(){  
     let reqs = await fetch(loginUrl,{
         method: 'POST',
         headers:{
@@ -71,40 +76,43 @@ async function login(){
         },
         body: JSON.stringify({
             email: email,
-            pass: password
+            pass: md5(password)
         })
     });
-
-    let ress = await reqs.json()
+    let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    //alert(ress);
-    //console.log(ress.status);
-    console.log(ress);
-   if(ress.status === true){
+    save('email', resp.email);
+    save('pass', resp.pass);
+    save('session', "true");
+    getValueFor('email');
+    getValueFor('pass');
+    //getValueFor('session');
+    setName(resp.name);
+    console.log(resp.status);
+    //console.log(resp.name);
+    console.log(name);
+    
+   if(resp.status === true){
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen'}],
       });
    }else{
         alert("Credenciais incorretas");
-   }
-   
+   }  
 }
-
 
 return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-       <View  style={loginStyles.loginContainer}>
+       <View style={loginStyles.loginContainer}>
             <View style={loginStyles.loginContent}>     
             <View style={loginStyles.loginLogoContainer}>
                 <Image source={require('../assets/logoLogin.png')} style={loginStyles.loginLogoImage} />
                 <Text style={loginStyles.loginLogoText}>PharmaIOT</Text>
             </View>
-
             <Card>
-            <Text style={loginStyles.loginLabel}>Login</Text>
-              
+            <Text style={loginStyles.loginLabel}>Login</Text>           
                 <View style={loginStyles.loginForm}>       
                    <View style={loginStyles.emailSection}>
                        <View style={loginStyles.labelLogoContainer}>
@@ -115,17 +123,14 @@ return(
                         onChangeText={setEmail}
                         keyboardType='email-address' 
                         style={loginStyles.borderTextInput}/>
-                   </View>    
-                   
+                   </View>              
                    <View style={loginStyles.passwordSection}>
                        
                        <View style={loginStyles.labelLogoContainer}>
                             <Image style={loginStyles.loginIcons}source= {require('../assets/lock.png')}/>
                             <Text style={loginStyles.passwordLabel}>Password</Text>                   
                        </View>    
-
-             {/* Password section */} 
-                  
+             {/* Password section */}                
                      <View style={loginStyles.passwordView}>                      
                        <TextInput 
                        onChangeText={setPassword}
