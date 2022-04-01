@@ -17,6 +17,9 @@ const navigation = useNavigation();
 const logout = () => {
     
     deleteItem('session');
+    deleteItem('sessionEmail', '');
+    deleteItem('sessionPassword', '');
+   
     navigation.reset({
         index: 0,
         routes: [{name: 'Login'}],

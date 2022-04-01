@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { globalStyles } from '../styles/global';
-import Card from '../shared/card';
-import { MaterialIcons } from '@expo/vector-icons';
-import ReviewForm from './reviewForm';
+import { UserContext } from '../store/userContext';
 
 export default function Monitorizacao({ navigation }) {
+  const {sessionPassword, sessionEmail} = useContext(UserContext);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userPassword, setUserPassword] = useState(null);
+  useEffect(() => {
+    console.log('vazio email: ' + sessionEmail);
+    console.log('password : ' + sessionPassword);
+    setUserPassword(sessionPassword);
+    setUserEmail(sessionEmail);
+
+}, [sessionPassword, sessionEmail])
 
   /*  const [modelOpen, setModelOpen] = useState(false);
 
@@ -60,7 +68,8 @@ export default function Monitorizacao({ navigation }) {
       />
     </View>*/
     <View backgroundColor="blue">
-      <Text>Monitorizacao</Text>
+      <Text>Õ email é: {userEmail}</Text>
+      <Text>A password é: {userPassword}</Text>
     </View>
   );
 }

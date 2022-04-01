@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text} from 'react-native';
 import homeScreen from '../../screens/homeScreen';
 import Login from '../../screens/login';
@@ -8,13 +8,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { CredentialsContext } from '../../store/CredentialsContext';
 import * as SecureStore from 'expo-secure-store';
 import ImageStylePropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes';
+import { UserContext } from '../../store/userContext';
 
 const Stack = createStackNavigator();
 
-
-
 const Navigation = ({result}) =>{
-    console.log(" navegação: " + result);
     if(result == true){
         return (           
             <NavigationContainer>

@@ -2,7 +2,6 @@ import * as SecureStore from 'expo-secure-store';
 import { useState } from 'react';
 import React from 'react';
 
- 
 export async function save(key, value){
     await SecureStore.setItemAsync(key, value);
 }

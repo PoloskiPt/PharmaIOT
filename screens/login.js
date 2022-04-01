@@ -4,24 +4,53 @@ import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
 import CheckBox from 'react-native-check-box';
 import FlatButton from '../shared/button';
-import Navigator from '../routes/authUser/drawer';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CredentialsContext } from '../store/CredentialsContext';
-import { ActivityIndicator } from 'react-native-paper';
 import md5 from 'md5';
 import * as SecureStore from 'expo-secure-store';
+import { UserContext } from '../store/userContext';
 
 
 export default function Login(route){
 const [name, setName] = useState('');
-const [key, onChangeKey] = useState('');    
-const [value, onChangeValue] = useState('');    
 const [result, onChangeResult] = useState('');    
+      
+const {contextEmail, 
+    setContextEmail ,
+    contextPassword,
+    setContextPassword, 
+    contextRememberMe, 
+    setContextRememberMe,
+    setSessionEmail,
+    setSessionPassword,
+} = useContext(UserContext);
 
 async function save(key, value){
     await SecureStore.setItemAsync(key, value);
 }
+
+async function deleteItem(key){
+    await SecureStore.deleteItemAsync(key);
+}
+
+async function getValueForEmail(){
+     
+    let result = await SecureStore.getItemAsync('email');
+    if(result){
+      setContextEmail(result);
+    }else{
+      setContextEmail('');
+    }
+  }
+
+async function getValueForPassword(){
+     
+    let result = await SecureStore.getItemAsync('pass');
+    if(result){
+      setContextPassword(result);
+    }else{
+      setContextPassword('');
+    }
+  }
 
 async function getValueFor(key){
     let result = await SecureStore.getItemAsync(key);
@@ -34,17 +63,13 @@ async function getValueFor(key){
 }
 
 const [checkBoxState, setCheckBoxState]  = useState(false);
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
+const [email, setEmail] = useState(null);
+const [password, setPassword] = useState(null);
 const [passwordVisible, setPasswordVisible] = useState(true);   
 const navigation = useNavigation();
 const img1 = require('../assets/eye-slash-solid.png');
 const [imageAsset, setImageAsset] = useState(img1);
 const [message, setMessage] = useState(null);
-
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const hideShowPassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -60,14 +85,22 @@ const hideShowPassword = () => {
 }
 
 useEffect(() => {
-    console.log("login: " + JSON.stringify(route.params));
-}, [])
+    setEmail(contextEmail);
+    setPassword(contextPassword);
+    if(contextRememberMe == "true"){     
+        setEmail(contextEmail);
+        setCheckBoxState(true);   
+    }else{
+        setPassword(contextPassword);
+        setCheckBoxState(false);
+    }
+}, [contextEmail, setContextEmail ,contextPassword,setContextPassword, contextRememberMe, setContextRememberMe])
 
 const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
-const [data, setData] = useState([]);
 
 //fazer Login
 async function login(){  
+    
     let reqs = await fetch(loginUrl,{
         method: 'POST',
         headers:{
@@ -82,24 +115,43 @@ async function login(){
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    save('email', resp.email);
-    save('pass', resp.pass);
-    save('session', "true");
+  
+    if(checkBoxState === true){
+        setContextRememberMe("true");  
+        save('rememberMe', "true");
+        save('email', email);
+        save('pass', password);
+        getValueForEmail();
+        getValueForPassword();
+   
+    }else if(checkBoxState === false){
+        setContextRememberMe("false");  
+        deleteItem('rememberMe', 'false');
+        deleteItem('pass', '');
+        deleteItem('email', '');
+        getValueForEmail();
+        getValueForPassword();
+        
+    }
     getValueFor('email');
     getValueFor('pass');
-    //getValueFor('session');
     setName(resp.name);
-    console.log(resp.status);
-    //console.log(resp.name);
-    console.log(name);
     
    if(resp.status === true){
+    save('session', "true");
+    save('sessionEmail', email);
+    save('sessionPassword', password);
+    setSessionEmail(email);
+    setSessionPassword(password);
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen'}],
+        otherParam: 'chegou aqui'
       });
-   }else{
+
+    }else{
         alert("Credenciais incorretas");
+        
    }  
 }
 
@@ -120,6 +172,7 @@ return(
                              <Text style={loginStyles.emailLabel}>Email</Text>                      
                        </View>                       
                         <TextInput 
+                        value={email}
                         onChangeText={setEmail}
                         keyboardType='email-address' 
                         style={loginStyles.borderTextInput}/>
@@ -133,6 +186,7 @@ return(
              {/* Password section */}                
                      <View style={loginStyles.passwordView}>                      
                        <TextInput 
+                       value={password}
                        onChangeText={setPassword}
                        secureTextEntry={passwordVisible} 
                        keyboardType={'default'} 
@@ -153,7 +207,7 @@ return(
                        <CheckBox 
                        style={loginStyles.checkBox}
                        isChecked={checkBoxState}
-                       onClick={() => {setCheckBoxState(!checkBoxState)}}
+                       onClick={() => {{setCheckBoxState(!checkBoxState), console.log(checkBoxState)}}}
                        />
                        <Text style={loginStyles.lembrarDadosLabel}>Lembrar os meus dados</Text>
                    </View>   
@@ -172,8 +226,7 @@ return(
                     />                  
 
                 </View>                       
-               
-                                                 
+                                         
                 <View style={loginStyles.webConnectLogoContainer}>
                      <Image source={require('../assets/logo_2bWebConnect.png')}/>
                 </View> 
