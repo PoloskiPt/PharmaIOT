@@ -19,6 +19,7 @@ const logout = () => {
     deleteItem('session');
     deleteItem('sessionEmail', '');
     deleteItem('sessionPassword', '');
+    deleteItem('pharmacy', '');
    
     navigation.reset({
         index: 0,

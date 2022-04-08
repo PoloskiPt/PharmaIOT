@@ -4,7 +4,7 @@ import { globalStyles } from '../styles/global';
 import { UserContext } from '../store/userContext';
 
 export default function Monitorizacao({ navigation }) {
-  const {sessionPassword, sessionEmail} = useContext(UserContext);
+  const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Monitorizacao({ navigation }) {
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
 
-}, [sessionPassword, sessionEmail])
+}, [sessionPassword, sessionEmail, sessionPharmacy])
 
   /*  const [modelOpen, setModelOpen] = useState(false);
 
@@ -68,8 +68,9 @@ export default function Monitorizacao({ navigation }) {
       />
     </View>*/
     <View backgroundColor="blue">
-      <Text>Õ email é: {userEmail}</Text>
+      <Text>O email é: {userEmail}</Text>
       <Text>A password é: {userPassword}</Text>
+      <Text>A farmácia é: {sessionPharmacy}</Text>
     </View>
   );
 }

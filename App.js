@@ -32,6 +32,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [contextEmail, setContextEmail] = useState(null);
   const [contextPassword, setContextPassword] = useState(null);
+  const [sessionPharmacy, setSessionPharmacy] = useState(null);
   const [contextRememberMe, setContextRememberMe] = useState(null);
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
@@ -45,10 +46,21 @@ async function getValueForSession(){
     setSessionEmail(sessionEmail);
     let sessionPassword = await SecureStore.getItemAsync('sessionPassword');
     setSessionPassword(sessionPassword);
+    //let sessionPharmacy = await SecureStore.getItemAsync('')
     setIsLoggedIn(true);
     }else{
        setIsLoggedIn(false);
     }
+}
+
+async function getValueForSessionPharmacy(){
+     
+  let result = await SecureStore.getItemAsync('pharmacy');
+  if(result){
+    setSessionPharmacy(result);
+  }else{
+    setSessionPharmacy('');
+  }
 }
 
 async function getValueForEmail(){
@@ -71,8 +83,7 @@ async function getValueForPassword(){
   }
 }
 
-async function getValueForRememberMe(){
-     
+async function getValueForRememberMe(){   
   let result = await SecureStore.getItemAsync('rememberMe');  
     setContextRememberMe(result);
 }
@@ -82,6 +93,7 @@ async function getValueForRememberMe(){
     getValueForEmail();
     getValueForPassword();
     getValueForRememberMe();
+    getValueForSessionPharmacy();
 
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -117,7 +129,9 @@ async function getValueForRememberMe(){
       sessionEmail, 
       setSessionEmail,
       sessionPassword,
-      setSessionPassword
+      setSessionPassword,
+      sessionPharmacy,
+      setSessionPharmacy
       }}>
         
       <Navigation result={isLoggedIn}/>        

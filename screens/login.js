@@ -22,6 +22,8 @@ const {contextEmail,
     setContextRememberMe,
     setSessionEmail,
     setSessionPassword,
+    sessionPharmacy, 
+    setSessionPharmacy
 } = useContext(UserContext);
 
 async function save(key, value){
@@ -87,6 +89,7 @@ const hideShowPassword = () => {
 useEffect(() => {
     setEmail(contextEmail);
     setPassword(contextPassword);
+    //alert("o que acontece aos meninos depois do logoff? : " + contextEmail);
     if(contextRememberMe == "true"){     
         setEmail(contextEmail);
         setCheckBoxState(true);   
@@ -115,12 +118,14 @@ async function login(){
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
+    console.log(resp);
   
     if(checkBoxState === true){
         setContextRememberMe("true");  
         save('rememberMe', "true");
         save('email', email);
         save('pass', password);
+        save('pharmacy', resp.pharmacy);
         getValueForEmail();
         getValueForPassword();
    
@@ -141,8 +146,11 @@ async function login(){
     save('session', "true");
     save('sessionEmail', email);
     save('sessionPassword', password);
+    save('pharmacy', resp.pharmacy);
     setSessionEmail(email);
     setSessionPassword(password);
+    setSessionPharmacy(resp.pharmacy);
+    //setSessionPharmacy(resp.pharmacy);
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen'}],
@@ -217,7 +225,7 @@ return(
                     borderRadius={7.5} 
                     text='Entrar' 
                     textColor="white" 
-                    color="#398BEA" 
+                    color="#398BEA"  
                     onPress={login} 
                     paddingVertical={14}
                     paddingHorizontal={10}
