@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        height: Platform.OS === 'android'? (windowHeight*0.70) : (windowHeight*0.5),
+        height: (windowHeight*0.70) ,
         width: Platform.OS === 'ios'? 340: 360,
         marginTop: Platform.OS === 'ios'? 150: 120,
         marginHorizontal: 4,
