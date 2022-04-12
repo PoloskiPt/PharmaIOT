@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, View, Text, Dimensions, Button,TextInput, Platform, Modal} from 'react-native';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
@@ -10,6 +10,43 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function Consulta() {
+
+  const measurePointsUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
+  const [measurePoints, setMeasurePoints] = useState([]);
+  let teste= [];
+  //passar a farmacia por parametro mais tarde.
+  async function getMeasurePoints() {
+  let reqs = await fetch(measurePointsUrl,{
+      method: 'POST',
+      headers:{
+          'Accept':'application/json',
+          'Content-Type':'application/json',
+          'charset': 'utf-8',
+      },
+  });
+  let resp = await reqs.json()
+  .then(console.log())
+  .catch((error) => alert(error))
+  //console.log(resp);
+  
+  resp.map(element => {
+    teste.push(
+        { label: element['name'], value: element['sn'] },
+    )
+   }); 
+
+   setMeasurePoints(teste);
+   console.log(teste);
+
+  }
+
+  useEffect(() => {
+
+    getMeasurePoints();
+    console.log("teste: " + JSON.stringify(measurePoints));
+
+  }, [])
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -74,7 +111,6 @@ export default function Consulta() {
     marginRight:'1%',shadowColor:"rgba(0,0,0,0.25)",flex:1,flexDirection:'row'}}>
      <View style={{width:'80%'}}>
      <RNPickerSelect
-              
               style={{ 
                 inputAndroid: { 
                 color: 'white',
@@ -95,11 +131,7 @@ export default function Consulta() {
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => console.log(value)}
               placeholder={{ }}
-              items={[
-                { label: 'Armazém', value: 'football' },
-                { label: 'Gaveta_1', value: 'baseball' },
-                { label: 'Gaveta_2', value: 'hockey' },
-              ]}
+              items={measurePoints}
               
           />
      </View>
@@ -153,12 +185,8 @@ export default function Consulta() {
 
       <Icon name='caret-down-outline' style={{color:'white'}} size={15}  type="Ionicons" />
 
-      </View>
-
-          
-    </View>
-     
-    
+      </View>      
+    </View>    
       <FlatButton 
          
          width = '29%'
@@ -175,9 +203,7 @@ export default function Consulta() {
          fontSize={12}
          onPress={() => alert('a exportar...')}         
          />     
- 
-       
-              
+                  
       </View>
       <View height="92%">   
       <MainCard height={cardHeight}>

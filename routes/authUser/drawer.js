@@ -21,8 +21,7 @@ const RootDrawerNavigator = createDrawerNavigator({
     
     Perfil:{
         screen: PerfilStack,
-        navigationOptions: {                           
-            
+        navigationOptions: {                                      
             title:teste,               
             drawerIcon: (                          
                 <Image source={require('../../assets/user.png')} style={{height:50, width:50, marginLeft:'50%', marginRight:'5%'}}/>

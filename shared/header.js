@@ -40,8 +40,6 @@ export default function Header( {navigation, title, tipo} ){
 
         let notificationsData = await getNotifications();
         //console.log(notificationsData);
-
-
         navigation2.navigate('notificationsModal', {notificationsData});          
 
     }
