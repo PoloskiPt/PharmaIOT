@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, ScrollView , Modal, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, ScrollView ,Modal, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,7 +12,7 @@ const NotificationModal = (props) => {
     //console.log(notificationData);
     
     let teste = [];
-   notificationData.map(element => {
+    notificationData.map(element => {
     teste.push(
         <View key={element['input']} style={styles.notificationCard}>
             
@@ -23,7 +23,7 @@ const NotificationModal = (props) => {
 
             <View style={styles.statusView}>
                 <Text style={styles.notificationSubtitleText}>Mensagem: 
-                          {<Text style={{flexShrink: 1, fontSize:14}}> {element['message']}</Text>}
+                        {<Text style={{flexShrink: 1, fontSize:14}}> {element['message']}</Text>}
                 </Text>
             </View>
             
@@ -32,33 +32,29 @@ const NotificationModal = (props) => {
                 {element['solved'] === 1 ? <Text style={styles.statusResolved}>Resolvido</Text> : <Text style={styles.statusNotResolved}>Por resolver</Text>}
             </View>
             
-          
         </View>
     )
    }); 
   
     return (  
 
-           <View >
-              
-                <Modal animationType='slide' visible={props.modalState}>         
+            <View >
+                <Modal animationType="slide" 
+                Visible={props.modalState} >      
                 <SafeAreaView>
                 <View style={{display:'flex', height:'100%'}} >
                 <View style={styles.closeIcon}>
-                <TouchableHighlight>   
-                <Icon name='close-circle-outline' style={{color:'black'}} size={60}  type="Ionicons" onPress={() => props.navigation.pop()} />
+                <TouchableHighlight  >   
+                <Icon name='close-outline' style={{color:'black'}} size={40}  type="Ionicons" onPress={() => props.navigation.pop()}/>
                 </TouchableHighlight>
                 </View>
                 <ScrollView>
                     {teste}
                 </ScrollView>
-                
                 </View>   
                 </SafeAreaView>        
                 </Modal>    
-              
             </View>
-           
     );
 }
 
@@ -70,12 +66,12 @@ const styles = StyleSheet.create({
     },
     statusView:{
         flexDirection:'row',
-        padding:2,
+        padding:'1%',
         alignItems:'center',
     },
     notificationCard:{
-        borderRadius: 10,
-        padding:10,
+        borderRadius: 8,
+        padding:'2%',
         elevation: 10,
         backgroundColor: '#fff',
         shadowOffset: {width: 1, height: 1},
@@ -83,11 +79,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
         marginHorizontal: '1%',
-        marginVertical: '1%',
+        marginVertical: '1.2%',
     },
     closeIcon:{
-        flexDirection:'row', 
-        justifyContent:'center'
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: '1%',
     },
     statusResolved:{
         color:'green',
