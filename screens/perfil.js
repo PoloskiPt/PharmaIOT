@@ -1,17 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text,TouchableHighlight } from 'react-native';
 import { globalStyles } from '../styles/global';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import PerfilCard from '../shared/perfilCard';
 
 export default function Perfil() {
-
-  let cardHeight = Platform.OS === 'android'? '90%': "90%";
+  const navigateBack = useNavigation();
+  let cardHeight = Platform.OS === 'android'? '85%': "85%";
   let nome = 'Igor Soares';
   let email = 'igorsoares@ua.pt';
+
   return (
     <View style={globalStyles.container}>
+      <SafeAreaView>
+      <View style={styles.backIcon}>
+      <TouchableHighlight >   
+      <Icon name='arrow-back-outline' style={{color:'black'}} size={40}  type="Ionicons" onPress={() => navigateBack.navigate('homeScreen') }/>
+      </TouchableHighlight>
+      </View> 
+      </SafeAreaView>
+      <PerfilCard height={cardHeight}>  
       
-      <PerfilCard height={cardHeight}>
         <View style={styles.perfilContainer}>
             
             <View style={styles.borderContainer}>
@@ -62,7 +73,7 @@ export default function Perfil() {
 
 const styles = StyleSheet.create({
   perfilContainer:{
-    padding:28
+    padding:28,
   },
   borderContainer:{
     borderBottomWidth:1 ,
@@ -71,6 +82,13 @@ const styles = StyleSheet.create({
     marginBottom: '3%'
 
   },
+  backIcon:{
+    marginRight: '78%',
+    justifyContent: 'center',
+    marginTop: '0.5%',
+    marginBottom: '-5.5%',
+
+},
   resultText:{
     fontSize:14
   },
