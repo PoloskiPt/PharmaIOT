@@ -130,7 +130,7 @@ export default function Consulta() {
           }}  
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => console.log(value)}
-              placeholder={{ }}
+              placeholder={{}}
               items={measurePoints}
               
           />
@@ -174,9 +174,9 @@ export default function Consulta() {
               onValueChange={(value) => console.log(value)}
               placeholder={{ }}
               items={[
-                { label: 'Mês Passado', value: 'football' },
-                { label: 'Últimos 7 dias', value: 'baseball' },
-                { label: 'Últimas 24 horas', value: 'hockey' },
+                { label: 'Últimas 24 horas', value: 'day' },
+                { label: 'Mês Passado', value: 'month' },
+                { label: 'Últimos 7 dias', value: 'week' },           
               ]}
           />
      </View>

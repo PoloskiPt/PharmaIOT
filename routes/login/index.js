@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import {View, Text} from 'react-native';
 import homeScreen from '../../screens/homeScreen';
 import Login from '../../screens/login';
+import Perfil from '../../screens/perfil';
 import NotificationsModal from '../../screens/notificationsModal';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -20,6 +21,7 @@ const Navigation = ({result}) =>{
             <Stack.Screen name="homeScreen" component={homeScreen} />   
             <Stack.Screen name="Login" component={Login} initialParams={{sessao:2}} />                                                                                            
             <Stack.Screen name="notificationsModal" component={NotificationsModal} />
+            <Stack.Screen name="Perfil" component={Perfil} />
             </Stack.Navigator>
          </NavigationContainer>                   
 );
@@ -30,6 +32,7 @@ const Navigation = ({result}) =>{
             <Stack.Screen name="Login" component={Login} />        
                  <Stack.Screen name="homeScreen" component={homeScreen} />                                                                                
                 <Stack.Screen name="notificationsModal" component={NotificationsModal} />
+                <Stack.Screen name="Perfil" component={Perfil} />
             </Stack.Navigator>
          </NavigationContainer>                   
 );

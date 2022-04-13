@@ -125,6 +125,7 @@ async function login(){
         save('rememberMe', "true");
         save('email', email);
         save('pass', password);
+        save('name', resp.name + ' ' + resp.surname);
         save('pharmacy', resp.pharmacy);
         getValueForEmail();
         getValueForPassword();
@@ -136,7 +137,7 @@ async function login(){
         deleteItem('email', '');
         getValueForEmail();
         getValueForPassword();
-        
+        gb
     }
     getValueFor('email');
     getValueFor('pass');
@@ -153,8 +154,7 @@ async function login(){
     //setSessionPharmacy(resp.pharmacy);
     navigation.reset({
         index: 0,
-        routes: [{name: 'homeScreen'}],
-        otherParam: 'chegou aqui'
+        routes: [{name: 'homeScreen', params: {}}],
       });
 
     }else{

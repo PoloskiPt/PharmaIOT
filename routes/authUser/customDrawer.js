@@ -1,16 +1,31 @@
-import React from 'react';
-import {View, Text, Image,Button, StyleSheet,TouchableWithoutFeedback, Dimensions} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Image,Button, StyleSheet,TouchableWithoutFeedback, Dimensions, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {DrawerNavigatorItems} from 'react-navigation-drawer';
 import { useNavigation } from '@react-navigation/native';
-import {deleteItem} from '../../store/functions';
 import * as SecureStore from 'expo-secure-store';
 
 function CustomDrawer({...props}){
 
+const [name, setName] = useState('');
+
 async function deleteItem(key){
     await SecureStore.deleteItemAsync(key);
 }
+
+useEffect(() => {
+    getValueForName();
+})
+
+async function getValueForName(){
+     
+    let result = await SecureStore.getItemAsync('name');
+    if(result){
+        setName(result);
+    }else{
+        setName('User');
+    }
+  }
 
 const navigation = useNavigation();    
 
@@ -25,6 +40,13 @@ const logout = () => {
         index: 0,
         routes: [{name: 'Login'}],
       });
+} 
+
+const navigatePerfil = () => {
+
+    alert('Abrir perfil');
+    navigation.navigate('Perfil');     
+
 }
 
     return(
@@ -33,6 +55,14 @@ const logout = () => {
             <Image style={styles.logoImage} source={require('../../assets/logo_drawer.png')}/>
             <Text style={styles.logoText}>PharmaIOT</Text>
             </View>
+            <TouchableOpacity onPress={navigatePerfil}>
+                <View style={{ flexDirection:'column', alignItems: 'center', justifyContent:'flex-start'}}>
+                    <Image source={require('../../assets/user.png')} style={{height:60, width:60}}/>
+                    <Text style={{fontSize:22}}>{name}</Text>
+                </View>
+            </TouchableOpacity>
+            
+           
             <View style={styles.drawerItems}>         
                 <DrawerNavigatorItems  {...props} width={'100%'}/>
             </View>
@@ -92,8 +122,9 @@ const styles = StyleSheet.create({
     drawerItems:{
         display:'flex',
         flexDirection: 'row',
-        marginTop: '10%',
-        height: '50%'
+        marginTop: '20%',
+        height: '35%',
+
 },
 logoutContainer:{
     flex: 1,

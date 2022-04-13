@@ -5,30 +5,14 @@ import ConsultaStack from "./consultaStack";
 import RelatorioStack from "./relatorioStack";
 import ConfiguracoesStack from "./configuracoesStack";
 import PerfilStack from "./perfilStack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {SafeAreaView, ScrollView, Dimensions,View, Text} from 'react-native';
 import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { borderColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-import { Platform, Image } from "react-native";
 import * as SecureStore from 'expo-secure-store';
-import React from "react";
-
-
-let teste = 'Igor Soares'
+import { Platform, Image } from "react-native";
+import React, {useContext, useState} from "react";
 
 const RootDrawerNavigator = createDrawerNavigator({
     
-    Perfil:{
-        screen: PerfilStack,
-        navigationOptions: {                                      
-            title:teste,               
-            drawerIcon: (                          
-                <Image source={require('../../assets/user.png')} style={{height:50, width:50, marginLeft:'50%', marginRight:'5%'}}/>
-            ),
-          }, 
-    },
-
     Monitorização:  {
         screen: MonitorizacaoStack,     
         navigationOptions: {

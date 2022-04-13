@@ -8,7 +8,6 @@ import { createAppContainer } from "react-navigation";
 import Header from "../../shared/header";
 import HeaderConfiguracoes from "../../shared/headerConfiguracoes";
 import React from 'react';
-import { shadowColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const screens = {
 
