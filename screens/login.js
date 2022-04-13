@@ -137,7 +137,6 @@ async function login(){
         deleteItem('email', '');
         getValueForEmail();
         getValueForPassword();
-        gb
     }
     getValueFor('email');
     getValueFor('pass');
