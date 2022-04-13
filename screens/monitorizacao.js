@@ -15,6 +15,7 @@ export default function Monitorizacao({ navigation }) {
 
 }, [sessionPassword, sessionEmail, sessionPharmacy])
 
+
   /*  const [modelOpen, setModelOpen] = useState(false);
 
     const [reviews, setReviews] = useState([
