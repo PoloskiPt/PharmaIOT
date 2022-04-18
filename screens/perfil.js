@@ -111,6 +111,7 @@ export default function Perfil(props) {
               {profileData && <Text>{profileData.tel}</Text>}
             </View>
            
+           
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Morada </Text>
               {profileData && <Text>{profileData.address}</Text>}

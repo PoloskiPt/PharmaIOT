@@ -3,12 +3,14 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native
 import { Button } from 'react-native-paper';
 import ConfiguracoesCard from '../shared/configuracoesCard';
 import { globalStyles } from '../styles/global';
+import { SafeAreaView } from 'react-native-safe-area-context';
 {ConfiguracoesCard}
 
 export default function Configuracoes({navigation}) {
 
   return (
     <View style={globalStyles.container}>
+         <SafeAreaView>
       <ConfiguracoesCard>
            
            <View style={{paddingTop:'2%', paddingBottom:'2%'}}>
@@ -28,6 +30,7 @@ export default function Configuracoes({navigation}) {
            </View>
            
       </ConfiguracoesCard>
+          </SafeAreaView>
     </View>
   );
 }
