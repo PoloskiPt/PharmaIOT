@@ -11,11 +11,9 @@ import md5 from 'md5';
 export default function Perfil(props) {
   const navigateBack = useNavigation();
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
-  let nome = 'Igor Soares';
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [profileData, setProfileData] = useState([]);
-  let [dogImage, setDogImage] = useState(null);
   let response;
   const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
   
@@ -64,17 +62,8 @@ export default function Perfil(props) {
     });
       const data = await response.json()
       setProfileData(data);
-      //console.log("A resposta: " + response.email);
-     // console.log(profileData.email); 
-      //console.log(profileData);
-    }
-    
+    }  
     fetchMyAPI();
-    //console.log(JSON.stringify(profileData));
-    //console.log(profileData);
-    //console.log(profileData);
-    console.log(profileData.name);
-    //console.log(response);
   },[]);
 
   return (
