@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Platform,Pressable, TouchableOpacity} from 'rea
 import { globalStyles } from '../styles/global';
 import RelatorioCard from '../shared/relatorioCard';
 import FlatButton from '../shared/button';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Relatorio() {
   
@@ -10,13 +11,15 @@ export default function Relatorio() {
   
   return (
     <View style={globalStyles.container}>
+
       <RelatorioCard height={cardHeight}>
+      <SafeAreaView>
         <View style={styles.cardTextContainer}>
             <Text style={styles.textoCard}>Pretende gerar o relatório quinzenal?</Text>
             <Text style={styles.textoCard}>Dependendo do volume de dados irá demorar alguns segundos</Text>
             <Text style={styles.textoCard}>Por favor aguarde.</Text>
         </View>
-       
+        </SafeAreaView> 
       <View style={styles.buttonContainer}>    
          <FlatButton 
          text="Criar Relatório" 
@@ -32,6 +35,7 @@ export default function Relatorio() {
      </View> 
    
       </RelatorioCard>
+      
     </View>
   );
 }

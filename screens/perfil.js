@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text,TouchableHighlight} from 'react-native';
+import { StyleSheet, View, Text,TouchableHighlight,ScrollView} from 'react-native';
 import { globalStyles } from '../styles/global';
 import FlatButton from '../shared/button';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -14,6 +14,7 @@ export default function Perfil() {
   let email = 'igorsoares@ua.pt';
 
   return (
+    
     <View style={globalStyles.container}>
       <SafeAreaView>
       <View style={styles.backIcon}>
@@ -22,7 +23,7 @@ export default function Perfil() {
       </TouchableHighlight>
       </View> 
      
-      <PerfilCard height={cardHeight}>  
+      <PerfilCard  height={cardHeight}>  
       
         <View style={styles.perfilContainer}>
             
@@ -70,23 +71,20 @@ export default function Perfil() {
         </View> 
        <View style={styles.buttonContainer}> 
         <FlatButton 
-         width='40%'
          text="Salvar" 
          textColor= "white"
-         color="#5E93AE"
-         textAlign="left" 
+         color="#17A2B8" 
          borderRadius={25} 
-         borderWidth={2}
-         borderColor="red"
-         paddingVertical={15}
-         paddingHorizontal={45}
-         fontSize={12}
-         onPress={() => alert('a exportar...')}         
+         paddingVertical={11}
+         paddingHorizontal={52}
+         fontSize={16}
+         onPress={() => alert('salvando...')}         
          />   
-         </View>
+          </View> 
       </PerfilCard >
       </SafeAreaView>
     </View>
+    
   );
 }
 
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     width:'100%',
-    marginTop:'12%',
+    marginTop:'10%',
     alignItems:'center',
     position:'relative',
 
