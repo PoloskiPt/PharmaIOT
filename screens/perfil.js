@@ -7,11 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PerfilCard from '../shared/perfilCard';
 import * as SecureStore from 'expo-secure-store';
 import md5 from 'md5';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Perfil(props) {
   const navigateBack = useNavigation();
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [email, setEmail] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [password, setPassword] = useState();
   const [profileData, setProfileData] = useState([]);
   let response;
@@ -40,11 +42,16 @@ export default function Perfil(props) {
     }
   }
 
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   useEffect( async () => {
-    
+    setIsLoading(true);
     getValueForEmail();
     getValueForPassword();  
-   
     async function fetchMyAPI() {
       let email = await getValueForEmail();
       let password = await getValueForPassword();
@@ -61,13 +68,20 @@ export default function Perfil(props) {
         })
     });
       const data = await response.json()
-      setProfileData(data);
+
+      setProfileData(data);  
+      setIsLoading(false);
     }  
+    
     fetchMyAPI();
   },[]);
 
   return (
+   
     <View style={globalStyles.container}>
+      
+      
+      {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
       <SafeAreaView>
       <View style={styles.backIcon}>
       <TouchableHighlight >   

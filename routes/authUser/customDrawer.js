@@ -44,10 +44,8 @@ const logout = () => {
 
 const navigatePerfil = () => {
 
-    alert('Abrir perfil');
     navigation.navigate('Perfil'); 
     props.navigation.closeDrawer();
-
 
 }
 
