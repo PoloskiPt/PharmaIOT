@@ -1,15 +1,13 @@
-import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
+import { createDrawerNavigator} from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
 import MonitorizacaoStack from "./monitorizacaoStack";
 import ConsultaStack from "./consultaStack";
 import RelatorioStack from "./relatorioStack";
 import ConfiguracoesStack from "./configuracoesStack";
-import PerfilStack from "./perfilStack";
 import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
-import * as SecureStore from 'expo-secure-store';
 import { Platform, Image } from "react-native";
-import React, {useContext, useState} from "react";
+import React from "react";
 
 const RootDrawerNavigator = createDrawerNavigator({
     
@@ -67,10 +65,7 @@ const RootDrawerNavigator = createDrawerNavigator({
             width: '100%',
         },
         itemStyle: {     
-            marginBottom: Platform.OS === 'android'? '1%': '5%',
-            //borderColor:'red',
-            //borderWidth:2,
-            
+            marginBottom: Platform.OS === 'android'? '1%': '5%',   
         },
         activeTintColor: 'black',
         inactiveTintColor: 'white',

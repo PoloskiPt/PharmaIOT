@@ -30,8 +30,6 @@ export default function Consulta() {
   let resp = await reqs.json()
   .then(console.log())
   .catch((error) => alert(error))
-  //console.log(resp);
-  
   resp.map(element => {
     teste.push(
         { label: element['name'], value: element['sn'] },

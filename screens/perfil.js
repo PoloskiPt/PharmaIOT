@@ -10,7 +10,7 @@ import * as SecureStore from 'expo-secure-store';
 import md5 from 'md5';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-export default function Perfil(props) {
+export default function Perfil() {
   const navigateBack = useNavigation();
   let cardHeight = Platform.OS === 'android'? '90%': "90%";
   const [email, setEmail] = useState();
@@ -37,12 +37,10 @@ export default function Perfil(props) {
     if(result){
       setPassword(md5(result));
       return md5(result);
-      alert(password);
     }else{
       setPassword('');
     }
   }
-
 
   useEffect( async () => {
     setIsLoading(true);
@@ -51,7 +49,6 @@ export default function Perfil(props) {
     async function fetchMyAPI() {
       let email = await getValueForEmail();
       let password = await getValueForPassword();
-      //console.log(password);
        response = await fetch(loginUrl,{
         method: 'POST',
         headers:{
@@ -64,7 +61,6 @@ export default function Perfil(props) {
         })
     });
       const data = await response.json()
-
       setProfileData(data);  
       setIsLoading(false);
     }  

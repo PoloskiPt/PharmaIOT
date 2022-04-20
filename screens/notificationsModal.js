@@ -1,19 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView ,Modal, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const NotificationModal = (props) => {
-    console.log(props.modalState);
-    
-    //console.log(props.route.params.notificationsData[1]['pharmacy']);
-    const notificationData = props.route.params.notificationsData;
-    //console.log(notificationData);
-    
-    let teste = [];
+    const notificationData = props.route.params.notificationsData;  
+   
+    let notificationsArray = [];
+   
     notificationData.map(element => {
-    teste.push(
+    
+    notificationsArray.push(
         <View key={element['input']} style={styles.notificationCard}>
             
             <View style={styles.statusView}>
@@ -49,7 +47,7 @@ const NotificationModal = (props) => {
                 </TouchableHighlight>
                 </View>
                 <ScrollView>
-                    {teste}
+                    {notificationsArray}
                 </ScrollView>
                 </View>   
                 </SafeAreaView>        

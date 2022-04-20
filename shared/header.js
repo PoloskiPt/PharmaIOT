@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, Modal,TouchableWithoutFeedback, Keyboard, Dimensions,Platform } from 'react-native';
+import { StyleSheet, Text, View,Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {getNotifications} from '../functions/genericFunctions';
 
-
-
-export default function Header( {navigation, title, tipo} ){
+export default function Header( {navigation, title} ){
+    const headerIconSize = Platform.OS === 'android' ? 30 : 40;
+    
     const navigation2 = useNavigation();
-    const tipoHeader = {tipo};
+   
     const openMenu = () => {
         navigation.openDrawer();
     }
-
+   
     async function openNotifications(){
 
         let notificationsData = await getNotifications();
@@ -20,10 +20,9 @@ export default function Header( {navigation, title, tipo} ){
         navigation2.navigate('notificationsModal', {notificationsData});          
 
     }
-
-    let headerIconSize = Platform.OS === 'android' ? 30 : 40;
-
    
+    
+
         return(
             <View style={styles.header}>
                 <MaterialIcons name='menu' size={headerIconSize} onPress={openMenu} style={styles.iconHamburguer}/>
@@ -34,7 +33,6 @@ export default function Header( {navigation, title, tipo} ){
                 <MaterialIcons name='notifications' onPress={openNotifications} color="#FFBE72" size={headerIconSize} style={styles.iconNotifications}/>
             </View>
         )
-    
 }
 
 const styles = StyleSheet.create({
