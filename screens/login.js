@@ -1,16 +1,16 @@
-import React, {useState, useContext, useEffect, createContext} from 'react';
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput, Dimensions} from 'react-native';
+import React, {useState, useContext, useEffect} from 'react';
+import {View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
 import CheckBox from 'react-native-check-box';
 import FlatButton from '../shared/button';
 import { useNavigation } from '@react-navigation/native';
 import md5 from 'md5';
-import * as SecureStore from 'expo-secure-store';
 import { UserContext } from '../store/userContext';
+import {save} from '../functions/genericFunctions';
 
 
-export default function Login(route){
+export default function Login(){
 const [name, setName] = useState('');
 const [result, onChangeResult] = useState('');    
       
@@ -26,9 +26,6 @@ const {contextEmail,
     setSessionPharmacy
 } = useContext(UserContext);
 
-async function save(key, value){
-    await SecureStore.setItemAsync(key, value);
-}
 
 async function deleteItem(key){
     await SecureStore.deleteItemAsync(key);

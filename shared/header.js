@@ -1,11 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Modal,TouchableWithoutFeedback, Keyboard, Dimensions,Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import NotificationsModal from '../screens/notificationsModal';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationEvents } from 'react-navigation';
+import {getNotifications} from '../functions/genericFunctions';
 
 
 
@@ -14,26 +11,6 @@ export default function Header( {navigation, title, tipo} ){
     const tipoHeader = {tipo};
     const openMenu = () => {
         navigation.openDrawer();
-    }
-    const numbers = [1, 2, 3, 4, 5];
-    const notificationsUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
-
-    //passar a farmacia por parametro mais tarde.
-    async function getNotifications() {
-    let reqs = await fetch(notificationsUrl,{
-        method: 'POST',
-        headers:{
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'charset': 'utf-8',
-        },
-    });
-    let resp = await reqs.json()
-    .then(console.log())
-    .catch((error) => alert(error))
-    //console.log(resp);
-    return resp;
-
     }
 
     async function openNotifications(){
