@@ -7,8 +7,8 @@ import FlatButton from '../shared/button';
 import { useNavigation } from '@react-navigation/native';
 import md5 from 'md5';
 import { UserContext } from '../store/userContext';
-import {save} from '../functions/genericFunctions';
-
+import {save, deleteItem} from '../functions/genericFunctions';
+import * as SecureStore from 'expo-secure-store';
 
 export default function Login(){
 const [name, setName] = useState('');
@@ -25,11 +25,6 @@ const {contextEmail,
     sessionPharmacy, 
     setSessionPharmacy
 } = useContext(UserContext);
-
-
-async function deleteItem(key){
-    await SecureStore.deleteItemAsync(key);
-}
 
 async function getValueForEmail(){
      

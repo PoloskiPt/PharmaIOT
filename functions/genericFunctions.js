@@ -25,8 +25,13 @@ export async function getNotifications() {
     }
 
 
-    
 // ** stores a value on the secure store **//
 export async function save(key, value){
         await SecureStore.setItemAsync(key, value);
     }
+
+// ** deletes a value on the secure store **//
+export async function deleteItem(key){
+        await SecureStore.deleteItemAsync(key);
+    }
+
