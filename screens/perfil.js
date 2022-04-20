@@ -42,11 +42,6 @@ export default function Perfil(props) {
     }
   }
 
-  function sleep(ms) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
-  }
 
   useEffect( async () => {
     setIsLoading(true);
@@ -79,8 +74,7 @@ export default function Perfil(props) {
   return (
    
     <View style={globalStyles.container}>
-      
-      
+         
       {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
       <SafeAreaView>
       <View style={styles.backIcon}>

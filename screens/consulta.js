@@ -8,14 +8,17 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Consulta() {
 
   const measurePointsUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
   const [measurePoints, setMeasurePoints] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   let teste= [];
   //passar a farmacia por parametro mais tarde.
   async function getMeasurePoints() {
+  setIsLoading(true);
   let reqs = await fetch(measurePointsUrl,{
       method: 'POST',
       headers:{
@@ -37,7 +40,7 @@ export default function Consulta() {
 
    setMeasurePoints(teste);
    console.log(teste);
-
+   setIsLoading(false);
   }
 
   useEffect(() => {
@@ -101,8 +104,9 @@ export default function Consulta() {
   const screenWidth = Dimensions.get("window").width;
 
   return (
-    <View style={globalStyles.container}>         
     
+    <View style={globalStyles.container}>         
+      {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={{ height:'8%', width:'90%', marginTop:4, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
 
     <View style={{backgroundColor: "rgb(94,147,174)", 
