@@ -16,7 +16,6 @@ export default function Header( {navigation, title} ){
     async function openNotifications(){
 
         let notificationsData = await getNotifications();
-        //console.log(notificationsData);
         navigation2.navigate('notificationsModal', {notificationsData});          
 
     }

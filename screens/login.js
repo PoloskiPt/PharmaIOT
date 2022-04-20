@@ -7,7 +7,7 @@ import FlatButton from '../shared/button';
 import { useNavigation } from '@react-navigation/native';
 import md5 from 'md5';
 import { UserContext } from '../store/userContext';
-import {save, deleteItem} from '../functions/genericFunctions';
+import {save, deleteItem, storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
 
 export default function Login(){
@@ -23,7 +23,8 @@ const {contextEmail,
     setSessionEmail,
     setSessionPassword,
     sessionPharmacy, 
-    setSessionPharmacy
+    setSessionPharmacy,
+    expoPushToken
 } = useContext(UserContext);
 
 async function getValueForEmail(){
@@ -50,7 +51,6 @@ async function getValueFor(key){
     let result = await SecureStore.getItemAsync(key);
     if(result){
         onChangeResult(result);
-        //alert(result);
     }else{
         alert('Inválid key')
     }
@@ -81,7 +81,6 @@ const hideShowPassword = () => {
 useEffect(() => {
     setEmail(contextEmail);
     setPassword(contextPassword);
-    //alert("o que acontece aos meninos depois do logoff? : " + contextEmail);
     if(contextRememberMe == "true"){     
         setEmail(contextEmail);
         setCheckBoxState(true);   
@@ -110,7 +109,6 @@ async function login(){
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    console.log(resp);
   
     if(checkBoxState === true){
         setContextRememberMe("true");  
@@ -142,7 +140,11 @@ async function login(){
     setSessionEmail(email);
     setSessionPassword(password);
     setSessionPharmacy(resp.pharmacy);
-    //setSessionPharmacy(resp.pharmacy);
+    console.log("teste: " + expoPushToken);
+    console.log("pharmacy: " + resp.pharmacy);
+    let datatime = "12/02/12";
+    let tokenResult = await storeNotificationToken(expoPushToken, resp.pharmacy, datatime);
+    console.log("resutado query: " + JSON.stringify(tokenResult));
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen', params: {}}],
@@ -150,7 +152,6 @@ async function login(){
 
     }else{
         alert("Credenciais incorretas");
-        
    }  
 }
 

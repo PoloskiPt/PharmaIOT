@@ -37,7 +37,6 @@ export default function Consulta() {
    }); 
 
    setMeasurePoints(teste);
-   console.log(teste);
    setIsLoading(false);
   }
 
