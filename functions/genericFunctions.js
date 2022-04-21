@@ -3,6 +3,33 @@ import * as SecureStore from 'expo-secure-store';
 /** ENDPOINTS **/
 const notificationsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
 const tokensEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/tokens/createToken.php";
+const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
+
+//** GET MEASURE POINTS **/
+
+export async function getMeasurePoints() {
+    let measurePointsArray = [];
+    
+    let reqs = await fetch(measurePointsEndpoint,{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+            'charset': 'utf-8',
+        },
+    });
+    let resp = await reqs.json()
+    .then(console.log())
+    .catch((error) => alert(error))
+    
+    resp.map(element => {
+        measurePointsArray.push(
+          { label: element['name'], value: element['sn'] },
+      )
+     }); 
+  
+     return measurePointsArray;
+    }
 
 //**  GET NOTIFICATIONS **/
 

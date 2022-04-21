@@ -7,53 +7,31 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import {getMeasurePoints} from '../functions/genericFunctions';
 
-export default function Monitorizacao({ navigation }) {
+export default function Monitorizacao() {
+  
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
-  const measurePointsUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
-  let teste= [];
   const [measurePoints, setMeasurePoints] = useState([]);
-  async function getMeasurePoints() {
-    let reqs = await fetch(measurePointsUrl,{
-        method: 'POST',
-        headers:{
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'charset': 'utf-8',
-        },
-    });
-    let resp = await reqs.json()
-    .then(console.log())
-    .catch((error) => alert(error))
-    //console.log(resp);
-    
-    resp.map(element => {
-      teste.push(
-          { label: element['name'], value: element['sn'] },
-      )
-     }); 
-  
-     setMeasurePoints(teste);
-     console.log(teste);
-
-    }
-  
-    useEffect(() => {
-  
-      getMeasurePoints();
-      console.log("teste: " + JSON.stringify(measurePoints));
-  
-    }, [])
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
+  
+  async function requestMeasurePoints(){
+
+      let resultMeasurePoints = await getMeasurePoints();
+      console.log(resultMeasurePoints);
+      setMeasurePoints(resultMeasurePoints);
+
+  }
+  
   useEffect(() => {
-    console.log('vazio email: ' + sessionEmail);
-    console.log('password : ' + sessionPassword);
+    
+    requestMeasurePoints(); 
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
 
-}, [sessionPassword, sessionEmail, sessionPharmacy])
+  }, [sessionPassword, sessionEmail, sessionPharmacy])
 
    return (
    
