@@ -7,27 +7,42 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {getMeasurePoints} from '../functions/genericFunctions';
+import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctions';
+
 
 export default function Monitorizacao() {
   
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
+  const [monitoringData, setmonitoringData] = useState();
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
   
-  async function requestMeasurePoints(){
+
+  async function requestMeasurePoints(id){
 
       let resultMeasurePoints = await getMeasurePoints();
-      console.log(resultMeasurePoints);
+      //console.log(resultMeasurePoints);
       setMeasurePoints(resultMeasurePoints);
+      requestMeasurePointData(resultMeasurePoints[id].value);
+     
+  }
+
+  async function requestMeasurePointData(sn){
+
+    let measurePointData = await getMeasurePointData(sn);
+    setmonitoringData(measurePointData);
 
   }
   
   useEffect(() => {
     
-    requestMeasurePoints(); 
+    requestMeasurePoints(0); 
+    //console.log(measurePoints[0].value);
+
+    //requestMeasurePointData(measurePoints[0].value);
+    
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
 
@@ -67,7 +82,7 @@ flex:1,flexDirection:'row'}}>
           
       />
  </View>
-
+ 
   <View style={{width:'15%',alignSelf:'center',marginLeft:'3%'}}>
 
   <Icon name='caret-down-outline' style={{color:'white', alignSelf:'center'}} size={15}  type="Ionicons" />
@@ -79,10 +94,15 @@ flex:1,flexDirection:'row'}}>
       <MonoCard height={cardHeight}>
       <SafeAreaView>
     <View style={styles.monoContainer}>
+     
       <Text>O email é: {userEmail}</Text>
       <Text>A password é: {userPassword}</Text>
-      <Text>A farmácia é: {sessionPharmacy}</Text>
+      <Text>A farmácia é: {sessionPharmacy}</Text>    
+      {monitoringData && <Text>{monitoringData[0].temp}</Text>}
+      {monitoringData && <Text>{monitoringData[0].hum}</Text>}
     </View>
+
+ 
 
     <View style={styles.buttonContainer}> 
         <FlatButton 
@@ -99,6 +119,8 @@ flex:1,flexDirection:'row'}}>
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   monoContainer:{

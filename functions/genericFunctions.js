@@ -4,6 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 const notificationsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
 const tokensEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/tokens/createToken.php";
 const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
+const measurePointDataEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints_status.php";
 
 //** GET MEASURE POINTS **/
 
@@ -29,6 +30,25 @@ export async function getMeasurePoints() {
      }); 
   
      return measurePointsArray;
+    }
+
+//** GET MEASURE POINTS **/
+
+export async function getMeasurePointData(sn) {
+    let reqs = await fetch(measurePointDataEndpoint,{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            sn: sn,
+        })
+    });
+    let resp = await reqs.json()
+    .then(console.log())
+    .catch((error) => alert(error))
+    return resp;
     }
 
 //**  GET NOTIFICATIONS **/

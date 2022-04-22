@@ -5573,7 +5573,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-dom@>=17.0.1", "react-dom@17.0.1":
+"react-dom@>=16.3.0", "react-dom@>=17.0.1", "react-dom@17.0.1":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -5581,6 +5581,11 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.1"
+
+"react-donut-chart@^1.2.2":
+  "integrity" "sha512-HgDfM2djRfWBVDdWafKec92kE0ATM22UKL6GAJcDwvMU6NNPZa34e/aWI4iyKdJnkKNIkddQwGCwlziv26ON5Q=="
+  "resolved" "https://registry.npmjs.org/react-donut-chart/-/react-donut-chart-1.2.2.tgz"
+  "version" "1.2.2"
 
 "react-fast-compare@^2.0.1":
   "integrity" "sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw=="
@@ -5627,6 +5632,11 @@
   "version" "2.1.7"
   dependencies:
     "prop-types" "^15.5.7"
+
+"react-native-circular-chart@^1.0.8":
+  "integrity" "sha512-4aJb6jPgdshLNNIkRVfRI5BwAdWjDlJv3e9JyGyz+ck0orGSUiQesOPZ+GAm70E32s/OxGVc/fW6Mdljb8BFZA=="
+  "resolved" "https://registry.npmjs.org/react-native-circular-chart/-/react-native-circular-chart-1.0.8.tgz"
+  "version" "1.0.8"
 
 "react-native-codegen@^0.0.6":
   "integrity" "sha512-cMvrUelD81wiPitEPiwE/TCNscIVauXxmt4NTGcy18HrUd0WRWXfYzAQGXm0eI87u3NMudNhqFj2NISJenxQHg=="
@@ -5758,7 +5768,7 @@
   "resolved" "https://registry.npmjs.org/react-native-shared-element/-/react-native-shared-element-0.8.4.tgz"
   "version" "0.8.4"
 
-"react-native-svg@^12.3.0", "react-native-svg@> 6.4.1":
+"react-native-svg@^12.3.0", "react-native-svg@> 6.4.1", "react-native-svg@>=9":
   "integrity" "sha512-ESG1g1j7/WLD7X3XRFTQHVv0r6DpbHNNcdusngAODIxG88wpTWUZkhcM3A2HJTb+BbXTFDamHv7FwtRKWQ/ALg=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.3.0.tgz"
   "version" "12.3.0"
@@ -5792,7 +5802,7 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.67 || 1000.0.0", "react-native@>= 0.50.0", "react-native@>=0.20.0", "react-native@>=0.42.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>=0.65.0", "react-native@0.64.3":
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.67 || 1000.0.0", "react-native@>= 0.50.0", "react-native@>=0.20.0", "react-native@>=0.42.0", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.60.0", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@>=0.65.0", "react-native@0.64.3":
   "integrity" "sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
   "version" "0.64.3"
