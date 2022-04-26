@@ -4,6 +4,7 @@ import * as SecureStore from 'expo-secure-store';
 const notificationsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
 const tokensEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/tokens/createToken.php";
 const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
+const measurePointsDataIntervalEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePointsInterval.php";
 const measurePointDataEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints_status.php";
 
 //** GET MEASURE POINTS **/
@@ -28,7 +29,7 @@ export async function getMeasurePoints() {
           { label: element['name'], value: element['sn'] },
       )
      }); 
-  
+     
      return measurePointsArray;
     }
 
@@ -43,6 +44,27 @@ export async function getMeasurePointData(sn) {
         },
         body: JSON.stringify({
             sn: sn,
+        })
+    });
+    let resp = await reqs.json()
+    .then(console.log())
+    .catch((error) => alert(error))
+    return resp;
+    }
+
+    //** GET MEASURE POINTS **/
+
+export async function getMeasurePointDataInterval(sn,dt,dt1) {
+    let reqs = await fetch(measurePointsDataIntervalEndpoint,{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            sn: sn,
+            dt:dt,
+            dt1:dt1,
         })
     });
     let resp = await reqs.json()
