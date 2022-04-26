@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctions';
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Monitorizacao() {
   
@@ -40,14 +41,16 @@ export default function Monitorizacao() {
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const radius = 70;
   const circleCircumference = 2 * Math.PI * radius;
    
   async function requestMeasurePoints(id){
-
+    setIsLoading(true);
       let resultMeasurePoints = await getMeasurePoints();
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(resultMeasurePoints[id].value);
+      setIsLoading(false);
  
   }
 
@@ -68,7 +71,7 @@ export default function Monitorizacao() {
    return (
   
     <View style={globalStyles.container}>
-     
+      {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={{ height:'8%', width:'30%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
 <View style={{backgroundColor: "rgb(94,147,174)", 
 shadowOffset: { width: 4, height: 4 }, 

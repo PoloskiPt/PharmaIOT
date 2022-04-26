@@ -9,26 +9,35 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Spinner from 'react-native-loading-spinner-overlay';
-import {getMeasurePoints} from '../functions/genericFunctions';
+import {getMeasurePoints,getMeasurePointDataInterval} from '../functions/genericFunctions';
 
 export default function Consulta() {
 
  
   const [measurePoints, setMeasurePoints] = useState([]);
+  const [DataInterval, setDataInterval] = useState();
   const [isLoading, setIsLoading] = useState(true);
   
   //passar a farmacia por parametro mais tarde.
-    async function requestMeasurePoints(){
+    async function requestMeasurePoints(id){
       setIsLoading(true);
     let resultMeasurePoints = await getMeasurePoints();
+    requestMeasurePointDataInterval(resultMeasurePoints[id].value,"2022-04-04 17:40:21","2022-04-05 19:40:21");
     setMeasurePoints(resultMeasurePoints);
+    
     setIsLoading(false);
     }
+    async function requestMeasurePointDataInterval(sn,dt,dt1){
 
+      let measurePointInterval = await getMeasurePointDataInterval(sn,dt,dt1);
+      setDataInterval(measurePointInterval);
+      console.log(measurePointInterval);
+    }
+     
   useEffect(() => {
 
-    requestMeasurePoints();
-
+    requestMeasurePoints(0);
+    
   }, [])
   
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -114,7 +123,7 @@ export default function Consulta() {
 
           }}  
               useNativeAndroidPickerStyle={false}
-              onValueChange={(value) => console.log(value)}
+               onValueChange={(value) => requestMeasurePointDataInterval(value,"2022-04-04 17:40:21","2022-04-05 19:40:21")}
               placeholder={{}}
               items={measurePoints}
               
@@ -231,7 +240,9 @@ export default function Consulta() {
         onCancel={hideDatePicker}
       />
     </View>
-
+    <View>
+    {DataInterval && <Text>{DataInterval[0].dt} </Text>}
+    </View>
         </MainCard>
       </View>
     
