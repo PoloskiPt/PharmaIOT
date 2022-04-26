@@ -43,7 +43,6 @@ export default function Consulta() {
   useEffect(() => {
 
     getMeasurePoints();
-    console.log("teste: " + JSON.stringify(measurePoints));
 
   }, [])
 

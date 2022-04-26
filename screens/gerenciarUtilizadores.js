@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     width:'100%',
     marginTop:'5%',
     alignItems:'center',
-    //justifyContent:'center',
     position:'relative',
 
   },
