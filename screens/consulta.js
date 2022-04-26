@@ -9,43 +9,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Spinner from 'react-native-loading-spinner-overlay';
+import {getMeasurePoints} from '../functions/genericFunctions';
 
 export default function Consulta() {
 
-  const measurePointsUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
+ 
   const [measurePoints, setMeasurePoints] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  let teste= [];
+  
   //passar a farmacia por parametro mais tarde.
-  async function getMeasurePoints() {
-  setIsLoading(true);
-  let reqs = await fetch(measurePointsUrl,{
-      method: 'POST',
-      headers:{
-          'Accept':'application/json',
-          'Content-Type':'application/json',
-          'charset': 'utf-8',
-      },
-  });
-  let resp = await reqs.json()
-  .then(console.log())
-  .catch((error) => alert(error))
-  resp.map(element => {
-    teste.push(
-        { label: element['name'], value: element['sn'] },
-    )
-   }); 
-
-   setMeasurePoints(teste);
-   setIsLoading(false);
-  }
+    async function requestMeasurePoints(){
+      setIsLoading(true);
+    let resultMeasurePoints = await getMeasurePoints();
+    setMeasurePoints(resultMeasurePoints);
+    setIsLoading(false);
+    }
 
   useEffect(() => {
 
     getMeasurePoints();
 
   }, [])
-
+  
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
