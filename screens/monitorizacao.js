@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TouchableWithoutFeedback,TouchableHighlight, Keyboard} from 'react-native';
+import { StyleSheet, View, Text} from 'react-native';
 import { globalStyles } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctions';
-
+import Svg, { G, Circle } from "react-native-svg";
 
 export default function Monitorizacao() {
   
@@ -18,31 +18,26 @@ export default function Monitorizacao() {
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
-  
-
+  const radius = 70;
+  const circleCircumference = 2 * Math.PI * radius;
+   
   async function requestMeasurePoints(id){
 
       let resultMeasurePoints = await getMeasurePoints();
-      //console.log(resultMeasurePoints);
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(resultMeasurePoints[id].value);
-     
+ 
   }
 
   async function requestMeasurePointData(sn){
 
     let measurePointData = await getMeasurePointData(sn);
     setmonitoringData(measurePointData);
-
   }
   
   useEffect(() => {
     
     requestMeasurePoints(0); 
-    //console.log(measurePoints[0].value);
-
-    //requestMeasurePointData(measurePoints[0].value);
-    
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
 
@@ -94,12 +89,41 @@ flex:1,flexDirection:'row'}}>
       <MonoCard height={cardHeight}>
       <SafeAreaView>
     <View style={styles.monoContainer}>
-     
-      <Text>O email é: {userEmail}</Text>
-      <Text>A password é: {userPassword}</Text>
-      <Text>A farmácia é: {sessionPharmacy}</Text>    
       {monitoringData && <Text>{monitoringData[0].temp}</Text>}
       {monitoringData && <Text>{monitoringData[0].hum}</Text>}
+     
+         {monitoringData &&
+         <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
+         <View style={{alignItems:'center', justifyContent:'center'}}> 
+         <Svg height="160" width="160" viewBox="0 0 180 180" >
+          <G rotation={-90} originX="90" originY="90">
+            <Circle
+              cx="50%"
+              cy="50%"
+              r={radius}
+              stroke="#F1F6F9"
+              fill="transparent"
+              strokeWidth="10"  
+            />
+            <Circle
+              cx="50%"
+              cy="50%"
+              r={radius}
+              stroke="#14274E"
+              fill="transparent"
+              strokeWidth="10"
+              strokeDasharray={circleCircumference}
+              strokeDashoffset={circleCircumference - (circleCircumference * Math.round(monitoringData[0].hum)) / 100}
+              strokeLinecap="round"
+            />
+          </G>
+         
+        </Svg>
+        <Text style={{position:'absolute', textAlign: 'center', fontSize:24, fontWeight: "600"}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
+        </View>
+        </View>
+      
+        }
     </View>
 
  
