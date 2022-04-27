@@ -261,7 +261,8 @@ const styles = StyleSheet.create({
     borderStyle:"solid",
     borderColor:"rgba(126,118,118,0.88)",
     borderRadius:11,
-    position:'relative'
+    position:'relative',
+    marginBottom:'1.5%'
   },
   modalClose: {
     marginTop:20,
