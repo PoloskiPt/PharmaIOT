@@ -97,7 +97,10 @@ flex:1,flexDirection:'row'}}>
       
       <MonoCard height={cardHeight} >
      
-      <ScrollView style={{height:'100%'}}>
+      <ScrollView style={{height:'100%'}}
+        showsVerticalScrollIndicator ={false}
+        showsHorizontalScrollIndicator={false}
+      >
     
      
     <View style={styles.monoContainer}>
