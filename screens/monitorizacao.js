@@ -6,15 +6,12 @@ import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctions';
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Monitorizacao() {
-  
-  
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
@@ -189,10 +186,14 @@ flex:1,flexDirection:'row'}}>
             },
           ],
            legend: ["Humidade","Temperatura"],
+           withShadow: false,
         }}
-        width={360}
+        withInnerLines={true}
+        withOuterLines={false}     
+        width={300}
         height={240}
         chartConfig={chartConfig}
+        style={{marginVertical:"2%"}}
       />}
 
 
@@ -205,9 +206,7 @@ flex:1,flexDirection:'row'}}>
          onPress={() => alert('abrindo...')}         
          />   
        </View>
- 
-
-   
+  
     </View>
         
     </ScrollView>
@@ -220,37 +219,40 @@ flex:1,flexDirection:'row'}}>
   );
 }
 
+  // CONFIGURAÇÕES DO LINE CHART
+
 const chartConfig = {
   
   backgroundGradientFrom: "white",
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(1, 1, 1, ${opacity})`,
+  backgroundGradientToOpacity: 0.5,  
+  color: (opacity = 1) => `rgba(2, 1, 1, ${opacity})`,
   strokeWidth: 3, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false, // optional
   propsForDots: {
     r: "1",
     strokeWidth: "2",
     stroke: "#ffa726"
   },
-  legend:{
-    fontSize:"10"
-  }
+  useShadowColorFromDataset: true,
+  propsForBackgroundLines: {
+    strokeDasharray: ""
+  },
+  propsForLabels:{
+    fontSize:15,  
+    fontWeight:400,
+  },
+
+  propsForHorizontalLabels:{
+    fontSize: "15",
+    x:"50"
+  } 
 };
 
 const styles = StyleSheet.create({
   monoContainer:{
     height:'87.5%',
-  },
-  modalToggle: {
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#f2f2f2',
-    padding:10,
-    borderRadius:10,
-    alignSelf: 'center'
+    padding: '4%',
   },
   buttonContainer:{
     marginTop:'4%',
