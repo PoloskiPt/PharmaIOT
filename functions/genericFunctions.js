@@ -52,7 +52,27 @@ export async function getMeasurePointData(sn) {
     return resp;
     }
 
- 
+    //** GET MEASURE POINTS **/
+
+export async function getMeasurePointDataInterval(sn,dt,dt1) {
+    let reqs = await fetch(measurePointsDataIntervalEndpoint,{
+        method: 'POST',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            sn: sn,
+            dt:dt,
+            dt1:dt1,
+        })
+    });
+    let resp = await reqs.json()
+    .then(console.log())
+    .catch((error) => alert(error))
+    return resp;
+    }
+
 //**  GET NOTIFICATIONS **/
 
 export async function getNotifications() {
