@@ -13,26 +13,7 @@ import { LineChart } from "react-native-chart-kit";
 
 export default function Monitorizacao() {
   
-  const data = {
-    labels: ["06:00", "12:00"],
-    datasets: [
-      {
-        data: [13, 14, 15, 16, 20, 18],
-        color: () => "#097907", // optional
-        strokeWidth: 2, // optional, default
-        
-      },
-      {
-        data: [70, 23, 15, 46, 20, 25],
-        color: () => "#18A0FB", // optional
-        strokeWidth: 2 // optional
-      }
-    ],
-    
-    legend: ["Humidade","Temperatura"],
-    
-   
-  };
+  
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
@@ -186,12 +167,28 @@ flex:1,flexDirection:'row'}}>
       
         }
  
- <LineChart
-        data={data}
+ {monitoringData && <LineChart
+        data={{
+          labels : ["6pm", "9pm"],
+          datasets: [ 
+            {
+              data: [monitoringData[0].hum, 50],
+              color: () => "#097907", // optional
+              strokeWidth: 2, // optional, default
+            },
+            {
+              data: [monitoringData[0].temp, 25],
+              color: () => "#18A0FB", // optional
+              strokeWidth: 2, // optional, default
+            },
+          ],
+           legend: ["Humidade","Temperatura"],
+        }}
         width={360}
         height={240}
         chartConfig={chartConfig}
-      />
+      />}
+
 
      <View style={styles.buttonContainer}> 
         <FlatButton 
