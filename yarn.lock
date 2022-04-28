@@ -2086,6 +2086,11 @@
   "resolved" "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   "version" "1.0.2"
 
+"base-64@0.1.0":
+  "integrity" "sha1-eAqZyE59YAJgNhURxId2E78k9rs="
+  "resolved" "https://registry.npmjs.org/base-64/-/base-64-0.1.0.tgz"
+  "version" "0.1.0"
+
 "base@^0.11.1":
   "integrity" "sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg=="
   "resolved" "https://registry.npmjs.org/base/-/base-0.11.2.tgz"
@@ -3207,12 +3212,21 @@
   dependencies:
     "ua-parser-js" "^0.7.19"
 
+"expo-downloads-manager@^1.0.2":
+  "integrity" "sha512-aOkd6pEqXi3OVgH+HTal91vmfwNTjvrOmwZ+8/7Qp4eZNXaMEQ94OHkJJEVGYl9vMn9aPBeyO9M04GrStRNMSg=="
+  "resolved" "https://registry.npmjs.org/expo-downloads-manager/-/expo-downloads-manager-1.0.2.tgz"
+  "version" "1.0.2"
+  dependencies:
+    "expo-file-system" "^13.1.4"
+    "expo-intent-launcher" "^10.1.3"
+    "expo-sharing" "^10.1.1"
+
 "expo-error-recovery@~3.0.5":
   "integrity" "sha512-VM6OOecjt0aPu5/eCdGGJfNjvAZIemaQym0JF/+SA5IlLiPpEfbVCDTO/5yiS8Zb5fKpeABx+GCRmtfnFqvRRw=="
   "resolved" "https://registry.npmjs.org/expo-error-recovery/-/expo-error-recovery-3.0.5.tgz"
   "version" "3.0.5"
 
-"expo-file-system@~13.1.3", "expo-file-system@~13.1.4":
+"expo-file-system@^13.1.4", "expo-file-system@~13.1.3", "expo-file-system@~13.1.4":
   "integrity" "sha512-/C2FKCzrdWuEt4m8Pzl9J4MhKgfU0denVLbqoKjidv8DnsLQrscFNlLhXuiooqWwsxB2OWAtGEVnPGJBWVuNEQ=="
   "resolved" "https://registry.npmjs.org/expo-file-system/-/expo-file-system-13.1.4.tgz"
   "version" "13.1.4"
@@ -3227,12 +3241,17 @@
   dependencies:
     "fontfaceobserver" "^2.1.0"
 
+"expo-intent-launcher@^10.1.3":
+  "integrity" "sha512-Gc3Zs4HvsyZJahbQoC0/4DSQ+EcGTFfo4FF0J+j6R0eS32DgdKWq7ErHyAQFDmpmLxGH+M13imoBP8CglENOWg=="
+  "resolved" "https://registry.npmjs.org/expo-intent-launcher/-/expo-intent-launcher-10.1.3.tgz"
+  "version" "10.1.3"
+
 "expo-keep-awake@~10.0.2":
   "integrity" "sha512-Ro1lgyKldbFs4mxhWM+goX9sg0S2SRR8FiJJeOvaRzf8xNhrZfWA00Zpr+/3ocCoWQ3eEL+X9UF4PXXHf0KoOg=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.0.2.tgz"
   "version" "10.0.2"
 
-"expo-media-library@~14.0.1":
+"expo-media-library@~14.0.0", "expo-media-library@~14.0.1":
   "integrity" "sha512-a7NGFxZvns81y0fRZJsBROXFWKtyEMaodw+x32IPNhKLUAn+X1ggfBS8FbNpUs3bA4ZvhjFQBn59dxPfcHHxEg=="
   "resolved" "https://registry.npmjs.org/expo-media-library/-/expo-media-library-14.0.1.tgz"
   "version" "14.0.1"
@@ -3285,7 +3304,7 @@
   "resolved" "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-11.1.1.tgz"
   "version" "11.1.1"
 
-"expo-sharing@~10.1.1":
+"expo-sharing@^10.1.1", "expo-sharing@~10.1.1":
   "integrity" "sha512-Wyre/y6Ce+S7PYwu1QGH2QNtO8ftHViiivSGAIif4shCO64QbO2JHYvgBzeMvAGfvUXzbJ04I+oCZKypA59tnA=="
   "resolved" "https://registry.npmjs.org/expo-sharing/-/expo-sharing-10.1.1.tgz"
   "version" "10.1.1"
@@ -3795,6 +3814,18 @@
     "inflight" "^1.0.4"
     "inherits" "2"
     "minimatch" "^3.0.4"
+    "once" "^1.3.0"
+    "path-is-absolute" "^1.0.0"
+
+"glob@7.0.6":
+  "integrity" "sha1-IRuvr0nlJbjNkyYNFKsTYVKz9Xo="
+  "resolved" "https://registry.npmjs.org/glob/-/glob-7.0.6.tgz"
+  "version" "7.0.6"
+  dependencies:
+    "fs.realpath" "^1.0.0"
+    "inflight" "^1.0.4"
+    "inherits" "2"
+    "minimatch" "^3.0.2"
     "once" "^1.3.0"
     "path-is-absolute" "^1.0.0"
 
@@ -6056,6 +6087,14 @@
   "resolved" "https://registry.npmjs.org/react-native-dropdown-picker/-/react-native-dropdown-picker-5.3.0.tgz"
   "version" "5.3.0"
 
+"react-native-fetch-blob@^0.10.8":
+  "integrity" "sha1-T8JWq64MtfEOfEHyjBGz/zMNcqk="
+  "resolved" "https://registry.npmjs.org/react-native-fetch-blob/-/react-native-fetch-blob-0.10.8.tgz"
+  "version" "0.10.8"
+  dependencies:
+    "base-64" "0.1.0"
+    "glob" "7.0.6"
+
 "react-native-fusioncharts@^5.2.0":
   "integrity" "sha512-Z3o2afNB6mrZrsuZOVUmUJPvNrYQfYTU1s+Yi48Pa+VRYalFvz7uLwj0SJCm7IoR3+KoMujPrAjZf9y5l3KnoA=="
   "resolved" "https://registry.npmjs.org/react-native-fusioncharts/-/react-native-fusioncharts-5.2.0.tgz"
@@ -6582,6 +6621,14 @@
   "version" "2.6.3"
   dependencies:
     "glob" "^7.1.3"
+
+"rn-fetch-blob@^0.12.0":
+  "integrity" "sha512-+QnR7AsJ14zqpVVUbzbtAjq0iI8c9tCg49tIoKO2ezjzRunN7YL6zFSFSWZm6d+mE/l9r+OeDM3jmb2tBb2WbA=="
+  "resolved" "https://registry.npmjs.org/rn-fetch-blob/-/rn-fetch-blob-0.12.0.tgz"
+  "version" "0.12.0"
+  dependencies:
+    "base-64" "0.1.0"
+    "glob" "7.0.6"
 
 "rsvp@^4.8.4":
   "integrity" "sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA=="

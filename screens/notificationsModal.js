@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, ScrollView ,Modal, TouchableHighlight} from 're
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
 const NotificationModal = (props) => {
     const notificationData = props.route.params.notificationsData;  
    

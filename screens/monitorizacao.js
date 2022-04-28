@@ -10,8 +10,21 @@ import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctio
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 
 export default function Monitorizacao() {
+
+  const onShare = async () => {
+    const {uri: localUri} = await FileSystem.downloadAsync(
+      'https://app.pharmaiot.pt/Pdfs/ProjetoFinal-TQS.pdf',
+      FileSystem.documentDirectory + 'Certificado-Calibracao.pdf'
+    ).catch((error) => {
+      console.error(error)
+    })
+    await Sharing.shareAsync(localUri)
+      .catch((err) => console.log('Sharing::error', err))
+  }
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
@@ -203,7 +216,7 @@ flex:1,flexDirection:'row'}}>
          textColor= "grey"
          paddingVertical={6}
          fontSize={14}
-         onPress={() => alert('abrindo...')}         
+         onPress={onShare}         
          />   
        </View>
   
