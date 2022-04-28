@@ -294,11 +294,27 @@ const chartConfig = {
   backgroundGradientFrom: "white",
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(1, 1, 1, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
+  backgroundGradientToOpacity: 0.5,  
+  color: (opacity = 1) => `rgba(2, 1, 1, ${opacity})`,
+  strokeWidth: 3, // optional, default 3
+  propsForDots: {
+    r: "1",
+    strokeWidth: "2",
+    stroke: "#ffa726"
+  },
+  useShadowColorFromDataset: true,
+  propsForBackgroundLines: {
+    strokeDasharray: ""
+  },
+  propsForLabels:{
+    fontSize:15,  
+    fontWeight:400,
+  },
+
+  propsForHorizontalLabels:{
+    fontSize: "15",
+    x:"50"
+  } 
 };
 
 const styles = StyleSheet.create({
