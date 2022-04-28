@@ -1,54 +1,74 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { StyleSheet, View, Text, Button, ScrollView} from 'react-native';
+import { StyleSheet, View, Text, ScrollView} from 'react-native';
 import { globalStyles } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
-import {getMeasurePoints, getMeasurePointData} from '../functions/genericFunctions';
+import {getMeasurePoints, getMeasurePointData, onShare} from '../functions/genericFunctions';
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
-import * as FileSystem from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
 
 export default function Monitorizacao() {
-
-  const onShare = async () => {
-    const {uri: localUri} = await FileSystem.downloadAsync(
-      'https://app.pharmaiot.pt/Pdfs/ProjetoFinal-TQS.pdf',
-      FileSystem.documentDirectory + 'Certificado-Calibracao.pdf'
-    ).catch((error) => {
-      console.error(error)
-    })
-    await Sharing.shareAsync(localUri)
-      .catch((err) => console.log('Sharing::error', err))
-  }
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
   const [monitoringData, setmonitoringData] = useState();
+  const [humCircleChartColor, setHumCircleChartColor] = useState();
+  const [tempCircleChartColor, setTempCircleChartColor] = useState(null);
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const radius = 70;
   const circleCircumference = 2 * Math.PI * radius;
-   
+
+
   async function requestMeasurePoints(id){
-    setIsLoading(true);
+     
+      setIsLoading(true);
       let resultMeasurePoints = await getMeasurePoints();
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(resultMeasurePoints[id].value);
       setIsLoading(false);
- 
+    
   }
 
   async function requestMeasurePointData(sn){
 
     let measurePointData = await getMeasurePointData(sn);
     setmonitoringData(measurePointData);
+    let humidade = Math.round(measurePointData[0].hum);
+    let temperatura = Math.round(measurePointData[0].temp);
+    
+    if(humidade <= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel) {
+      setHumCircleChartColor('#D0342C');
+    }
+
+    if(humidade >= measurePointData[0].hum_min_threshold && humidade >= measurePointData[0].hum_min_admissivel || humidade <= measurePointData[0].hum_max_threshold) {
+      setHumCircleChartColor('#FFF720');
+    }
+
+    if(humidade >= measurePointData[0].hum_min_histerese && humidade <= measurePointData[0].hum_max_histerese) {
+      setHumCircleChartColor('#4BB543');
+    }
+
+    // INICIO TESTES TEMPERATURA
+
+    if(temperatura <= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel) {
+      setTempCircleChartColor('#D0342C');
+    }
+
+    if(temperatura >= measurePointData[0].temp_min_threshold && temperatura >= measurePointData[0].temp_min_admissivel || temperatura <= measurePointData[0].temp_max_threshold) {
+      setTempCircleChartColor('#FFF720');
+    }
+
+    if(temperatura >= measurePointData[0].temp_min_histerese && temperatura <= measurePointData[0].temp_max_histerese) {
+      setTempCircleChartColor('#4BB543');
+    }
+
   }
   
   useEffect(() => {
@@ -133,7 +153,7 @@ flex:1,flexDirection:'row'}}>
               cx="50%"
               cy="50%"
               r={radius}
-              stroke="#14274E"
+              stroke= {humCircleChartColor}
               fill="transparent"
               strokeWidth="10"
               strokeDasharray={circleCircumference}
@@ -149,7 +169,7 @@ flex:1,flexDirection:'row'}}>
       
         }
 
-{monitoringData &&
+{monitoringData && 
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
          <Text style={{textAlign: 'center', fontSize:24, fontWeight: "700"}}>Temperatura</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
@@ -167,7 +187,7 @@ flex:1,flexDirection:'row'}}>
               cx="50%"
               cy="50%"
               r={radius}
-              stroke="#14274E"
+              stroke={tempCircleChartColor}
               fill="transparent"
               strokeWidth="10"
               strokeDasharray={circleCircumference}
@@ -235,7 +255,6 @@ flex:1,flexDirection:'row'}}>
   // CONFIGURAÇÕES DO LINE CHART
 
 const chartConfig = {
-  
   backgroundGradientFrom: "white",
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",

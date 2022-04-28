@@ -1,4 +1,18 @@
 import * as SecureStore from 'expo-secure-store';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+
+/** DOWNLOAD Cerificado Calibração PDF **/
+export const onShare = async () => {
+    const {uri: localUri} = await FileSystem.downloadAsync(
+      'https://app.pharmaiot.pt/Pdfs/ProjetoFinal-TQS.pdf',
+      FileSystem.documentDirectory + 'Certificado-Calibracao.pdf'
+    ).catch((error) => {
+      console.error(error)
+    })
+    await Sharing.shareAsync(localUri)
+      .catch((err) => console.log('Sharing::error', err))
+  }
 
 /** ENDPOINTS **/
 const notificationsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
