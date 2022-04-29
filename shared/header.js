@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         height: 80,
         backgroundColor: "#398BEA",
         margin:0,
+       
     },
     headerText: {
         fontWeight: 'bold',
@@ -52,17 +53,20 @@ const styles = StyleSheet.create({
         color: 'white',
         letterSpacing: 1,
         marginTop: Platform.OS === 'android'? 16: 40,
+        
     },
     iconHamburguer: {
         position: 'absolute',
         left:16,
-        top: Platform.OS === 'android'? '38%': '50%',     
+        top: Platform.OS === 'android'? 34: 40,  
+       
+ 
     },
     iconNotifications: {
         position: 'absolute',
         right:16,
-        top: Platform.OS === 'android'? '38%': '50%',  
-
+        top: Platform.OS === 'android'? 34: 40,  
+       
     },
     headerTitle:{
         flexDirection: 'row'

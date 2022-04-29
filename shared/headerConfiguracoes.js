@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     iconHamburguer: {
         position: 'absolute',
         left:16,
-        top: Platform.OS === 'android'? '38%': '50%',   
+        top: Platform.OS === 'android'? 34: 40,   
         color:'white'  
     },
     iconNotifications: {
         position: 'absolute',
         right:16,
-        top: Platform.OS === 'android'? '38%': '50%',  
+        top: Platform.OS === 'android'? 34: 40,  
 
     },
     headerTitle:{
