@@ -10,29 +10,29 @@ export default function GerenciarUtilizadores() {
   
   return (
     <View style={globalStyles.container}>
-      <RelatorioCard height={cardHeight}>
-        <View style={styles.cardTextContainer}>
-            <Text style={styles.textoCard}>Pretende gerar o relatório quinzenal?</Text>
-            <Text style={styles.textoCard}>Dependendo do volume de dados irá demorar alguns segundos</Text>
-            <Text style={styles.textoCard}>Por favor aguarde.</Text>
-        </View>
-       
-      <View style={styles.buttonContainer}>    
-         <FlatButton 
-         text="Criar Relatório" 
-         borderRadius={25} 
-         textColor= "black"
-         color="#17A2B8" 
-         paddingVertical={10}
-         paddingHorizontal={20}
-         fontSize={16}
-         onPress={() => alert('a gerar...')}
-         fontWeight="700"
-         />
-     </View> 
-   
-      </RelatorioCard>
+    <RelatorioCard height={cardHeight}>
+     
+     <View style={{borderTopLeftRadius:15 , borderTopRightRadius: 15 ,flexDirection:'row', flexWrap: 'wrap', justifyContent: 'space-between',alignItems:'center' , backgroundColor: '#EEDEDE', padding:10}}>
+  
+    <View style={{width:'60%'}}>
+      <Text style={{fontSize:16}}>Utilizadores</Text>
     </View>
+     
+    <View style={styles.buttonContainer}>    
+       <FlatButton 
+       text="Adicionar" 
+       borderRadius={25} 
+       textColor= "black"
+       color="#17A2B8" 
+       paddingVertical={10}
+       paddingHorizontal={20}
+       fontSize={14}
+       onPress={() => alert('a gerar...')}
+       />
+   </View> 
+   </View>
+    </RelatorioCard>
+  </View>
   );
 }
 
@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   buttonContainer:{
-    width:'100%',
-    marginTop:'5%',
+    width:'40%',
     alignItems:'center',
     position:'relative',
 
