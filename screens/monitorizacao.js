@@ -93,6 +93,7 @@ flex:1,flexDirection:'row'}}>
  <RNPickerSelect
           style={{ 
             inputAndroid: { 
+            fontFamily: 'roboto-light',
             color: 'white',
             textAlign:'left',
             fontSize: 12,
@@ -101,6 +102,7 @@ flex:1,flexDirection:'row'}}>
             width: '90%',
            }, 
            inputIOS: {
+            fontFamily: 'roboto-light',
             color:'white',
             textAlign:'left',
             marginLeft:'6%',
