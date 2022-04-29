@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         margin:0,
     },
     headerText: {
-        fontWeight: 'bold',
+        fontFamily: 'roboto-bold',
         fontSize: 30,
         color: 'white',
         letterSpacing: 1,

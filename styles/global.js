@@ -22,7 +22,7 @@ export const loginStyles = StyleSheet.create({
   loginLogoText:{
     color: '#fff',
     fontSize: 44,
-    fontWeight: "600",
+    fontFamily:'roboto-bold',
     textAlign: 'center',
     justifyContent: "center",
     width: 308,
@@ -59,6 +59,7 @@ export const loginStyles = StyleSheet.create({
   lembrarDadosLabel:{
     color: 'black',
     height:30,
+    fontFamily:'roboto-light',
     marginLeft:8,
     marginTop: Platform.OS === 'ios'? 4: 2,
     fontSize: 16,
@@ -75,7 +76,7 @@ export const loginStyles = StyleSheet.create({
 loginLabel:{
     marginBottom:10,  
     fontSize: 26,
-    fontWeight: "700",
+    fontFamily:'roboto-bold',
     justifyContent: 'center',
     marginLeft: 14,
 
@@ -86,7 +87,7 @@ emailSection:{
 emailLabel:{
     color: "rgba(57,139,234,0.94)",
     fontSize:20,
-    fontWeight: '600',
+    fontFamily:'roboto-light',
     marginTop:6,
     marginLeft:8,
 },
@@ -94,7 +95,7 @@ emailLabel:{
 passwordLabel:{
   color: "rgba(57,139,234,0.94)",
   fontSize:20,
-  fontWeight: '600',
+  fontFamily:'roboto-light',
   marginTop:10,
   marginLeft:8,
 },
@@ -114,6 +115,8 @@ eyeIcon:{
 borderTextInputPassword:{
   fontSize:16,
   flex: 1,
+  fontFamily:'roboto-regular',
+
 },
 lembrarDadosSection:{
   flexDirection: 'row',
@@ -125,6 +128,7 @@ borderTextInput:{
     borderBottomColor:'grey',
     height:40,
     fontSize:16,
+    fontFamily:'roboto-regular',
 },
 webConnectLogoContainer:{
   position:'relative',
@@ -143,7 +147,7 @@ webConnectLogoContainer:{
 export const globalStyles = StyleSheet.create({
   titleText: {
     fontSize: 18,
-    fontFamily: 'nunito-bold',
+    fontFamily: 'roboto-bold',
     color: '#333',
   },
   paragraph: {
