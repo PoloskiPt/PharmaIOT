@@ -111,7 +111,6 @@ export default function Consulta() {
               style={{
                 inputAndroid: {
                   color: 'white',
-                  fontFamily:'roboto-light',
                   textAlign: 'left',
                   fontSize: 12,
                   marginLeft: '6%',
@@ -119,7 +118,6 @@ export default function Consulta() {
                   width: '90%',
                 },
                 inputIOS: {
-                  fontFamily:'roboto-light',
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
@@ -158,7 +156,6 @@ export default function Consulta() {
               style={{
                 inputAndroid: {
                   color: 'white',
-                  fontFamily:'roboto-light',
                   textAlign: 'left',
                   fontSize: 12,
                   marginLeft: '6%',
@@ -167,7 +164,6 @@ export default function Consulta() {
                 },
                 inputIOS: {
                   color: 'white',
-                  fontFamily:'roboto-light',
                   textAlign: 'left',
                   marginLeft: '6%',
                   height: '100%',
@@ -200,7 +196,6 @@ export default function Consulta() {
           width='29%'
           height='90%'
           text="Exportar Relatório"
-         
           borderRadius={10}
           textColor="white"
           color="#5E93AE"
@@ -232,7 +227,6 @@ export default function Consulta() {
               ],
               legend: ["Humidade"] // optional
             }}
-            fontFamily={'roboto-light'}
             width={360}
             height={240}
             chartConfig={chartConfig}
@@ -258,10 +252,10 @@ export default function Consulta() {
           />}
 
           <View style={{ margin: 20, flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'red' }}>
-            <Text style={{marginTop: 5, marginRight: 4,fontFamily:'roboto-light' }}>De</Text>
-            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontFamily:'roboto-bold', fontSize: 15, borderWidth: 1.5, paddingLeft: 7.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
+            <Text style={{ marginRight: 4 }}>De</Text>
+            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontWeight: 'bold', fontSize: 15, borderWidth: 1.5, paddingLeft: 7.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
               <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '3%' }} size={16} type="Ionicons" /> </Text>
-            <Text style={{ marginTop: 5, marginLeft: 4, fontFamily:'roboto-light'}}>Até</Text>
+            <Text style={{ marginLeft: 5 }}>Até</Text>
           </View>
 
           {show && (

@@ -58,13 +58,13 @@ const navigatePerfil = () => {
             <TouchableOpacity onPress={navigatePerfil}>
                 <View style={{ flexDirection:'column', alignItems: 'center', justifyContent:'flex-start'}}>
                     <Image source={require('../../assets/user.png')} style={{height:60, width:60}}/>
-                    <Text style={{fontSize:22, fontFamily:'roboto-light',}}>{name}</Text>
+                    <Text style={{fontSize:22}}>{name}</Text>
                 </View>
             </TouchableOpacity>
             
            
             <View style={styles.drawerItems}>         
-                <DrawerNavigatorItems fontFamily='roboto-italic' {...props}  width={'100%'}  />
+                <DrawerNavigatorItems  {...props} width={'100%'}/>
             </View>
                
                  <View style={styles.logoutContainer}>           
@@ -87,8 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#398BEA',
         display:"flex",
         height: '100%',
-        flexDirection:'column', 
-        fontFamily:'roboto-light',   
+        flexDirection:'column',    
     },
     logoContainer:{
         marginTop: '20%',
@@ -98,8 +97,7 @@ const styles = StyleSheet.create({
     logoText:{
         color: 'white',
         fontSize: 44,
-        marginBottom: '5%',
-        fontFamily:'roboto-light',
+        marginBottom: '5%'
     },
     logoImage:{
         height:44,
@@ -116,19 +114,16 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
         marginLeft: 10,
-        
     },
     user:{
         height:66,
         width:66,
     },
     drawerItems:{
-        
         display:'flex',
         flexDirection: 'row',
         marginTop: '20%',
         height: '35%',
-        fontFamily:'roboto-light',
 
 },
 logoutContainer:{
@@ -142,7 +137,6 @@ logoutLabel:{
     fontSize: 26,   
     color: 'white',
     marginLeft: '2%',
-    fontFamily:'roboto-light',
 },
 logoutContainerWrapper:{    
     flexDirection: 'row',  

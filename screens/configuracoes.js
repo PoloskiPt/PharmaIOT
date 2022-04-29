@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
      },
      defaultText:{
           fontSize:18,
-          fontFamily:'roboto-light',
           color:'black',
           marginLeft: '5%'
      }

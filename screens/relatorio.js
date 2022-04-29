@@ -29,7 +29,6 @@ export default function Relatorio() {
          paddingVertical={10}
          paddingHorizontal={20}
          fontSize={16}
-        
          onPress={() => alert('a gerar...')}
          fontWeight="700"
          />
@@ -48,8 +47,7 @@ const styles = StyleSheet.create({
   },
   textoCard:{
     textAlign:'center',
-    fontSize: 16,
-    fontFamily:'roboto-regular'
+    fontSize: 16
   },
   buttonContainer:{
     width:'100%',
@@ -57,7 +55,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     //justifyContent:'center',
     position:'relative',
-    
 
   },
 })

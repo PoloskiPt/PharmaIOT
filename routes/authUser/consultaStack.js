@@ -10,7 +10,7 @@ const screens = {
         screen: Consulta,
         navigationOptions: ({ navigation }) => {
             return {
-                header: () => <Header navigation ={navigation} title= 'Consulta' tipo='titulo' fontFamily={'roboto-light'}/>,
+                header: () => <Header navigation ={navigation} title= 'Consulta' tipo='titulo'/>,
             }    
         }
     },
@@ -20,8 +20,7 @@ const ConsultaStack = createStackNavigator(screens, {
     defaultNavigationOptions: {
         headerTintColor: '#444',
         headerStyle: {
-            backgroundColor: "#eee", 
-                   
+            backgroundColor: "#eee",          
         },             
     }
 });
