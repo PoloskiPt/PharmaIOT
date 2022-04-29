@@ -137,7 +137,7 @@ flex:1,flexDirection:'row'}}>
    
          {monitoringData &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontWeight: "700"}}>Humidade</Text>
+         <Text style={{textAlign: 'center', fontSize:24, fontWeight: "700", fontFamily: 'roboto-italic'}}>Humidade</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -228,7 +228,6 @@ flex:1,flexDirection:'row'}}>
         chartConfig={chartConfig}
         style={{marginVertical:"2%"}}
       />}
-
 
      <View style={styles.buttonContainer}> 
         <FlatButton 

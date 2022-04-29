@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect, createContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {Platform } from 'react-native';
 import Navigation from './routes/login/index';
 import { LogBox } from 'react-native';
@@ -7,6 +7,9 @@ import * as SecureStore from 'expo-secure-store';
 import { UserContext } from './store/userContext';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import useFonts from './hooks/useFonts';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesature components, check out new Gestures system!",
@@ -20,6 +23,12 @@ Notifications.setNotificationHandler({
   }),
 });
 
+const getFonts = () => Font.loadAsync({
+      'nunito-regular' : require('./assets/fonts/Nunito-Regular.ttf'),
+      'nunito-bold' : require('./assets/fonts/Nunito-Bold.ttf'),
+  })
+
+
 export default function App() {
 
   //notifications
@@ -27,8 +36,7 @@ export default function App() {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-
-
+  const [IsReady, SetIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [contextEmail, setContextEmail] = useState(null);
   const [contextPassword, setContextPassword] = useState(null);
@@ -36,6 +44,10 @@ export default function App() {
   const [contextRememberMe, setContextRememberMe] = useState(null);
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
+ 
+  const LoadFontsAndRestoreToken = async () => {
+    await useFonts();
+  };
 
 async function getValueForSession(){
      
@@ -114,9 +126,17 @@ async function getValueForRememberMe(){
 
   }, []);
 
-
-  if(isLoggedIn === null) return null;
-    
+  if (!IsReady && isLoggedIn != null) {
+    return (
+      <AppLoading
+        startAsync={LoadFontsAndRestoreToken}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
+      />
+    );
+  }
+  
+  
     return (     
       <UserContext.Provider 
       value={{
@@ -139,6 +159,11 @@ async function getValueForRememberMe(){
       
       </UserContext.Provider>  
     );
+
+
+  
+    
+   
   
     async function sendPushNotification(expoPushToken) {
       const message = {

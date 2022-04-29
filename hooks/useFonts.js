@@ -2,8 +2,9 @@ import * as Font from 'expo-font';
 
 const useFonts = async () => {
   await Font.loadAsync({
-    'nunito-regular': require('../assets/fonts/Nunito-Regular.ttf'),
-    'nunito-bold': require('../assets/fonts/Nunito-Bold.ttf'),
+    'roboto-regular': require('../assets/fonts/Roboto-Regular.ttf'),
+    'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
+    'roboto-italic': require('../assets/fonts/Roboto-Italic.ttf'),
   });
 };
 
