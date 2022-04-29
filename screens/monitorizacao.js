@@ -235,7 +235,7 @@ flex:1,flexDirection:'row'}}>
          text="Certificado de calibração" 
          textColor= "grey"
          paddingVertical={6}
-         fontSize={14}
+         fontSize={17}
          onPress={onShare}         
          />   
        </View>
@@ -289,9 +289,9 @@ const styles = StyleSheet.create({
   buttonContainer:{
     marginTop:'4%',
     alignItems:'center',
-    marginLeft: '25%',
+    marginLeft: '17%',
     borderWidth: 2,
-    width: '50%',
+    width: '66%',
     borderStyle:"solid",
     borderColor:"rgba(126,118,118,0.88)",
     borderRadius:11,
