@@ -114,6 +114,7 @@ eyeIcon:{
 borderTextInputPassword:{
   fontSize:16,
   flex: 1,
+  
 },
 lembrarDadosSection:{
   flexDirection: 'row',
@@ -143,7 +144,7 @@ webConnectLogoContainer:{
 export const globalStyles = StyleSheet.create({
   titleText: {
     fontSize: 18,
-    fontFamily: 'nunito-bold',
+    fontFamily: 'roboto-bold',
     color: '#333',
   },
   paragraph: {

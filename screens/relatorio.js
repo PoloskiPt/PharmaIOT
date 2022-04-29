@@ -23,6 +23,7 @@ export default function Relatorio() {
       <View style={styles.buttonContainer}>    
          <FlatButton 
          text="Criar Relatório" 
+         fontFamily= 'roboto-light'
          borderRadius={25} 
          textColor= "black"
          color="#17A2B8" 
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
   },
   textoCard:{
     textAlign:'center',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'roboto-regular',
   },
   buttonContainer:{
     width:'100%',

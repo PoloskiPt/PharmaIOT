@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
           padding:'5%'
      },
      defaultText:{
+          fontFamily: 'roboto-light',
           fontSize:18,
           color:'black',
           marginLeft: '5%'

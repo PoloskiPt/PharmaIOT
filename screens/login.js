@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
+
 import {View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
@@ -9,6 +10,7 @@ import md5 from 'md5';
 import { UserContext } from '../store/userContext';
 import {save, deleteItem, storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
+
 
 export default function Login(){
 const [name, setName] = useState('');

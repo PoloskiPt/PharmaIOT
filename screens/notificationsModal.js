@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         padding:'1%',
         alignItems:'center',
+       
     },
     notificationCard:{
         borderRadius: 8,
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         marginHorizontal: '1%',
         marginVertical: '1.2%',
+      
     },
     closeIcon:{
         flexDirection: 'row',
@@ -85,13 +87,14 @@ const styles = StyleSheet.create({
     },
     statusResolved:{
         color:'green',
-        fontWeight:'600'
+        fontFamily: 'roboto-light',
     },
     statusNotResolved:{
         color:'red',
-        fontWeight:'600'
+        fontFamily: 'roboto-light',
     },
     notificationSubtitleText:{
         fontSize:18,   
+        fontFamily: 'roboto-light',
     }
 })

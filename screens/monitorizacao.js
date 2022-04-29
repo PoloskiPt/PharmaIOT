@@ -137,7 +137,7 @@ flex:1,flexDirection:'row'}}>
    
          {monitoringData &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-italic'}}>Humidade</Text>
+         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-bold'}}>Humidade</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -163,7 +163,7 @@ flex:1,flexDirection:'row'}}>
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontWeight: "600"}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
+        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontFamily: 'roboto-light',}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
         </View>
         </View>
       
@@ -171,7 +171,7 @@ flex:1,flexDirection:'row'}}>
 
 {monitoringData && 
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-light'}}>Temperatura</Text>
+         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-bold'}}>Temperatura</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -197,7 +197,7 @@ flex:1,flexDirection:'row'}}>
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontWeight: "600"}}>{Math.round(monitoringData[0].temp) + "°"}</Text>
+        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontFamily: 'roboto-light',}}>{Math.round(monitoringData[0].temp) + "°"}</Text>
         </View>
         </View>
       
@@ -233,6 +233,7 @@ flex:1,flexDirection:'row'}}>
      <View style={styles.buttonContainer}> 
         <FlatButton 
          text="Certificado de calibração" 
+         fontFamily= 'roboto-light'
          textColor= "grey"
          paddingVertical={6}
          fontSize={17}

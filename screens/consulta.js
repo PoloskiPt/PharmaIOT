@@ -110,6 +110,7 @@ export default function Consulta() {
             <RNPickerSelect
               style={{
                 inputAndroid: {
+                  fontFamily: 'roboto-light',
                   color: 'white',
                   textAlign: 'left',
                   fontSize: 12,
@@ -118,6 +119,7 @@ export default function Consulta() {
                   width: '90%',
                 },
                 inputIOS: {
+                  fontFamily: 'roboto-light',
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
@@ -155,6 +157,7 @@ export default function Consulta() {
             <RNPickerSelect
               style={{
                 inputAndroid: {
+                  fontFamily: 'roboto-light',
                   color: 'white',
                   textAlign: 'left',
                   fontSize: 12,
@@ -163,6 +166,7 @@ export default function Consulta() {
                   width: '100%',
                 },
                 inputIOS: {
+                  fontFamily: 'roboto-light',
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
@@ -196,6 +200,7 @@ export default function Consulta() {
           width='29%'
           height='90%'
           text="Exportar Relatório"
+          fontFamily='roboto-light'
           borderRadius={10}
           textColor="white"
           color="#5E93AE"
@@ -252,10 +257,10 @@ export default function Consulta() {
           />}
 
           <View style={{ margin: 20, flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'red' }}>
-            <Text style={{ marginRight: 4 }}>De</Text>
-            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontWeight: 'bold', fontSize: 15, borderWidth: 1.5, paddingLeft: 7.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
+            <Text style={{ marginRight: 4 ,fontFamily: 'roboto-light',}}>De</Text>
+            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.5, paddingLeft: 7.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
               <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '3%' }} size={16} type="Ionicons" /> </Text>
-            <Text style={{ marginLeft: 5 }}>Até</Text>
+            <Text style={{ marginLeft: 5,fontFamily: 'roboto-light' }}>Até</Text>
           </View>
 
           {show && (
