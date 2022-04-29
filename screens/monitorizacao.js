@@ -137,11 +137,7 @@ flex:1,flexDirection:'row'}}>
    
          {monitoringData &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-<<<<<<< HEAD
          <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-italic'}}>Humidade</Text>
-=======
-         <Text style={{textAlign: 'center', fontSize:26, fontWeight: "700", fontFamily: 'roboto-italic'}}>Humidade</Text>
->>>>>>> 35b08b49d2af616d1e06149ca4c0e38f249035ef
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -175,11 +171,7 @@ flex:1,flexDirection:'row'}}>
 
 {monitoringData && 
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-<<<<<<< HEAD
          <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-light'}}>Temperatura</Text>
-=======
-         <Text style={{textAlign: 'center', fontSize:26, fontWeight: "700"}}>Temperatura</Text>
->>>>>>> 35b08b49d2af616d1e06149ca4c0e38f249035ef
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
