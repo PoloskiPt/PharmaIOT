@@ -44,29 +44,29 @@ export default function Monitorizacao() {
     let temperatura = Math.round(measurePointData[0].temp);
     
     if(humidade <= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel) {
-      setHumCircleChartColor('#D0342C');
+      setHumCircleChartColor('#ba0000');
     }
 
     if(humidade >= measurePointData[0].hum_min_threshold && humidade >= measurePointData[0].hum_min_admissivel || humidade <= measurePointData[0].hum_max_threshold) {
-      setHumCircleChartColor('#FFF720');
+      setHumCircleChartColor('#e4d60b');
     }
 
     if(humidade >= measurePointData[0].hum_min_histerese && humidade <= measurePointData[0].hum_max_histerese) {
-      setHumCircleChartColor('#4BB543');
+      setHumCircleChartColor('#11eb0d');
     }
 
     // INICIO TESTES TEMPERATURA
 
     if(temperatura <= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel) {
-      setTempCircleChartColor('#D0342C');
+      setTempCircleChartColor('#ba0000');
     }
 
     if(temperatura >= measurePointData[0].temp_min_threshold && temperatura >= measurePointData[0].temp_min_admissivel || temperatura <= measurePointData[0].temp_max_threshold) {
-      setTempCircleChartColor('#FFF720');
+      setTempCircleChartColor('#e4d60b');
     }
 
     if(temperatura >= measurePointData[0].temp_min_histerese && temperatura <= measurePointData[0].temp_max_histerese) {
-      setTempCircleChartColor('#4BB543');
+      setTempCircleChartColor('#11eb0d');
     }
 
   }
@@ -137,7 +137,7 @@ flex:1,flexDirection:'row'}}>
    
          {monitoringData &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontWeight: "700", fontFamily: 'roboto-italic'}}>Humidade</Text>
+         <Text style={{textAlign: 'center', fontSize:26, fontWeight: "700", fontFamily: 'roboto-italic'}}>Humidade</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -147,7 +147,7 @@ flex:1,flexDirection:'row'}}>
               r={radius}
               stroke="#F1F6F9"
               fill="transparent"
-              strokeWidth="10"  
+              strokeWidth="11"  
             />
             <Circle
               cx="50%"
@@ -155,7 +155,7 @@ flex:1,flexDirection:'row'}}>
               r={radius}
               stroke= {humCircleChartColor}
               fill="transparent"
-              strokeWidth="10"
+              strokeWidth="11"
               strokeDasharray={circleCircumference}
               strokeDashoffset={circleCircumference - (circleCircumference * Math.round(monitoringData[0].hum)) / 100}
               strokeLinecap="round"
@@ -163,7 +163,7 @@ flex:1,flexDirection:'row'}}>
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:24, fontWeight: "600"}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
+        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontWeight: "600"}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
         </View>
         </View>
       
@@ -171,7 +171,7 @@ flex:1,flexDirection:'row'}}>
 
 {monitoringData && 
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontWeight: "700"}}>Temperatura</Text>
+         <Text style={{textAlign: 'center', fontSize:26, fontWeight: "700"}}>Temperatura</Text>
          <View style={{alignItems:'center', justifyContent:'center'}}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -181,7 +181,7 @@ flex:1,flexDirection:'row'}}>
               r={radius}
               stroke="#F1F6F9"
               fill="transparent"
-              strokeWidth="10"  
+              strokeWidth="11"  
             />
             <Circle
               cx="50%"
@@ -189,7 +189,7 @@ flex:1,flexDirection:'row'}}>
               r={radius}
               stroke={tempCircleChartColor}
               fill="transparent"
-              strokeWidth="10"
+              strokeWidth="11"
               strokeDasharray={circleCircumference}
               strokeDashoffset={circleCircumference - (circleCircumference * Math.round(monitoringData[0].temp)) / 100}
               strokeLinecap="round"
@@ -197,7 +197,7 @@ flex:1,flexDirection:'row'}}>
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:24, fontWeight: "600"}}>{Math.round(monitoringData[0].temp) + "°"}</Text>
+        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontWeight: "600"}}>{Math.round(monitoringData[0].temp) + "°"}</Text>
         </View>
         </View>
       
@@ -210,12 +210,12 @@ flex:1,flexDirection:'row'}}>
             {
               data: [monitoringData[0].hum, 50],
               color: () => "#097907", // optional
-              strokeWidth: 2, // optional, default
+              strokeWidth: 3, // optional, default
             },
             {
               data: [monitoringData[0].temp, 25],
               color: () => "#18A0FB", // optional
-              strokeWidth: 2, // optional, default
+              strokeWidth: 3, // optional, default
             },
           ],
            legend: ["Humidade","Temperatura"],
@@ -223,11 +223,12 @@ flex:1,flexDirection:'row'}}>
         }}
         withInnerLines={true}
         withOuterLines={false}     
-        width={300}
+        width={310}
         height={240}
         chartConfig={chartConfig}
         style={{marginVertical:"2%"}}
       />}
+
 
      <View style={styles.buttonContainer}> 
         <FlatButton 
@@ -271,12 +272,14 @@ const chartConfig = {
   },
   propsForLabels:{
     fontSize:15,  
-    fontWeight:400,
+    fontWeight:400, 
   },
 
   propsForHorizontalLabels:{
     fontSize: "15",
     x:"50"
+    
+    
   } 
 };
 
@@ -288,12 +291,12 @@ const styles = StyleSheet.create({
   buttonContainer:{
     marginTop:'4%',
     alignItems:'center',
-    marginLeft: '17%',
+    marginLeft: '18%',
     borderWidth: 2,
-    width: '66%',
+    width: '64%',
     borderStyle:"solid",
     borderColor:"rgba(126,118,118,0.88)",
-    borderRadius:11,
+    borderRadius:15,
     position:'relative',
     marginBottom:'1.5%'
   },
