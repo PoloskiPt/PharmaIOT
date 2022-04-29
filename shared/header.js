@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         //flexDirection: 'row',
+        
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
        
     },
     headerText: {
-        fontWeight: 'bold',
+        fontFamily: 'roboto-bold',
         fontSize: 30,
         color: 'white',
         letterSpacing: 1,

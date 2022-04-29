@@ -26,7 +26,7 @@ const styles = (props)  => StyleSheet.create({
     },
     buttonText: {
         color: props.textColor,
-        fontWeight: props.fontWeight,
+        fontFamily: props.fontFamily,
         //textTransform: 'uppercase',
         fontSize: props.fontSize,
         textAlign: props.textAlign,

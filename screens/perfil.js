@@ -76,7 +76,7 @@ export default function Perfil() {
       <SafeAreaView>
       <View style={styles.backIcon}>
       <TouchableHighlight>   
-      <Icon name='arrow-back-outline' style={{color:'black'}} size={40}  type="Ionicons" onPress={() => navigateBack.navigate('homeScreen') }/>
+      <Icon name='arrow-back-outline' style={{color:'white'}} size={40}  type="Ionicons" onPress={() => navigateBack.navigate('homeScreen') }/>
       </TouchableHighlight>
       </View> 
       
@@ -125,6 +125,7 @@ export default function Perfil() {
         <View style={styles.buttonContainer}> 
         <FlatButton 
          text="Salvar" 
+      
          textColor= "white"
          color="#17A2B8" 
          borderRadius={25}    
@@ -149,7 +150,8 @@ const styles = StyleSheet.create({
     borderBottomWidth:1 ,
     borderBottomColor: 'black',   
     paddingBottom: '3%',
-    marginBottom: '3%'
+    marginBottom: '3%',
+    
 
   },
   buttonContainer:{
@@ -165,10 +167,11 @@ const styles = StyleSheet.create({
     marginBottom: '-5.5%',
 },
   resultText:{
-    fontSize:14
+    fontSize:14,
+    
   },
   titleText:{
     fontSize: 20,
-    fontWeight: '500'
+    fontFamily:'roboto-bold'
   }
 })

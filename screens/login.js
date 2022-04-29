@@ -219,6 +219,7 @@ return(
                     textColor="white" 
                     color="#398BEA"  
                     onPress={login} 
+                    fontFamily={'roboto-light'}
                     paddingVertical={14}
                     paddingHorizontal={10}
                     fontWeight='bold'
