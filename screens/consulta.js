@@ -98,28 +98,29 @@ export default function Consulta() {
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ height: '8%', width: '90%', marginTop: 4, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex:1,height: '8%', width: '92%',marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 
         <View style={{
           backgroundColor: "rgb(94,147,174)",
           shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10, width: '29%', height: '90%',
-          marginRight: '1%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
+          borderRadius: 10, 
+          marginRight: '3%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
         }}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
               style={{
                 inputAndroid: {
-                  fontFamily: 'roboto-light',
+                  fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
-                  fontSize: 12,
+                  fontSize: 16,
                   marginLeft: '6%',
                   height: '100%',
                   width: '90%',
+                  
                 },
                 inputIOS: {
-                  fontFamily: 'roboto-light',
+                  fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
@@ -140,7 +141,7 @@ export default function Consulta() {
 
           <View style={{ width: '15%', alignSelf: 'center', marginLeft: '3%' }}>
 
-            <Icon name='caret-down-outline' style={{ color: 'white', alignSelf: 'center' }} size={15} type="Ionicons" />
+            <Icon name='caret-down-outline' style={{ color: 'white', alignSelf: 'center' }} size={16} type="Ionicons" />
 
           </View>
 
@@ -150,27 +151,26 @@ export default function Consulta() {
         <View style={{
           backgroundColor: "rgb(94,147,174)",
           shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10, width: '29%', height: '90%',
-          marginRight: '1%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
+          borderRadius: 10,  
+          marginLeft: '3%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
         }}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
               style={{
                 inputAndroid: {
-                  fontFamily: 'roboto-light',
+                  fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
-                  fontSize: 12,
-                  marginLeft: '6%',
+                  fontSize: 16,
+                  marginLeft: '9%',
                   height: '100%',
-                  width: '100%',
+                  width: '90%',
                 },
                 inputIOS: {
-                  fontFamily: 'roboto-light',
+                  fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
-                  height: '100%',
                   fontSize: 12,
                   height: '100%'
                 },
@@ -183,7 +183,7 @@ export default function Consulta() {
 
               items={[
                 { label: 'Últimas 24 horas', value: '2022-04-03 19:40' },
-                { label: 'Mês Passado', value: "2022-03-04 17:40:21" },
+                { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
             />
@@ -191,28 +191,10 @@ export default function Consulta() {
 
           <View style={{ width: '15%', justifyContent: 'center', marginLeft: '3%' }}>
 
-            <Icon name='caret-down-outline' style={{ color: 'white' }} size={15} type="Ionicons" />
+            <Icon name='caret-down-outline' style={{ color: 'white' }} size={16} type="Ionicons" />
 
           </View>
         </View>
-        <FlatButton
-
-          width='29%'
-          height='90%'
-          text="Exportar Relatório"
-          fontFamily='roboto-light'
-          borderRadius={10}
-          textColor="white"
-          color="#5E93AE"
-          textAlign="left"
-          borderWidth={2}
-          borderColor="red"
-          paddingVertical={10}
-          paddingHorizontal={6}
-          fontSize={12}
-          onPress={() => alert('a exportar...')}
-        />
-
       </View>
       <View height="92%">
         <MainCard height={cardHeight}>

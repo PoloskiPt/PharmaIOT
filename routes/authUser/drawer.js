@@ -73,7 +73,7 @@ const RootDrawerNavigator = createDrawerNavigator({
         inactiveBackgroundColor: '#398BEA',
         labelStyle:{
             fontWeight:'normal',
-            fontSize: 20,
+            fontSize: 22,
             marginLeft: 10,  
             fontFamily: 'roboto-regular',       
         },          

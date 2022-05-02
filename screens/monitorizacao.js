@@ -84,7 +84,7 @@ export default function Monitorizacao() {
   
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
-      <View style={{ height:'8%', width:'30%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
+      <View style={{ height:'8%', width:'40%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
 <View style={{backgroundColor: "rgb(94,147,174)", 
 shadowOffset: { width: 4, height: 4 }, 
 borderRadius:10,shadowColor:"rgba(0,0,0,0.25)",
@@ -94,19 +94,19 @@ flex:1,flexDirection:'row'}}>
  <RNPickerSelect
           style={{ 
             inputAndroid: { 
-            fontFamily: 'roboto-light',
+            fontFamily: 'roboto-medium',
             color: 'white',
             textAlign:'left',
-            fontSize: 12,
-            marginLeft:'6%',
+            fontSize: 16,
+            marginLeft:'9%',
             height:'100%',
             width: '90%',
            }, 
            inputIOS: {
-            fontFamily: 'roboto-light',
+            fontFamily: 'roboto-medium',
             color:'white',
             textAlign:'left',
-            marginLeft:'6%',
+            marginLeft:'9%',
             height:'100%'
            },
 
@@ -119,9 +119,9 @@ flex:1,flexDirection:'row'}}>
       />
  </View>
  
-  <View style={{width:'15%',alignSelf:'center',marginLeft:'3%'}}>
+  <View style={{width:'20%',alignSelf:'center',marginLeft:'3%'}}>
 
-  <Icon name='caret-down-outline' style={{color:'white', alignSelf:'center'}} size={15}  type="Ionicons" />
+  <Icon name='caret-down-outline' style={{color:'white', alignSelf:'center'}} size={16}  type="Ionicons" />
 
   </View>
   </View> 

@@ -7,6 +7,14 @@ const useFonts = async () => {
     'roboto-italic': require('../assets/fonts/Roboto-Italic.ttf'),
     'roboto-light': require('../assets/fonts/Roboto-Light.ttf'),
     'roboto-medium': require('../assets/fonts/Roboto-Medium.ttf'),
+    'roboto-thin': require('../assets/fonts/Roboto-Thin.ttf'),
+    'roboto-black': require('../assets/fonts/Roboto-Black.ttf'),
+    'roboto-blackitalic': require('../assets/fonts/Roboto-BlackItalic.ttf'),
+    'roboto-bolditalic': require('../assets/fonts/Roboto-BoldItalic.ttf'),
+    'roboto-lightitalic': require('../assets/fonts/Roboto-LightItalic.ttf'),
+    'roboto-mediumitalic': require('../assets/fonts/Roboto-MediumItalic.ttf'),
+    'roboto-thinitalic': require('../assets/fonts/Roboto-ThinItalic.ttf'),
+
   });
 };
 
