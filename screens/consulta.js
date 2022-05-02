@@ -7,7 +7,6 @@ import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getMeasurePoints, getMeasurePointDataInterval } from '../functions/genericFunctions';
 
@@ -16,6 +15,9 @@ export default function Consulta() {
   const [measurePoints, setMeasurePoints] = useState([]);
   const [DataInterval, setDataInterval] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  // useStates pickers topo
+  const [currentSn, setCurrentSn] = useState();
+  const [selectedTimeSpan, setSelectedTimeSpan] = useState();
 
   const [datepick, setDatepick] = useState(null);
   useEffect(() => {
@@ -30,7 +32,6 @@ export default function Consulta() {
     let resultMeasurePoints = await getMeasurePoints();
     requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-04-05 17:40:21");
     setMeasurePoints(resultMeasurePoints);
-
     setIsLoading(false);
   }
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
@@ -42,10 +43,7 @@ export default function Consulta() {
   }
 
   useEffect(() => {
-
     requestMeasurePoints(0);
-
-
   }, [])
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -82,14 +80,13 @@ export default function Consulta() {
   }
 
   const showMode = (currentMode) => {
-
     setShow(true);
     setMode(currentMode);
   }
+
   const [dateEnd, setDateEnd] = useState(new Date());
   const [modeEnd, setModeEnd] = useState('date');
   const [showEnd, setShowEnd] = useState(false);
-
 
   const onChangeEnd = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -104,19 +101,13 @@ export default function Consulta() {
   }
 
   const showModeEnd = (currentMode) => {
-
     setShowEnd(true);
     setModeEnd(currentMode);
   }
 
-
-
   const sn = DataInterval && DataInterval[0].sn;
 
   let cardHeight = Platform.OS === 'android' ? '95%' : "95%";
-
-
-  const screenWidth = Dimensions.get("window").width;
 
   return (
 
@@ -158,8 +149,6 @@ export default function Consulta() {
 
               placeholder={{}}
               items={measurePoints}
-
-
             />
 
           </View>
@@ -232,17 +221,18 @@ export default function Consulta() {
                   data: DataInterval.map((item) => {
                     return ((item.hum) * 100) / 100;
                   }),
-                  color: () => `rgba(1,1,1)`, // optional
-                  strokeWidth: 2 // optional
+                  color: () => "#097907",
+                  strokeWidth: 3,
                 },
 
               ],
-              legend: ["Humidade"] // optional
+              legend: ["Humidade"] 
             }}
             width={360}
             height={240}
             chartConfig={chartConfig}
           />}
+          
           {DataInterval && <LineChart
             data={{
               labels: ["14 Mar"],
@@ -251,12 +241,12 @@ export default function Consulta() {
                   data: DataInterval.map((item) => {
                     return ((item.temp) * 100) / 100;
                   }),
-                  color: () => `rgba(1,1,1)`, // optional
-                  strokeWidth: 2 // optional
+                  color: () => "#18A0FB", 
+                  strokeWidth: 3, 
                 },
 
               ],
-              legend: ["Temperatura"] // optional
+              legend: ["Temperatura"]
             }}
             width={360}
             height={240}
@@ -299,9 +289,7 @@ export default function Consulta() {
               onChange={onChangeEnd}
             />
           )}
-    
-          
-          
+         
         </MainCard>
       </View>
 
@@ -315,7 +303,7 @@ const chartConfig = {
   backgroundGradientFrom: "white",
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,  
+  backgroundGradientToOpacity: 0,  
   color: (opacity = 1) => `rgba(2, 1, 1, ${opacity})`,
   strokeWidth: 3, // optional, default 3
   propsForDots: {
@@ -339,37 +327,6 @@ const chartConfig = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10,
-  },
-
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: 'yellow'
-
-  },
-  text: {
-    fontSize: 24,
-  },
-  picker: {
-    marginVertical: 30,
-    width: 300,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#666",
-  },
 
 
 });

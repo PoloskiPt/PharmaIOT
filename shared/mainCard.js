@@ -20,18 +20,16 @@ const styles = (height)  => StyleSheet.create({
         borderRadius: 15,
         elevation: 3,
         backgroundColor: '#fff',
-        shadowOffset: {width: 1, height: 1},
-        shadowColor: '#333',
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
         height: height,
         width: Platform.OS === 'ios'? '90%': '90%',
         marginTop: Platform.OS === 'ios'? 0: 10,
         marginHorizontal: 4,
-        marginVertical: 6,
+        marginVertical: 2,
+
     },
     cardContent:{
         marginHorizontal: 18,
-        marginVertical: 20,     
+        marginVertical: 20,    
+        borderRadius:15, 
     },
 });

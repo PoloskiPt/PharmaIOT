@@ -23,7 +23,7 @@ const styles = (height)  => StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 2,
         height: height,
-        width: Platform.OS === 'ios'? 340: 360,
+        width:'100%',
         marginTop: Platform.OS === 'ios'? '8%': '8%',
         marginHorizontal: 4,
         marginVertical: 6,
