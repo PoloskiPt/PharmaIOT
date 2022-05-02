@@ -67,6 +67,7 @@ export default function Consulta() {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [text, setText] = useState('dd/mm/aaaa');
+  const [textEnd, setTextEnd] = useState('dd/mm/aaaa');
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -85,6 +86,29 @@ export default function Consulta() {
     setShow(true);
     setMode(currentMode);
   }
+  const [dateEnd, setDateEnd] = useState(new Date());
+  const [modeEnd, setModeEnd] = useState('date');
+  const [showEnd, setShowEnd] = useState(false);
+
+
+  const onChangeEnd = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowEnd(Platform.OS === 'ios');
+    setDateEnd(currentDate);
+
+    let tempDate = new Date(currentDate);
+    let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+    let fTime = 'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
+    setTextEnd(fDate);
+    console.log(fDate + ' (' + fTime + ')');
+  }
+
+  const showModeEnd = (currentMode) => {
+
+    setShowEnd(true);
+    setModeEnd(currentMode);
+  }
+
 
 
   const sn = DataInterval && DataInterval[0].sn;
@@ -98,22 +122,22 @@ export default function Consulta() {
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ flex:1,height: '8%', width: '92%',marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 
         <View style={{
-          backgroundColor: "rgb(94,147,174)",
+          backgroundColor: "#286cbe",
           shadowOffset: { width: 4, height: 4 },
           borderRadius: 10, 
-          marginRight: '3%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
+          marginRight: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
         }}>
-          <View style={{ width: '80%' }}>
+          <View style={{ width: '70%' }}>
             <RNPickerSelect
               style={{
                 inputAndroid: {
                   fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
-                  fontSize: 16,
+                  fontSize: 14.5,
                   marginLeft: '6%',
                   height: '100%',
                   width: '90%',
@@ -123,6 +147,7 @@ export default function Consulta() {
                   fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
+                  fontSize: 14.5,
                   marginLeft: '6%',
                   height: '100%'
                 },
@@ -149,10 +174,10 @@ export default function Consulta() {
         </View>
 
         <View style={{
-          backgroundColor: "rgb(94,147,174)",
+          backgroundColor: "#286cbe",
           shadowOffset: { width: 4, height: 4 },
           borderRadius: 10,  
-          marginLeft: '3%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
+          marginLeft: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
         }}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
@@ -161,7 +186,7 @@ export default function Consulta() {
                   fontFamily: 'roboto-medium',
                   color: 'white',
                   textAlign: 'left',
-                  fontSize: 16,
+                  fontSize: 14.5,
                   marginLeft: '9%',
                   height: '100%',
                   width: '90%',
@@ -171,7 +196,7 @@ export default function Consulta() {
                   color: 'white',
                   textAlign: 'left',
                   marginLeft: '6%',
-                  fontSize: 12,
+                  fontSize: 14.5,
                   height: '100%'
                 },
 
@@ -238,13 +263,16 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-          <View style={{ margin: 20, flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'red' }}>
-            <Text style={{ marginRight: 4 ,fontFamily: 'roboto-light',}}>De</Text>
-            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.5, paddingLeft: 7.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
-              <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '3%' }} size={16} type="Ionicons" /> </Text>
-            <Text style={{ marginLeft: 5,fontFamily: 'roboto-light' }}>Até</Text>
+          <View style={{ margin: '2%',flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'red', width:'90%'}}>
+            <Text style={{ marginRight: '1%' ,fontFamily: 'roboto-light',}}>De</Text>
+            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.3, paddingLeft:6.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
+              <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={16} type="Ionicons" /> </Text>
+            <Text style={{ marginLeft: '2%', marginRight:'1%',fontFamily: 'roboto-light' }}>Até</Text>
+            <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.3, paddingLeft: 6.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{textEnd}
+              <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={16} type="Ionicons" /> </Text>
+         
           </View>
-
+    
           {show && (
             <DateTimePicker
               testID='dateTimePicker'
@@ -258,16 +286,22 @@ export default function Consulta() {
               onChange={onChange}
             />
           )}
-
-          <View>
-            <Button title="Show Date Picker" onPress={showDatePicker} />
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
+          {showEnd && (
+            <DateTimePicker
+              testID='dateTimePicker'
+              value={dateEnd}
+              mode={modeEnd}
+              is24Hour={true}
+              animationType={"fade"}
+              androidMode={"default"}
+              display="spinner"
+              locale="pt-PT"
+              onChange={onChangeEnd}
             />
-          </View>
+          )}
+    
+          
+          
         </MainCard>
       </View>
 
@@ -318,11 +352,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
   },
+
   screen: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: 'yellow'
+
   },
   text: {
     fontSize: 24,

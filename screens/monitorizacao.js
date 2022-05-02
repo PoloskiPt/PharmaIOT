@@ -85,7 +85,7 @@ export default function Monitorizacao() {
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={{ height:'8%', width:'40%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
-<View style={{backgroundColor: "rgb(94,147,174)", 
+<View style={{backgroundColor: "#286cbe", 
 shadowOffset: { width: 4, height: 4 }, 
 borderRadius:10,shadowColor:"rgba(0,0,0,0.25)",
 flex:1,flexDirection:'row'}}>
