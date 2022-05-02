@@ -28,16 +28,14 @@ export default function Monitorizacao() {
 
   async function requestMeasurePoints(id){
      
-      setIsLoading(true);
       let resultMeasurePoints = await getMeasurePoints();
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(resultMeasurePoints[id].value);
-      setIsLoading(false);
     
   }
 
   async function requestMeasurePointData(sn){
-
+    setIsLoading(true);
     let measurePointData = await getMeasurePointData(sn);
     setmonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
@@ -68,6 +66,8 @@ export default function Monitorizacao() {
     if(temperatura >= measurePointData[0].temp_min_histerese && temperatura <= measurePointData[0].temp_max_histerese) {
       setTempCircleChartColor('#11eb0d');
     }
+
+    setIsLoading(false);
 
   }
   
