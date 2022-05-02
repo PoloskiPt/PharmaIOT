@@ -7,7 +7,6 @@ import * as SecureStore from 'expo-secure-store';
 import { UserContext } from './store/userContext';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
-import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import useFonts from './hooks/useFonts';
 

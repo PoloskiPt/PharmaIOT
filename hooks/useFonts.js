@@ -6,6 +6,7 @@ const useFonts = async () => {
     'roboto-bold': require('../assets/fonts/Roboto-Bold.ttf'),
     'roboto-italic': require('../assets/fonts/Roboto-Italic.ttf'),
     'roboto-light': require('../assets/fonts/Roboto-Light.ttf'),
+    'roboto-medium': require('../assets/fonts/Roboto-Medium.ttf'),
   });
 };
 

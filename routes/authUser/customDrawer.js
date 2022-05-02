@@ -58,7 +58,7 @@ const navigatePerfil = () => {
             <TouchableOpacity onPress={navigatePerfil}>
                 <View style={{ flexDirection:'column', alignItems: 'center', justifyContent:'flex-start'}}>
                     <Image source={require('../../assets/user.png')} style={{height:60, width:60}}/>
-                    <Text style={{fontSize:22, fontFamily: 'roboto-light',}}>{name}</Text>
+                    <Text style={{fontSize:22, fontFamily: 'roboto-regular',}}>{name}</Text>
                 </View>
             </TouchableOpacity>
             

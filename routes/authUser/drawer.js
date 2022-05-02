@@ -75,7 +75,7 @@ const RootDrawerNavigator = createDrawerNavigator({
             fontWeight:'normal',
             fontSize: 20,
             marginLeft: 10,  
-            fontFamily: 'roboto-light',       
+            fontFamily: 'roboto-regular',       
         },          
     }
 });

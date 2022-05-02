@@ -80,6 +80,7 @@ export default function Monitorizacao() {
   }, [sessionPassword, sessionEmail, sessionPharmacy])
 
    return (
+     
   
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
@@ -235,8 +236,8 @@ flex:1,flexDirection:'row'}}>
      <View style={styles.buttonContainer}> 
         <FlatButton 
          text="Certificado de calibração" 
-         fontFamily= 'roboto-light'
-         textColor= "grey"
+         fontFamily= 'roboto-regular'
+         textColor= "#696969"
          paddingVertical={6}
          fontSize={17}
          onPress={onShare}         
@@ -297,11 +298,11 @@ const styles = StyleSheet.create({
     marginLeft: '18%',
     borderWidth: 2,
     width: '64%',
-    borderStyle:"solid",
-    borderColor:"rgba(126,118,118,0.88)",
+    borderColor:"rgba(110,110,110,1)",
     borderRadius:15,
     position:'relative',
-    marginBottom:'1.5%'
+    marginBottom:'1.5%',
+    padding:2
   },
   modalClose: {
     marginTop:20,
