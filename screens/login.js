@@ -110,8 +110,8 @@ async function login(){
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
-  
+    .catch((error) => alert(resp.error))
+
     if(checkBoxState === true){
         setContextRememberMe("true");  
         save('rememberMe', "true");
