@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Dimensions, Button, TextInput, Platform, Modal } from 'react-native';
+import { StyleSheet, View, Text, Platform, TouchableWithoutFeedback  } from 'react-native';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
 import { LineChart } from "react-native-chart-kit";
@@ -232,7 +232,7 @@ export default function Consulta() {
             height={240}
             chartConfig={chartConfig}
           />}
-          
+
           {DataInterval && <LineChart
             data={{
               labels: ["14 Mar"],
@@ -253,17 +253,30 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-          <View style={{ margin: '2%',flex: 1, flexDirection: 'row', borderWidth: 1, borderColor: 'red', width:'90%'}}>
-            <Text style={{ marginRight: '1%' ,fontFamily: 'roboto-light',}}>De</Text>
-            <Text onPress={() => showMode('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.3, paddingLeft:6.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{text}
-              <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={16} type="Ionicons" /> </Text>
-            <Text style={{ marginLeft: '2%', marginRight:'1%',fontFamily: 'roboto-light' }}>Até</Text>
-            <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 15, borderWidth: 1.3, paddingLeft: 6.5, borderColor: '#C4C4C4', alignItems: 'center' }}>{textEnd}
-              <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={16} type="Ionicons" /> </Text>
-         
+          <View style={styles.containerDates}>
+            <View style={styles.containerDatePicker}>
+              <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>
+              <TouchableWithoutFeedback onPress={() => showMode('date')}>
+              <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
+                  <Text  placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 18, alignItems: 'center', marginRight:'8%', marginLeft:'8%'}}>{text}
+                  </Text>
+                  <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={22} type="Ionicons" /> 
+              </View>
+              </TouchableWithoutFeedback> 
+            </View> 
+            <View style={styles.containerDatePicker}>
+              <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>
+              <TouchableWithoutFeedback onPress={() => showMode('date')}>
+                 <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row',justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
+                      <Text placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 18, alignItems: 'center' ,marginRight:'8%', marginLeft:'8%'}}>{textEnd}
+                      </Text>
+                      <Icon name='calendar-outline' style={{ color: 'black'}} size={22} type="Ionicons" />
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>   
           </View>
     
-          {show && (
+          {show && (  
             <DateTimePicker
               testID='dateTimePicker'
               value={date}
@@ -289,6 +302,20 @@ export default function Consulta() {
               onChange={onChangeEnd}
             />
           )}
+
+      <View style={styles.buttonContainer}> 
+          <FlatButton 
+          text="Filtrar" 
+          textColor= "white"
+          fontFamily= 'roboto-light'
+          color="#17A2B8" 
+          borderRadius={25}    
+          paddingVertical={11}
+          paddingHorizontal={52}
+          fontSize={16}
+          onPress={() => alert('A filtrar...')}         
+          />   
+         </View> 
          
         </MainCard>
       </View>
@@ -305,7 +332,7 @@ const chartConfig = {
   backgroundGradientTo: "white",
   backgroundGradientToOpacity: 0,  
   color: (opacity = 1) => `rgba(2, 1, 1, ${opacity})`,
-  strokeWidth: 3, // optional, default 3
+  strokeWidth: 3,
   propsForDots: {
     r: "1",
     strokeWidth: "2",
@@ -327,6 +354,29 @@ const chartConfig = {
 };
 
 const styles = StyleSheet.create({
-
+  buttonContainer:{
+    width:'100%',
+    marginTop:'10%',
+    alignItems:'center',
+    position:'relative',
+  },
+  containerDates:{
+    padding:'2%',
+    flex: 1, 
+    flexDirection: 'row', 
+    //borderWidth: 1, 
+    //borderColor: 'red', 
+    width:'100%'
+  },
+  
+  containerDatePicker:{
+    flex:1, 
+    flexDirection: 'row', 
+    //borderWidth:2, 
+    //borderColor:'green', 
+    justifyContent:'center',
+    alignItems: 'center',
+    marginLeft:'1%'
+  }
 
 });
