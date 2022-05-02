@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         height: '20%'
     },  
     logoText:{
-        fontFamily: 'roboto-light',
+        fontFamily: 'roboto-regular',
         color: 'white',
         fontSize: 44,
         marginBottom: '5%'
@@ -135,7 +135,7 @@ logoutContainer:{
     marginLeft: '3%'
 },
 logoutLabel:{
-    fontFamily: 'roboto-light',
+    fontFamily: 'roboto-regular',
     fontSize: 26,   
     color: 'white',
     marginLeft: '2%',
