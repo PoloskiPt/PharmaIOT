@@ -16,15 +16,16 @@ export default function Configuracoes({navigation}) {
            <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarAlarmes')}>       
                  <Text style={styles.defaultText}>Gerir Alarmes</Text> 
             </TouchableOpacity>
+            <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarUnidades')}>       
+                 <Text style={styles.defaultText}>Gerir Unidades</Text>            
+            </TouchableOpacity>
             <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarContactos')}>       
                  <Text style={styles.defaultText}>Gerir Contactos</Text>            
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarUtilizadores')}>       
+            <TouchableOpacity style={styles.lastListItem} onPress={() => navigation.navigate('GerenciarUtilizadores')}>       
                  <Text style={styles.defaultText}>Gerir Utilizadores</Text>            
             </TouchableOpacity>
-            <TouchableOpacity style={styles.lastListItem} onPress={() => navigation.navigate('GerenciarUnidades')}>       
-                 <Text style={styles.defaultText}>Gerir Unidades</Text>            
-            </TouchableOpacity>
+          
            </View>
            
       </ConfiguracoesCard>
