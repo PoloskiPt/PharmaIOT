@@ -81,13 +81,15 @@ const hideShowPassword = () => {
 }
 
 useEffect(() => {
-    setEmail(contextEmail);
-    setPassword(contextPassword);
+    //setEmail(contextEmail);
+    //setPassword(contextPassword);
     if(contextRememberMe == "true"){     
         setEmail(contextEmail);
+        setPassword(contextPassword);
         setCheckBoxState(true);   
     }else{
-        setPassword(contextPassword);
+        setEmail("");
+        setPassword("");
         setCheckBoxState(false);
     }
 }, [contextEmail, setContextEmail ,contextPassword,setContextPassword, contextRememberMe, setContextRememberMe])
@@ -110,26 +112,21 @@ async function login(){
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
-  
+    .catch((error) => alert(resp.error))
+
     if(checkBoxState === true){
         setContextRememberMe("true");  
         save('rememberMe', "true");
         save('email', email);
         save('pass', password);
         save('name', resp.name + ' ' + resp.surname);
-        save('pharmacy', resp.pharmacy);
-        getValueForEmail();
-        getValueForPassword();
-   
     }else if(checkBoxState === false){
         setContextRememberMe("false");  
-        deleteItem('rememberMe', 'false');
-        deleteItem('pass', '');
-        deleteItem('email', '');
-        getValueForEmail();
-        getValueForPassword();
+        save('rememberMe', 'false');
     }
+   
+    getValueForEmail();
+    getValueForPassword();
     getValueFor('email');
     getValueFor('pass');
     setName(resp.name);
@@ -141,11 +138,9 @@ async function login(){
     save('pharmacy', resp.pharmacy);
     setSessionEmail(email);
     setSessionPassword(password);
-    setSessionPharmacy(resp.pharmacy);
-    console.log("teste: " + expoPushToken);
-    console.log("pharmacy: " + resp.pharmacy);
+    setSessionPharmacy(JSON.stringify(resp.pharmacy));
     let datatime = "12/02/12";
-    let tokenResult = await storeNotificationToken(expoPushToken, resp.pharmacy, datatime);
+    let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime);
     console.log("resutado query: " + JSON.stringify(tokenResult));
     navigation.reset({
         index: 0,
@@ -153,7 +148,7 @@ async function login(){
       });
 
     }else{
-        alert("Credenciais incorretas");
+        setMessage("Credenciais inválidas");
    }  
 }
 
@@ -202,7 +197,7 @@ return(
              {/*Fim password section */} 
                   
                   <View>
-                      {message && ( <Text>{message}</Text> )}
+                      {message && ( <Text style={{color:"red"}}>{message}</Text> )}
                   </View>
 
                    <View style={loginStyles.lembrarDadosSection}>
