@@ -6,7 +6,7 @@ import RelatorioStack from "./relatorioStack";
 import ConfiguracoesStack from "./configuracoesStack";
 import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Platform, Image } from "react-native";
+import { Platform } from "react-native";
 import React from "react";
 
 const RootDrawerNavigator = createDrawerNavigator({

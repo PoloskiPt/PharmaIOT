@@ -65,6 +65,8 @@
     "react-native-svg": "^12.3.0",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
+    "react-native-wheel-picker-expo": "^0.4.2",
+    "react-native-wheel-scrollview-picker": "^2.0.1",
     "react-navigation": "^4.4.4",
     "react-navigation-drawer": "^2.7.2",
     "react-navigation-shared-element": "^3.1.3",

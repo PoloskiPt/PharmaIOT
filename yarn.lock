@@ -1134,7 +1134,7 @@
   resolved "https://registry.npmjs.org/@expo/config-types/-/config-types-44.0.0.tgz"
   integrity sha512-d+gpdKOAhqaD5RmcMzGgKzNtvE1w+GCqpFQNSXLliYlXjj+Tv0eL8EPeAdPtvke0vowpPFwd5McXLA90dgY6Jg==
 
-"@expo/config@6.0.18", "@expo/config@^6.0.6":
+"@expo/config@6.0.18":
   version "6.0.18"
   resolved "https://registry.npmjs.org/@expo/config/-/config-6.0.18.tgz"
   integrity sha512-60z0YICI9eJWlvajl/Wgq8+lKm0jfkZOMdATDQtWz6GvWshUxd+A8EYhtgjJ9eWMGqOYkwrCpRNLHz5TZtCKWA==
@@ -1151,7 +1151,7 @@
     slugify "^1.3.4"
     sucrase "^3.20.0"
 
-"@expo/config@6.0.6":
+"@expo/config@6.0.6", "@expo/config@^6.0.6":
   version "6.0.6"
   resolved "https://registry.npmjs.org/@expo/config/-/config-6.0.6.tgz"
   integrity sha512-GPI8EIdMAtZ5VaB4p5GcfuX50xyfGFdpEqLi0QmcfrCfTsGry1/j/Qy28hovHM1oJYHlaZylTcbGy+1ET+AO2w==
@@ -3087,7 +3087,7 @@ expo-intent-launcher@^10.1.3:
 
 expo-json-utils@~0.2.0:
   version "0.2.1"
-  resolved "https://registry.yarnpkg.com/expo-json-utils/-/expo-json-utils-0.2.1.tgz#a8d15181e361f3fc782d5241ce381851bab4465b"
+  resolved "https://registry.npmjs.org/expo-json-utils/-/expo-json-utils-0.2.1.tgz"
   integrity sha512-wU7gXGtaUlyxFLTp5e3PbnJB90/92r6gEc2BuMHdqE0OxhTQKyKzRszk2szCsdkeI7L4XntvZhCs1Px+gL1gvA==
 
 expo-keep-awake@~10.0.2:
@@ -3097,7 +3097,7 @@ expo-keep-awake@~10.0.2:
 
 expo-manifests@~0.2.2:
   version "0.2.4"
-  resolved "https://registry.yarnpkg.com/expo-manifests/-/expo-manifests-0.2.4.tgz#28aa7a0b21d8b932e1a49c836cfc31b5a9cd1f9c"
+  resolved "https://registry.npmjs.org/expo-manifests/-/expo-manifests-0.2.4.tgz"
   integrity sha512-8PrMPyvElKXflYd1ApDHJR9JF0SR996iVEVQgHAMLzVP7OqEAM6dQaFeqrRqVn/DSsxEWkJTpxv8WJ5NWrT4Lg==
   dependencies:
     expo-json-utils "~0.2.0"
@@ -3175,17 +3175,17 @@ expo-status-bar@~1.2.0:
 
 expo-structured-headers@~2.1.0:
   version "2.1.1"
-  resolved "https://registry.yarnpkg.com/expo-structured-headers/-/expo-structured-headers-2.1.1.tgz#bdbf8752af36c7d3203540476af55562546b6aeb"
+  resolved "https://registry.npmjs.org/expo-structured-headers/-/expo-structured-headers-2.1.1.tgz"
   integrity sha512-0up4sfHHsiK2YLpTwD/ssUD2oeSGzVUeARnu/itKAJO4zHqjpc+m8N1s7HPSJcdC7fdDpMjzcdrDasT0o+cOAw==
 
 expo-updates-interface@~0.5.0:
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/expo-updates-interface/-/expo-updates-interface-0.5.1.tgz#b390622f60b353bb352def895a32dc800a21a4dc"
+  resolved "https://registry.npmjs.org/expo-updates-interface/-/expo-updates-interface-0.5.1.tgz"
   integrity sha512-RLvC69o1BkhHP6hNaWiIvSiTgXABB9v4HnoietoXKFHlAyxlQCupy6ki164KpZNrOS/PFJ2WWqZOvKfiyDVO+w==
 
 expo-updates@~0.11.7:
   version "0.11.7"
-  resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.11.7.tgz#c267ce8818d42a997d49a1e24b11b4887a2fb17b"
+  resolved "https://registry.npmjs.org/expo-updates/-/expo-updates-0.11.7.tgz"
   integrity sha512-zmteCFOBj2OtDOZO5eGgFHR4EXZvFUv5DM56aMkZ6+PE/fo+8ZjNZLxkQWD33GXmXs/9jLCLKXPj2+6kCJvyhg==
   dependencies:
     "@expo/config" "^6.0.6"
@@ -5834,6 +5834,16 @@ react-native-webview@^11.0.0:
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
+
+react-native-wheel-picker-expo@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-wheel-picker-expo/-/react-native-wheel-picker-expo-0.4.2.tgz#bd7d5cbb9743901703b1fd17a22ef515ff7248a5"
+  integrity sha512-xhxVjg/IELhRZdKAKON+GBfOKYzb6UygZj8lwfrP8oOJPLLQDwhXLLaAuVKgq7dzddx/y91OHTAw9PdGa8mI7A==
+
+react-native-wheel-scrollview-picker@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/react-native-wheel-scrollview-picker/-/react-native-wheel-scrollview-picker-2.0.1.tgz"
+  integrity sha512-jNhOU/gsw9TDumMev4vMaIfR9Coicc4Pgo3kizdam0UC0NQga1gpLWnXuZoYIwEIDElwbHXAEGINOoiF1MM5Hw==
 
 react-native@0.64.3:
   version "0.64.3"
