@@ -7,7 +7,7 @@ import * as SecureStore from 'expo-secure-store';
 
 function CustomDrawer({...props}){
 
-const [name, setName] = useState('');
+const [name, setName] = useState();
 
 async function deleteItem(key){
     await SecureStore.deleteItemAsync(key);

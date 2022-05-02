@@ -22,7 +22,7 @@ export default function Perfil() {
   
   async function getValueForEmail(){
      
-    let result = await SecureStore.getItemAsync('email');
+    let result = await SecureStore.getItemAsync('sessionEmail');
     if(result){
       setEmail(result);
       return result;
@@ -33,7 +33,7 @@ export default function Perfil() {
 
   async function getValueForPassword(){
      
-    let result = await SecureStore.getItemAsync('pass');
+    let result = await SecureStore.getItemAsync('sessionPassword');
     if(result){
       setPassword(md5(result));
       return md5(result);
