@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect} from 'react';
-
 import {View, Text, TouchableWithoutFeedback, Keyboard,Image, TextInput} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
@@ -8,9 +7,8 @@ import FlatButton from '../shared/button';
 import { useNavigation } from '@react-navigation/native';
 import md5 from 'md5';
 import { UserContext } from '../store/userContext';
-import {save, deleteItem, storeNotificationToken} from '../functions/genericFunctions';
+import {save,storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
-
 
 export default function Login(){
 const [name, setName] = useState('');
@@ -197,7 +195,7 @@ return(
              {/*Fim password section */} 
                   
                   <View>
-                      {message && ( <Text style={{color:"red"}}>{message}</Text> )}
+                      {message && ( <Text style={{color:"red",fontFamily:"roboto-bold"}}>{message}</Text> )}
                   </View>
 
                    <View style={loginStyles.lembrarDadosSection}>
@@ -218,8 +216,7 @@ return(
                     onPress={login} 
                     paddingVertical={14}
                     paddingHorizontal={10}
-                    fontWeight='bold'
-                    textAlign = 'center'
+                    textAlign = 'center'  
                     />                  
 
                 </View>                       
