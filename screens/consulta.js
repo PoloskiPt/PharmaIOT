@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Platform, TouchableWithoutFeedback  } from 'react-native';
+import { StyleSheet, View, Text, Platform, TouchableWithoutFeedback, Alert  } from 'react-native';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
 import { LineChart } from "react-native-chart-kit";
@@ -18,7 +18,8 @@ export default function Consulta() {
   // useStates pickers topo
   const [currentSn, setCurrentSn] = useState();
   const [selectedTimeSpan, setSelectedTimeSpan] = useState();
-
+  const [dataInicial, setDataInicial] = useState();
+  const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
   useEffect(() => {
     let today = new Date();
@@ -67,6 +68,19 @@ export default function Consulta() {
   const [text, setText] = useState('dd/mm/aaaa');
   const [textEnd, setTextEnd] = useState('dd/mm/aaaa');
 
+
+  // verficar date inputs
+
+  const verificarDateInputs = () => {
+
+    if(dataFinal == null || dataInicial == null){
+      Alert.alert("Dados em falta","Por favor preencha as duas datas.", [{text:'Compreendo'}]);
+    }
+
+    console.log("resultado data final: " + dataFinal + " data inicial: " +  dataInicial);
+
+  }
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -76,7 +90,9 @@ export default function Consulta() {
     let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
     let fTime = 'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setText(fDate);
+    setDataInicial(fDate);
     console.log(fDate + ' (' + fTime + ')');
+    
   }
 
   const showMode = (currentMode) => {
@@ -97,7 +113,9 @@ export default function Consulta() {
     let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
     let fTime = 'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setTextEnd(fDate);
+    setDataFinal(fDate);
     console.log(fDate + ' (' + fTime + ')');
+    console.log(fDate);
   }
 
   const showModeEnd = (currentMode) => {
@@ -107,13 +125,13 @@ export default function Consulta() {
 
   const sn = DataInterval && DataInterval[0].sn;
 
-  let cardHeight = Platform.OS === 'android' ? '95%' : "95%";
+  let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
   return (
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: '-4%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 
         <View style={{
           backgroundColor: "#286cbe",
@@ -210,8 +228,10 @@ export default function Consulta() {
           </View>
         </View>
       </View>
-      <View height="92%">
+      <View height="94%">
         <MainCard height={cardHeight}>
+
+        <View style={styles.consultaContainer}>
 
           {DataInterval && <LineChart
             data={{
@@ -228,7 +248,7 @@ export default function Consulta() {
               ],
               legend: ["Humidade"] 
             }}
-            width={360}
+            width={300}
             height={240}
             chartConfig={chartConfig}
           />}
@@ -248,31 +268,27 @@ export default function Consulta() {
               ],
               legend: ["Temperatura"]
             }}
-            width={360}
+            width={300}
             height={240}
             chartConfig={chartConfig}
           />}
 
           <View style={styles.containerDates}>
             <View style={styles.containerDatePicker}>
-              <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>
-              <TouchableWithoutFeedback onPress={() => showMode('date')}>
-              <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                  <Text  placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 18, alignItems: 'center', marginRight:'8%', marginLeft:'8%'}}>{text}
-                  </Text>
+              <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>      
+           <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
+                  <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center', marginRight:'8%', marginLeft:'8%'}}>{text}
                   <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={22} type="Ionicons" /> 
+                  </Text>           
               </View>
-              </TouchableWithoutFeedback> 
             </View> 
             <View style={styles.containerDatePicker}>
-              <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>
-              <TouchableWithoutFeedback onPress={() => showMode('date')}>
+              <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>     
                  <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row',justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                      <Text placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 18, alignItems: 'center' ,marginRight:'8%', marginLeft:'8%'}}>{textEnd}
-                      </Text>
-                      <Icon name='calendar-outline' style={{ color: 'black'}} size={22} type="Ionicons" />
+                      <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center' ,marginRight:'8%', marginLeft:'8%'}}>{textEnd}
+                      <Icon name='calendar-outline' style={{ color: 'black'}} size={13} type="Ionicons" />
+                      </Text>       
                   </View>
-                </TouchableWithoutFeedback>
               </View>   
           </View>
     
@@ -302,6 +318,8 @@ export default function Consulta() {
               onChange={onChangeEnd}
             />
           )}
+        
+        </View>
 
       <View style={styles.buttonContainer}> 
           <FlatButton 
@@ -313,7 +331,7 @@ export default function Consulta() {
           paddingVertical={11}
           paddingHorizontal={52}
           fontSize={16}
-          onPress={() => alert('A filtrar...')}         
+          onPress={verificarDateInputs}         
           />   
          </View> 
          
@@ -354,6 +372,11 @@ const chartConfig = {
 };
 
 const styles = StyleSheet.create({
+  consultaContainer:{
+    height:'87.5%',
+    padding: '4%',
+  },
+  
   buttonContainer:{
     width:'100%',
     marginTop:'10%',

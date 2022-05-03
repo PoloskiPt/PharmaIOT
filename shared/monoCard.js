@@ -7,7 +7,11 @@ export default function MonoCard(props){
     return(
         <View style={styles(props.height).mainCard}>
             <View style={styles.cardContent}>            
-                {props.children}             
+            <ScrollView
+                showsVerticalScrollIndicator ={false}
+                showsHorizontalScrollIndicator={false}>
+                {props.children}
+                </ScrollView>           
             </View>
         </View>
     )

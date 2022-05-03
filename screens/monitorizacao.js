@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { StyleSheet, View, Text, ScrollView} from 'react-native';
+import { StyleSheet, View, Text} from 'react-native';
 import { globalStyles } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
@@ -24,7 +24,6 @@ export default function Monitorizacao() {
   const [isLoading, setIsLoading] = useState(true);
   const radius = 70;
   const circleCircumference = 2 * Math.PI * radius;
-
 
   async function requestMeasurePoints(id){
      
@@ -85,39 +84,39 @@ export default function Monitorizacao() {
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={{ height:'8%', width:'40%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
-<View style={{backgroundColor: "#286cbe", 
-shadowOffset: { width: 4, height: 4 }, 
-borderRadius:10,shadowColor:"rgba(0,0,0,0.25)",
-flex:1,flexDirection:'row'}}>
+        <View style={{backgroundColor: "#286cbe", 
+        shadowOffset: { width: 4, height: 4 }, 
+        borderRadius:10,shadowColor:"rgba(0,0,0,0.25)",
+        flex:1,flexDirection:'row'}}>
    
- <View style={{width:'80%'}}>
- <RNPickerSelect
-          style={{ 
-            inputAndroid: { 
-            fontFamily: 'roboto-medium',
-            color: 'white',
-            textAlign:'left',
-            fontSize: 16,
-            marginLeft:'9%',
-            height:'100%',
-            width: '90%',
-           }, 
-           inputIOS: {
-            fontFamily: 'roboto-medium',
-            color:'white',
-            textAlign:'left',
-            marginLeft:'9%',
-            height:'100%'
-           },
+          <View style={{width:'80%'}}>
+                <RNPickerSelect
+                          style={{ 
+                            inputAndroid: { 
+                            fontFamily: 'roboto-medium',
+                            color: 'white',
+                            textAlign:'left',
+                            fontSize: 16,
+                            marginLeft:'9%',
+                            height:'100%',
+                            width: '90%',
+                          }, 
+                          inputIOS: {
+                            fontFamily: 'roboto-medium',
+                            color:'white',
+                            textAlign:'left',
+                            marginLeft:'9%',
+                            height:'100%'
+                          },
 
-      }}  
-          useNativeAndroidPickerStyle={false}
-          onValueChange={(value) => requestMeasurePointData(value)}
-          placeholder={{}}
-          items={measurePoints}
-          
-      />
- </View>
+                      }}  
+                          useNativeAndroidPickerStyle={false}
+                          onValueChange={(value) => requestMeasurePointData(value)}
+                          placeholder={{}}
+                          items={measurePoints}
+                          
+                      />
+  </View>
  
   <View style={{width:'20%',alignSelf:'center',marginLeft:'3%'}}>
 
@@ -126,15 +125,9 @@ flex:1,flexDirection:'row'}}>
   </View>
   </View> 
 </View>
-<View height="102%"> 
+<View style={{borderColor:'yellow', borderColor:2, height:"100%"}}> 
       
       <MonoCard height={cardHeight} >
-     
-      <ScrollView style={{height:'100%'}}
-        showsVerticalScrollIndicator ={false}
-        showsHorizontalScrollIndicator={false}
-      >
-    
      
     <View style={styles.monoContainer}>
    
@@ -226,7 +219,7 @@ flex:1,flexDirection:'row'}}>
         }}
         withInnerLines={true}
         withOuterLines={false}     
-        width={310}
+        width={300}
         height={240}
         chartConfig={chartConfig}
         style={{marginVertical:"2%"}}
@@ -246,7 +239,6 @@ flex:1,flexDirection:'row'}}>
   
     </View>
         
-    </ScrollView>
     </MonoCard>
   
     </View>
@@ -256,7 +248,7 @@ flex:1,flexDirection:'row'}}>
   );
 }
 
-  // CONFIGURAÇÕES DO LINE CHART
+// CONFIGURAÇÕES DO LINE CHART
 
 const chartConfig = {
   backgroundGradientFrom: "white",
@@ -281,9 +273,7 @@ const chartConfig = {
 
   propsForHorizontalLabels:{
     fontSize: "15",
-    x:"50"
-    
-    
+    x:"50"  
   } 
 };
 
@@ -297,7 +287,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     marginLeft: '18%',
     borderWidth: 2,
-    width: '64%',
+    width: '66%',
     borderColor:"rgba(110,110,110,1)",
     borderRadius:15,
     position:'relative',
