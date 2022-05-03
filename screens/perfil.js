@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text,TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -17,6 +17,17 @@ export default function Perfil() {
   const [isLoading, setIsLoading] = useState(true);
   const [password, setPassword] = useState();
   const [profileData, setProfileData] = useState([]);
+  const [btnEditText,setBtnEditText] = useState('Editar');
+  const [btnEditColor,setBtnEditColor] = useState('#FFC222');
+  const [editableState, setEditableState] = useState(false);
+  
+  // use states updated values
+ 
+  const [emailUpdate,setEmailUpdate] = useState();
+  const [addressUpdate, setAddressUpdate] = useState();
+  const [cityUpdate, setCityUpdate] = useState();
+ 
+
   let response;
   const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
   
@@ -29,6 +40,17 @@ export default function Perfil() {
     }else{
       setEmail('');
     }
+  }
+
+  const editButtonLogic = () => {
+
+    if(btnEditText == "Editar"){ setBtnEditText('Confirmar'); setEditableState(true); setBtnEditColor("#4CBB17");}     
+     
+    else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); }  
+     
+    console.log(profileData);
+    console.log(addressUpdate);
+    console.log(cityUpdate);
   }
 
   async function getValueForPassword(){
@@ -81,60 +103,80 @@ export default function Perfil() {
       </View> 
       
       <PerfilCard height={cardHeight}>  
-      
+      <ScrollView>
+      <KeyboardAvoidingView>
         <View style={styles.perfilContainer}>
             
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Nome </Text>
-            {profileData && <Text>{profileData.name}</Text>} 
+            {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.name}</TextInput>} 
              
             </View>   
 
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Apelido </Text>
-              {profileData && <Text>{profileData.surname}</Text>}
+              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.surname}</TextInput>}
             </View>   
            
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Endereço de e-mail </Text>
-              {profileData && <Text>{profileData.email}</Text>}
+              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.email}</TextInput>}
             </View>
            
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Contacto telefónico </Text>
-              {profileData && <Text>{profileData.tel}</Text>}
+              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.tel}</TextInput>}
             </View>
            
-           
             <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Morada </Text>
-              {profileData && <Text>{profileData.address}</Text>}
+                <Text style={styles.titleText}>Morada </Text>
+                {
+                  profileData && 
+                  <TextInput 
+                    style={{color:'black'}} 
+                    editable = {editableState}
+                    onChangeText={(val) => setAddressUpdate(val)}
+                  >
+                     {profileData.address}
+                  </TextInput>
+                }
             </View>
 
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Cidade </Text>
-              {profileData && <Text>{profileData.city}</Text>}
+              {
+                  profileData && 
+                  <TextInput 
+                      style={{color:'black'}} 
+                      editable = {editableState}
+                      onChangeText={(val) => setCityUpdate(val)}
+                  >
+                       {profileData.city}
+                  </TextInput>
+              }
             </View>
 
-            <View >
+            <View style={styles.borderContainer}>
               <Text style={styles.titleText}>País </Text>
-              {profileData && <Text>{profileData.country}</Text>}
+              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.country}</TextInput>}
             </View>
            
         </View> 
         <View style={styles.buttonContainer}> 
         <FlatButton 
-         text="Salvar" 
+         text={btnEditText}
          textColor= "white"
-         fontFamily= 'roboto-light'
-         color="#17A2B8" 
+         fontFamily= 'roboto-medium'
+         color={btnEditColor}
          borderRadius={25}    
          paddingVertical={11}
-         paddingHorizontal={52}
-         fontSize={16}
-         onPress={() => alert('salvando...')}         
+         paddingHorizontal={40}
+         fontSize={20}
+         onPress={editButtonLogic}         
          />   
          </View> 
+         </KeyboardAvoidingView>
+         </ScrollView>
       </PerfilCard >
       </SafeAreaView>
     </View>
@@ -155,7 +197,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     width:'100%',
-    marginTop:'10%',
+    marginTop:'6%',
     alignItems:'center',
     position:'relative',
   },

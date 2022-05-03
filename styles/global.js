@@ -1,18 +1,13 @@
 import { StyleSheet, Platform } from 'react-native';
 
-
 export const loginStyles = StyleSheet.create({
   loginContainer: {
-    //backgroundColor: 'rgba(57,139,234,0.94)',
     backgroundColor: '#398BEA',
     alignItems: 'center',
     display:"flex",
     height:'100%',
     justifyContent:'center',
     flexDirection:'column',
-
-    //shadowColor: 'rgba(0,0,0,0.25)',
-    //shadowOffset: { width: 0, height: 4 },
   },
   loginContent:{
     display:"flex",
@@ -47,9 +42,6 @@ export const loginStyles = StyleSheet.create({
   },
   loginForm:{
     display:"flex",
-    //borderWidth: 1,
-    //borderColor: 'red',
-    //height:'100%',
     justifyContent:'center',
     flexDirection:'column',
     padding:10,
@@ -68,7 +60,6 @@ export const loginStyles = StyleSheet.create({
 },
   labelLogoContainer:{ 
     flexDirection: 'row',
-    //justifyContent: 'center',
     alignItems: 'flex-start',
 },
 
@@ -133,8 +124,6 @@ webConnectLogoContainer:{
   justifyContent:'center',
   alignItems:'center',
   left:15,
-  //borderWidth:1,
-  //borderColor: 'red',
   height:60
 }
 

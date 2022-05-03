@@ -3,7 +3,6 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Platform } from 'react-native';
 
 export default function MainCard(props){
-    
     return(
         <View style={styles(props.height).mainCard}>
             <View style={styles.cardContent}>

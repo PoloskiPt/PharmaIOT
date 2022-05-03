@@ -3,14 +3,13 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Platform } from 'react-native';
 
 export default function MonoCard(props){
-    
     return(
         <View style={styles(props.height).mainCard}>
             <View style={styles.cardContent}>            
-            <ScrollView
-                showsVerticalScrollIndicator ={false}
-                showsHorizontalScrollIndicator={false}>
-                {props.children}
+                 <ScrollView
+                    showsVerticalScrollIndicator ={false}
+                    showsHorizontalScrollIndicator={false}>
+                    {props.children}
                 </ScrollView>           
             </View>
         </View>
