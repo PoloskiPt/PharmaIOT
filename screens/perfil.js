@@ -53,12 +53,12 @@ export default function Perfil() {
     else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); }  
      
     console.log(profileData);
+    console.log(nameUpdate);
+    console.log(surnameUpdate);
+    console.log(emailUpdate);
+    console.log(phoneUpdate);
     console.log(addressUpdate);
     console.log(cityUpdate);
-    console.log(emailUpdate);
-    console.log(nameUpdate);
-    console.log(phoneUpdate);
-    console.log(surnameUpdate);
     console.log(countryUpdate);
 
     
