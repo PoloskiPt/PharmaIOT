@@ -26,6 +26,10 @@ export default function Perfil() {
   const [emailUpdate,setEmailUpdate] = useState();
   const [addressUpdate, setAddressUpdate] = useState();
   const [cityUpdate, setCityUpdate] = useState();
+  const [countryUpdate, setCountryUpdate] = useState();
+  const [phoneUpdate, setPhoneUpdate] = useState();
+  const [nameUpdate, setNameUpdate] = useState();
+  const [surnameUpdate, setSurnameUpdate] = useState();
  
 
   let response;
@@ -51,6 +55,13 @@ export default function Perfil() {
     console.log(profileData);
     console.log(addressUpdate);
     console.log(cityUpdate);
+    console.log(emailUpdate);
+    console.log(nameUpdate);
+    console.log(phoneUpdate);
+    console.log(surnameUpdate);
+    console.log(countryUpdate);
+
+    
   }
 
   async function getValueForPassword(){
@@ -109,23 +120,43 @@ export default function Perfil() {
             
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Nome </Text>
-            {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.name}</TextInput>} 
+            {profileData && <TextInput 
+            style={{color:'black'}} 
+            editable = {editableState}
+            onChangeText={(text) => setNameUpdate(text)}
+            >
+              {profileData.name}</TextInput>} 
              
             </View>   
 
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Apelido </Text>
-              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.surname}</TextInput>}
+              {profileData && <TextInput 
+              style={{color:'black'}} 
+              editable = {editableState}
+              onChangeText={(text) => setSurnameUpdate(text)}
+              >
+                {profileData.surname}</TextInput>}
             </View>   
            
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Endereço de e-mail </Text>
-              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.email}</TextInput>}
+              {profileData && <TextInput 
+              style={{color:'black'}} 
+              editable = {editableState}
+              onChangeText={(text) => setEmailUpdate(text)}
+              >
+                {profileData.email}</TextInput>}
             </View>
            
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Contacto telefónico </Text>
-              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.tel}</TextInput>}
+              {profileData && <TextInput 
+              style={{color:'black'}} 
+              editable = {editableState} 
+              onChangeText={(val) => setPhoneUpdate(val)}
+              >
+                {profileData.tel}</TextInput>}
             </View>
            
             <View style={styles.borderContainer}>
@@ -158,7 +189,11 @@ export default function Perfil() {
 
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>País </Text>
-              {profileData && <TextInput style={{color:'black'}} editable = {editableState}>{profileData.country}</TextInput>}
+              {profileData && <TextInput style={{color:'black'}} 
+              editable = {editableState}
+              onChangeText={(val) => setCountryUpdate(val)}
+              >
+                {profileData.country}</TextInput>}
             </View>
            
         </View> 
