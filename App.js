@@ -102,6 +102,10 @@ async function getValueForRememberMe(){
     getValueForSessionPharmacy();
 
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    console.log('1')
+    console.log( registerForPushNotificationsAsync());
+    
+   
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       setNotification(notification);
@@ -111,7 +115,7 @@ async function getValueForRememberMe(){
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       //console.log(response);
     });
-    //console.log(expoPushToken);
+   
     return () => {
       Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
@@ -162,12 +166,13 @@ async function getValueForRememberMe(){
         data: { someData: 'goes here' },
       };
     
-      await fetch('https://exp.host/--/api/v2/push/send', {
+      await fetch('https://fcm.googleapis.com/fcm/send', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Accept-encoding': 'gzip, deflate',
           'Content-Type': 'application/json',
+          Authorization:`key= AAAAQHDNhn4:APA91bG3V1PF8dyLJLcqD4aGPgzkZPIG8SP70hzCjQuYMky7VicqdbMM5VAw8LcUu-xsiQis9toezRxY2bFj7YTiBn8_tB4AR-LpyuSstMBLqgYXVy8FRWloVZUPZ4yrZvaHkORzip5J`,
         },
         body: JSON.stringify(message),
       });
@@ -187,8 +192,9 @@ async function getValueForRememberMe(){
           alert('Failed to get push token for push notification!');
           return;
         }
-        token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
+         const token = (await Notifications.getDevicePushTokenAsync({ gcmSenderId: "276770424446" })).data;
+         console.log("Got "+ token.data);
+         console.log(token);
       } else {
         alert('Must use physical device for Push Notifications');
       }

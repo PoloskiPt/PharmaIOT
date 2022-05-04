@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "276770424446",
+    "project_id": "pharmaiot",
+    "storage_bucket": "pharmaiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276770424446:android:baa9c93d9266ba2ed4ba2f",
+        "android_client_info": {
+          "package_name": "com.poloski.PharmaIoT"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276770424446-t3mpkh2eghqu6adl8ja0ji15ubt40n5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwRDvsPa-dncYJAzuHXeQjFwlz2M50la4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276770424446-t3mpkh2eghqu6adl8ja0ji15ubt40n5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
