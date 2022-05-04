@@ -39,6 +39,8 @@ export default function App() {
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
  
+ 
+ 
   const LoadFontsAndRestoreToken = async () => {
     await useFonts();
   };
@@ -94,6 +96,8 @@ async function getValueForRememberMe(){
     setContextRememberMe(result);
 }
 
+
+
   useEffect(() => {
     getValueForSession();
     getValueForEmail();
@@ -101,10 +105,10 @@ async function getValueForRememberMe(){
     getValueForRememberMe();
     getValueForSessionPharmacy();
 
+
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-    console.log('1')
-    console.log( registerForPushNotificationsAsync());
     
+   
    
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
@@ -149,7 +153,7 @@ async function getValueForRememberMe(){
       setSessionPassword,
       sessionPharmacy,
       setSessionPharmacy,
-      expoPushToken
+      expoPushToken,
       }}>
         
       <Navigation result={isLoggedIn}/>        
@@ -180,7 +184,7 @@ async function getValueForRememberMe(){
     }
     
     async function registerForPushNotificationsAsync() {
-      let token;
+       let token;
       if (Device.isDevice) {
         const { status: existingStatus } = await Notifications.getPermissionsAsync();
         let finalStatus = existingStatus;
@@ -192,9 +196,11 @@ async function getValueForRememberMe(){
           alert('Failed to get push token for push notification!');
           return;
         }
-         const token = (await Notifications.getDevicePushTokenAsync({ gcmSenderId: "276770424446" })).data;
-         console.log("Got "+ token.data);
-         console.log(token);
+          token = (await Notifications.getDevicePushTokenAsync({ gcmSenderId: "276770424446" }));
+       
+         
+  
+         
       } else {
         alert('Must use physical device for Push Notifications');
       }
@@ -207,8 +213,8 @@ async function getValueForRememberMe(){
           lightColor: '#FF231F7C',
         });
       }
-    
-      return token;
+      console.log(token);
+      setExpoPushToken(token.data);
     }
 
 }

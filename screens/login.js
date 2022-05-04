@@ -139,6 +139,7 @@ async function login(){
     setSessionPharmacy(JSON.stringify(resp.pharmacy));
     let datatime = "12/02/12";
     let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime);
+
     console.log("resutado query: " + JSON.stringify(tokenResult));
     navigation.reset({
         index: 0,
