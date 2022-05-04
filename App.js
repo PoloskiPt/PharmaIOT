@@ -38,7 +38,7 @@ export default function App() {
   const [contextRememberMe, setContextRememberMe] = useState(null);
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
- 
+  let getToken;
  
  
   const LoadFontsAndRestoreToken = async () => {
@@ -96,7 +96,12 @@ async function getValueForRememberMe(){
     setContextRememberMe(result);
 }
 
+async function getValueForToken(){ 
+  let result = await registerForPushNotificationsAsync();
 
+ 
+  return result;
+}
 
   useEffect(() => {
     getValueForSession();
@@ -104,10 +109,12 @@ async function getValueForRememberMe(){
     getValueForPassword();
     getValueForRememberMe();
     getValueForSessionPharmacy();
+    getValueForToken();
 
-
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+   let device =  getValueForToken();
+   
     
+    //console.log('f' + getToken);
    
    
     // This listener is fired whenever a notification is received while the app is foregrounded
@@ -154,6 +161,7 @@ async function getValueForRememberMe(){
       sessionPharmacy,
       setSessionPharmacy,
       expoPushToken,
+      getToken
       }}>
         
       <Navigation result={isLoggedIn}/>        
@@ -197,9 +205,7 @@ async function getValueForRememberMe(){
           return;
         }
           token = (await Notifications.getDevicePushTokenAsync({ gcmSenderId: "276770424446" }));
-       
          
-  
          
       } else {
         alert('Must use physical device for Push Notifications');
@@ -213,7 +219,6 @@ async function getValueForRememberMe(){
           lightColor: '#FF231F7C',
         });
       }
-      console.log(token);
       setExpoPushToken(token.data);
     }
 
