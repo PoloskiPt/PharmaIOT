@@ -6,7 +6,7 @@ import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { UserContext } from '../store/userContext';
-import {getMeasurePoints, getMeasurePointData, onShare} from '../functions/genericFunctions';
+import {getMeasurePoints, getMeasurePointData, onShare,getMeasurePointDataLastDay} from '../functions/genericFunctions';
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -16,6 +16,7 @@ export default function Monitorizacao() {
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const [measurePoints, setMeasurePoints] = useState([]);
   const [monitoringData, setmonitoringData] = useState();
+  const [monitoringDataLastDay, setmonitoringDataLastDay] = useState();
   const [humCircleChartColor, setHumCircleChartColor] = useState();
   const [tempCircleChartColor, setTempCircleChartColor] = useState(null);
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
@@ -30,6 +31,7 @@ export default function Monitorizacao() {
       let resultMeasurePoints = await getMeasurePoints();
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(resultMeasurePoints[id].value);
+      requestMeasurePointDataLastDay(resultMeasurePoints[id].value);
     
   }
 
@@ -39,8 +41,8 @@ export default function Monitorizacao() {
     setmonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
     let temperatura = Math.round(measurePointData[0].temp);
-    
-    if(humidade <= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel) {
+    console.log(measurePointData[0].hum_max_admissivel);
+    if(humidade <= measurePointData[0].hum_min_admissivel && humidade >= measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
     }
 
@@ -67,6 +69,14 @@ export default function Monitorizacao() {
     }
 
     setIsLoading(false);
+
+  }
+  async function requestMeasurePointDataLastDay(sn){
+    
+    let measurePointDataLastDay = await getMeasurePointDataLastDay(sn);
+    setmonitoringDataLastDay(measurePointDataLastDay);
+    console.log(measurePointDataLastDay);
+  
 
   }
   
@@ -111,7 +121,7 @@ export default function Monitorizacao() {
 
                       }}  
                           useNativeAndroidPickerStyle={false}
-                          onValueChange={(value) => requestMeasurePointData(value)}
+                          onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value)} 
                           placeholder={{}}
                           items={measurePoints}
                           
@@ -198,23 +208,27 @@ export default function Monitorizacao() {
         </View>
       
         }
- 
- {monitoringData && <LineChart
+
+ {monitoringDataLastDay && <LineChart
         data={{
           labels : ["6pm", "9pm"],
           datasets: [ 
             {
-              data: [monitoringData[0].hum, 50],
+              data:monitoringDataLastDay.map((item) => {
+                return ((item.hum) * 100) / 100
+              }),
               color: () => "#097907", // optional
               strokeWidth: 3, // optional, default
             },
             {
-              data: [monitoringData[0].temp, 25],
+              data: monitoringDataLastDay.map((item) => {
+                return ((item.temp) * 100) / 100;
+              }),
               color: () => "#18A0FB", // optional
               strokeWidth: 3, // optional, default
             },
           ],
-           legend: ["Humidade","Temperatura"],
+           legend: ["Humidade"],
            withShadow: false,
         }}
         withInnerLines={true}

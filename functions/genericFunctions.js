@@ -20,6 +20,7 @@ const tokensEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/tokens/createTo
 const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
 const measurePointsDataIntervalEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePointsInterval.php";
 const measurePointDataEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints_status.php";
+const measurePointDataLastDayEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getMeasurePointsLastDay.php";
 
 //** GET MEASURE POINTS **/
 
@@ -65,6 +66,23 @@ export async function getMeasurePointData(sn) {
     .catch((error) => alert(error))
     return resp;
     }
+
+    export async function getMeasurePointDataLastDay(sn) {
+        let reqs = await fetch(measurePointDataLastDayEndpoint,{
+            method: 'POST',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                sn: sn,
+            })
+        });
+        let resp = await reqs.json()
+        .then(console.log())
+        .catch((error) => alert(error))
+        return resp;
+        }
 
     //** GET MEASURE POINTS **/
 

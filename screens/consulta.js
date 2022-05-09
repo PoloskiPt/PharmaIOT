@@ -29,17 +29,18 @@ export default function Consulta() {
 
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
-    setIsLoading(true);
+   
     let resultMeasurePoints = await getMeasurePoints();
-    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-04-05 17:40:21");
+    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-05-09 17:40:21");
     setMeasurePoints(resultMeasurePoints);
-    setIsLoading(false);
+    
   }
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
-
+    setIsLoading(true);
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
     setDataInterval(measurePointInterval);
     console.log(measurePointInterval);
+    setIsLoading(false);
 
   }
 
