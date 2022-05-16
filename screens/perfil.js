@@ -60,8 +60,6 @@ export default function Perfil() {
     console.log(addressUpdate);
     console.log(cityUpdate);
     console.log(countryUpdate);
-
-    
   }
 
   async function getValueForPassword(){
@@ -69,6 +67,7 @@ export default function Perfil() {
     let result = await SecureStore.getItemAsync('sessionPassword');
     if(result){
       setPassword(md5(result));
+      console.log(md5(result));
       return md5(result);
     }else{
       setPassword('');
@@ -94,9 +93,18 @@ export default function Perfil() {
         })
     });
       const data = await response.json()
+      setEmailUpdate(data.email);
+      setAddressUpdate(data.address);
+      setCityUpdate(data.city);
+      setCountryUpdate(data.country);
+      setPhoneUpdate(data.tel);
+      setNameUpdate(data.name);
+      setSurnameUpdate(data.surname);
       setProfileData(data);  
       setIsLoading(false);
-    }  
+      
+    } 
+
     
     fetchMyAPI();
   },[]);
