@@ -21,10 +21,12 @@ export default function Consulta() {
   const [dataInicial, setDataInicial] = useState();
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
+  
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     setDatepick(date);
+    requestMeasurePoints(0);
   }, []);
 
   //passar a farmacia por parametro mais tarde.
@@ -42,10 +44,6 @@ export default function Consulta() {
     console.log(measurePointInterval);
 
   }
-
-  useEffect(() => {
-    requestMeasurePoints(0);
-  }, [])
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
