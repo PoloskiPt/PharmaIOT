@@ -8,7 +8,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { getMeasurePoints, getMeasurePointDataInterval } from '../functions/genericFunctions';
+import { getMeasurePoints, getMeasurePointDataInterval,getMeasurePointData } from '../functions/genericFunctions';
 
 export default function Consulta() {
 
@@ -21,20 +21,33 @@ export default function Consulta() {
   const [dataInicial, setDataInicial] = useState();
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
+  const [datepickEnd, setDatepickEnd] = useState(null);
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     setDatepick(date);
   }, []);
 
+  useEffect(() => {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + 0 + (today.getMonth() + 1 ) + '-' + 0 + (today.getDate() - 1) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    
+    setDatepickEnd(date);
+   
+    
+  }, []);
+
+  console.log(datepickEnd);
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
     let resultMeasurePoints = await getMeasurePoints();
-    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-05-09 17:40:21");
     setMeasurePoints(resultMeasurePoints);
+    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-05-11 17:40:21");
+    
     
   }
+ 
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
     setIsLoading(true);
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
@@ -164,8 +177,7 @@ export default function Consulta() {
 
               }}
               useNativeAndroidPickerStyle={false}
-              onValueChange={(value) => requestMeasurePointDataInterval(value, "2022-04-03 19:40", datepick)}
-
+              onValueChange={(value) => requestMeasurePointDataInterval(value, datepickEnd,datepick)}
               placeholder={{}}
               items={measurePoints}
             />
@@ -211,11 +223,11 @@ export default function Consulta() {
               }}
 
               useNativeAndroidPickerStyle={false}
-              onValueChange={(value) => requestMeasurePointDataInterval(sn, value, datepick)}
+              onValueChange={(value) => requestMeasurePointDataInterval(sn,value,datepick) &&  setDatepickEnd(value)} 
               placeholder={{}}
 
               items={[
-                { label: 'Últimas 24 horas', value: '2022-04-03 19:40' },
+                { label: 'Últimas 24 horas', value: '2022-05-09 16:40' },
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
