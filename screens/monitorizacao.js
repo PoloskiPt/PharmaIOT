@@ -77,14 +77,14 @@ export default function Monitorizacao() {
     setmonitoringDataLastDay(measurePointDataLastDay);
     console.log(measurePointDataLastDay);
   
-
   }
   
   useEffect(() => {
-    
+  
     requestMeasurePoints(0); 
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
+    
 
   }, [sessionPassword, sessionEmail, sessionPharmacy])
 
@@ -209,7 +209,7 @@ export default function Monitorizacao() {
       
         }
 
- {monitoringDataLastDay && <LineChart
+ {monitoringDataLastDay && monitoringDataLastDay.length > 0 && <LineChart
         data={{
           labels : ["6pm", "9pm"],
           datasets: [ 

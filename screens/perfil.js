@@ -9,8 +9,9 @@ import PerfilCard from '../shared/perfilCard';
 import * as SecureStore from 'expo-secure-store';
 import md5 from 'md5';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {save} from '../functions/genericFunctions';
 
-export default function Perfil() {
+export default function Perfil(props) {
   const navigateBack = useNavigation();
   let cardHeight = Platform.OS === 'android'? '90%': "90%";
   const [email, setEmail] = useState();
@@ -30,6 +31,7 @@ export default function Perfil() {
   const [phoneUpdate, setPhoneUpdate] = useState();
   const [nameUpdate, setNameUpdate] = useState();
   const [surnameUpdate, setSurnameUpdate] = useState();
+  const [userId, setUserId] = useState();
  
 
   let response;
@@ -50,16 +52,38 @@ export default function Perfil() {
 
     if(btnEditText == "Editar"){ setBtnEditText('Confirmar'); setEditableState(true); setBtnEditColor("#4CBB17");}     
      
-    else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); }  
+    else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); updateInformation();}  
      
-    console.log(profileData);
-    console.log(nameUpdate);
-    console.log(surnameUpdate);
-    console.log(emailUpdate);
-    console.log(phoneUpdate);
-    console.log(addressUpdate);
-    console.log(cityUpdate);
-    console.log(countryUpdate);
+  }
+
+  const saveProfileDataUrl = "https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile_info.php";
+  
+  async function updateInformation()  {
+    console.log("chegou aqui!!!");
+    console.log("id do user: " +  userId);
+    console.log("mensagem: " +  addressUpdate);
+    response = await fetch(saveProfileDataUrl,{
+        method: 'PUT',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          address: addressUpdate,
+          city: cityUpdate,
+          country : countryUpdate,
+          tel : phoneUpdate,
+          name : nameUpdate,
+          surname : surnameUpdate,
+          pass : password,
+          input : userId
+        })
+    });
+    const data = await response.json()
+    save('name', nameUpdate + ' ' + surnameUpdate);
+    alert(data.message);
+    
   }
 
   async function getValueForPassword(){
@@ -67,7 +91,7 @@ export default function Perfil() {
     let result = await SecureStore.getItemAsync('sessionPassword');
     if(result){
       setPassword(md5(result));
-      console.log(md5(result));
+      //console.log(md5(result));
       return md5(result);
     }else{
       setPassword('');
@@ -76,6 +100,7 @@ export default function Perfil() {
 
   useEffect( async () => {
     setIsLoading(true);
+    console.log(props);
     getValueForEmail();
     getValueForPassword();  
     async function fetchMyAPI() {
@@ -93,6 +118,7 @@ export default function Perfil() {
         })
     });
       const data = await response.json()
+     // console.log(data);
       setEmailUpdate(data.email);
       setAddressUpdate(data.address);
       setCityUpdate(data.city);
@@ -100,6 +126,7 @@ export default function Perfil() {
       setPhoneUpdate(data.tel);
       setNameUpdate(data.name);
       setSurnameUpdate(data.surname);
+      setUserId(data.input);
       setProfileData(data);  
       setIsLoading(false);
       
@@ -117,7 +144,7 @@ export default function Perfil() {
       <SafeAreaView>
       <View style={styles.backIcon}>
       <TouchableHighlight>   
-      <Icon name='arrow-back-outline' style={{color:'white'}} size={40}  type="Ionicons" onPress={() => navigateBack.navigate('homeScreen') }/>
+      <Icon name='arrow-back-outline' style={{color:'white'}} size={40}  type="Ionicons" onPress={() => navigateBack.pop()}/>
       </TouchableHighlight>
       </View> 
       

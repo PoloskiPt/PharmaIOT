@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Platform, TouchableWithoutFeedback, Alert  } from 'react-native';
+import { StyleSheet, View, Text, Platform, Alert  } from 'react-native';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
 import { LineChart } from "react-native-chart-kit";
@@ -8,12 +8,12 @@ import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { getMeasurePoints, getMeasurePointDataInterval,getMeasurePointData } from '../functions/genericFunctions';
+import { getMeasurePoints, getMeasurePointDataInterval} from '../functions/genericFunctions';
 
 export default function Consulta() {
 
   const [measurePoints, setMeasurePoints] = useState([]);
-  const [DataInterval, setDataInterval] = useState();
+  const [DataInterval, setDataInterval] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   // useStates pickers topo
   const [currentSn, setCurrentSn] = useState();
@@ -21,11 +21,7 @@ export default function Consulta() {
   const [dataInicial, setDataInicial] = useState();
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
-<<<<<<< HEAD
   const [datepickEnd, setDatepickEnd] = useState(null);
-=======
-  
->>>>>>> 93d384dbfdd8c9c0965ab57826958bf35af289b8
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -42,7 +38,7 @@ export default function Consulta() {
     
   }, []);
 
-  console.log(datepickEnd);
+  //console.log(datepickEnd);
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
@@ -54,10 +50,13 @@ export default function Consulta() {
   }
  
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
+   
     setIsLoading(true);
+    console.log("AQUI E QUE SE TESTA ESTA MERDA: " + sn);
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
     setDataInterval(measurePointInterval);
-    console.log(measurePointInterval);
+    console.log(" das das das dsa: " + typeof(DataInterval));
+    //console.log(measurePointInterval);
     setIsLoading(false);
 
   }
@@ -138,7 +137,8 @@ export default function Consulta() {
     setModeEnd(currentMode);
   }
 
-  const sn = DataInterval && DataInterval[0].sn;
+  //const sn = DataInterval && DataInterval[0].sn;
+  
 
   let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
@@ -146,7 +146,7 @@ export default function Consulta() {
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: '-4%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: '-4%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',}}>
 
         <View style={{
           backgroundColor: "#286cbe",
@@ -178,7 +178,7 @@ export default function Consulta() {
 
               }}
               useNativeAndroidPickerStyle={false}
-              onValueChange={(value) => requestMeasurePointDataInterval(value, datepickEnd,datepick)}
+              onValueChange={(value) => requestMeasurePointDataInterval(value, datepickEnd,datepick) && setCurrentSn(value)}
               placeholder={{}}
               items={measurePoints}
             />
@@ -224,7 +224,7 @@ export default function Consulta() {
               }}
 
               useNativeAndroidPickerStyle={false}
-              onValueChange={(value) => requestMeasurePointDataInterval(sn,value,datepick) &&  setDatepickEnd(value)} 
+              onValueChange={(value) => requestMeasurePointDataInterval(currentSn,value,datepick) &&  setDatepickEnd(value)} 
               placeholder={{}}
 
               items={[
@@ -242,12 +242,12 @@ export default function Consulta() {
           </View>
         </View>
       </View>
-      <View height="94%">
+      <View height="94%" style={{borderColor:'red', borderWidth:2,}}>
         <MainCard height={cardHeight}>
 
         <View style={styles.consultaContainer}>
 
-          {DataInterval && <LineChart
+          {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
               labels: ["14 Mar"],
               datasets: [
@@ -267,7 +267,7 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-          {DataInterval && <LineChart
+          {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
               labels: ["14 Mar"],
               datasets: [

@@ -8,13 +8,13 @@ import * as SecureStore from 'expo-secure-store';
 function CustomDrawer({...props}){
 
 const [name, setName] = useState();
-
 async function deleteItem(key){
     await SecureStore.deleteItemAsync(key);
 }
 
 useEffect(() => {
     getValueForName();
+    console.log(name);
 })
 
 async function getValueForName(){
@@ -44,7 +44,9 @@ const logout = () => {
 
 const navigatePerfil = () => {
 
-    navigation.navigate('Perfil'); 
+    navigation.navigate('Perfil', {
+
+    }); 
     props.navigation.closeDrawer();
 
 }
