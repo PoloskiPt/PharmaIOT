@@ -21,6 +21,7 @@ const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitori
 const measurePointsDataIntervalEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePointsInterval.php";
 const measurePointDataEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints_status.php";
 const measurePointDataLastDayEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getMeasurePointsLastDay.php";
+const updateProfileEndpoint="https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile.php";
 
 //** GET MEASURE POINTS **/
 
