@@ -209,7 +209,7 @@ export default function Monitorizacao() {
       
         }
 
- {monitoringDataLastDay && <LineChart
+ {monitoringDataLastDay &&  monitoringDataLastDay.length > 0 && <LineChart
         data={{
           labels : ["6pm", "9pm"],
           datasets: [ 
