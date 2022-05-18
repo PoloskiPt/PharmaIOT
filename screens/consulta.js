@@ -140,12 +140,8 @@ export default function Consulta() {
     setModeEnd(currentMode);
   }
 
-<<<<<<< HEAD
   //const sn = DataInterval && DataInterval[0].sn;
   
-=======
-  const sn = DataInterval && DataInterval.length > 0 && DataInterval[0].sn;
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
 
   let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
@@ -256,11 +252,7 @@ export default function Consulta() {
 
         <View style={styles.consultaContainer}>
 
-<<<<<<< HEAD
           {DataInterval && DataInterval.length > 0 && <LineChart
-=======
-          {DataInterval && DataInterval.length > 0  &&<LineChart
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
             data={{
               labels: ["14 Mar"],
               datasets: [
@@ -280,11 +272,7 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-<<<<<<< HEAD
           {DataInterval && DataInterval.length > 0 && <LineChart
-=======
-          {DataInterval && DataInterval.length > 0  &&<LineChart
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
             data={{
               labels: ["14 Mar"],
               datasets: [
