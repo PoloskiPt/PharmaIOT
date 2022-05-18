@@ -29,14 +29,6 @@ export default function Consulta() {
     requestMeasurePoints(0);
   }, []);
 
-  useEffect(() => {
-    let today = new Date();
-    let date = today.getFullYear() + '-' + 0 + (today.getMonth() + 1 ) + '-' + 0 + (today.getDate() - 1) + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    
-    setDatepickEnd(date);
-   
-    
-  }, []);
 
   //console.log(datepickEnd);
   //passar a farmacia por parametro mais tarde.
@@ -60,7 +52,18 @@ export default function Consulta() {
     setIsLoading(false);
 
   }
-
+  useEffect(() => {
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    setDatepick(date);
+   
+    let today1 = new Date();
+    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + today1.getHours() + ':' + today1.getMinutes() + ':' + today1.getSeconds();
+    
+    setDatepickEnd(date1);
+   
+    requestMeasurePoints(0);
+  }, []);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -137,8 +140,12 @@ export default function Consulta() {
     setModeEnd(currentMode);
   }
 
+<<<<<<< HEAD
   //const sn = DataInterval && DataInterval[0].sn;
   
+=======
+  const sn = DataInterval && DataInterval.length > 0 && DataInterval[0].sn;
+>>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
 
   let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
@@ -228,7 +235,9 @@ export default function Consulta() {
               placeholder={{}}
 
               items={[
-                { label: 'Últimas 24 horas', value: '2022-05-09 16:40' },
+                //put value of items as last string datepickend
+                
+                { label: 'Últimas 24 horas', value: "2022-05- 17:40:21"},
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
@@ -247,7 +256,11 @@ export default function Consulta() {
 
         <View style={styles.consultaContainer}>
 
+<<<<<<< HEAD
           {DataInterval && DataInterval.length > 0 && <LineChart
+=======
+          {DataInterval && DataInterval.length > 0  &&<LineChart
+>>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
             data={{
               labels: ["14 Mar"],
               datasets: [
@@ -267,7 +280,11 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
+<<<<<<< HEAD
           {DataInterval && DataInterval.length > 0 && <LineChart
+=======
+          {DataInterval && DataInterval.length > 0  &&<LineChart
+>>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
             data={{
               labels: ["14 Mar"],
               datasets: [
