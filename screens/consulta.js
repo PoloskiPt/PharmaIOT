@@ -44,26 +44,27 @@ export default function Consulta() {
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
    
     setIsLoading(true);
-    console.log("AQUI E QUE SE TESTA ESTA MERDA: " + sn);
+ 
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
     setDataInterval(measurePointInterval);
-    console.log(" das das das dsa: " + typeof(DataInterval));
+
     //console.log(measurePointInterval);
     setIsLoading(false);
 
   }
   useEffect(() => {
     let today = new Date();
-    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + (today.getHours()+1) + ':' + today.getMinutes() + ':' + today.getSeconds();
     setDatepick(date);
    
     let today1 = new Date();
-    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + today1.getHours() + ':' + today1.getMinutes() + ':' + today1.getSeconds();
+    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours() + 1 )+ ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
    
     requestMeasurePoints(0);
   }, []);
+  console.log(datepickEnd);
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -140,12 +141,12 @@ export default function Consulta() {
     setModeEnd(currentMode);
   }
 
-<<<<<<< HEAD
+
   //const sn = DataInterval && DataInterval[0].sn;
   
-=======
+
   const sn = DataInterval && DataInterval.length > 0 && DataInterval[0].sn;
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
+
 
   let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
@@ -256,11 +257,9 @@ export default function Consulta() {
 
         <View style={styles.consultaContainer}>
 
-<<<<<<< HEAD
-          {DataInterval && DataInterval.length > 0 && <LineChart
-=======
+
           {DataInterval && DataInterval.length > 0  &&<LineChart
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
+
             data={{
               labels: ["14 Mar"],
               datasets: [
@@ -280,11 +279,9 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-<<<<<<< HEAD
-          {DataInterval && DataInterval.length > 0 && <LineChart
-=======
+
           {DataInterval && DataInterval.length > 0  &&<LineChart
->>>>>>> d0368e8e9b661a959e320c073aa308dc90e21908
+
             data={{
               labels: ["14 Mar"],
               datasets: [

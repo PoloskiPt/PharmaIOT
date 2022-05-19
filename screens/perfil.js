@@ -59,9 +59,6 @@ export default function Perfil(props) {
   const saveProfileDataUrl = "https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile_info.php";
   
   async function updateInformation()  {
-    console.log("chegou aqui!!!");
-    console.log("id do user: " +  userId);
-    console.log("mensagem: " +  addressUpdate);
     response = await fetch(saveProfileDataUrl,{
         method: 'PUT',
         headers:{
