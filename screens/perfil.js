@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -79,7 +79,6 @@ export default function Perfil(props) {
     });
     const data = await response.json()
     save('name', nameUpdate + ' ' + surnameUpdate);
-    alert(data.message);
     
   }
 
@@ -97,7 +96,6 @@ export default function Perfil(props) {
 
   useEffect( async () => {
     setIsLoading(true);
-    console.log(props);
     getValueForEmail();
     getValueForPassword();  
     async function fetchMyAPI() {
@@ -134,11 +132,11 @@ export default function Perfil(props) {
   },[]);
 
   return (
-   
-    <View style={globalStyles.container}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View onPress={Keyboard.dismiss} style={globalStyles.container}>
          
       {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
-      <SafeAreaView>
+      <SafeAreaView >
       <View style={styles.backIcon}>
       <TouchableHighlight>   
       <Icon name='arrow-back-outline' style={{color:'white'}} size={40}  type="Ionicons" onPress={() => navigateBack.pop()}/>
@@ -247,6 +245,7 @@ export default function Perfil(props) {
       </PerfilCard >
       </SafeAreaView>
     </View>
+</TouchableWithoutFeedback>
   );
 }
 
