@@ -42,11 +42,11 @@ export default function Monitorizacao() {
     let humidade = Math.round(measurePointData[0].hum);
     let temperatura = Math.round(measurePointData[0].temp);
     console.log(measurePointData[0].hum_max_admissivel);
-    if(humidade <= measurePointData[0].hum_min_admissivel && humidade >= measurePointData[0].hum_max_admissivel) {
+    if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
     }
 
-    if(humidade >= measurePointData[0].hum_min_threshold && humidade >= measurePointData[0].hum_min_admissivel || humidade <= measurePointData[0].hum_max_threshold) {
+    if( humidade >= measurePointData[0].hum_min_threshold  &&  humidade <= measurePointData[0].hum_max_threshold) {
       setHumCircleChartColor('#e4d60b');
     }
 
@@ -56,11 +56,11 @@ export default function Monitorizacao() {
 
     // INICIO TESTES TEMPERATURA
 
-    if(temperatura <= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel) {
+    if(temperatura >= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel || temperatura > measurePointData[0].temp_max_admissivel ) {
       setTempCircleChartColor('#ba0000');
     }
 
-    if(temperatura >= measurePointData[0].temp_min_threshold && temperatura >= measurePointData[0].temp_min_admissivel || temperatura <= measurePointData[0].temp_max_threshold) {
+    if(temperatura >= measurePointData[0].temp_min_threshold && temperatura <= measurePointData[0].temp_max_threshold) {
       setTempCircleChartColor('#e4d60b');
     }
 
