@@ -11,6 +11,7 @@ import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
 
+
 export default function Monitorizacao() {
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
@@ -84,7 +85,6 @@ export default function Monitorizacao() {
     requestMeasurePoints(0); 
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
-    
 
   }, [sessionPassword, sessionEmail, sessionPharmacy])
 
@@ -135,7 +135,7 @@ export default function Monitorizacao() {
   </View>
   </View> 
 </View>
-<View style={{borderColor:'yellow', borderColor:2, height:"100%"}}> 
+<View style={{height:"100%", width:'88%'}}> 
       
       <MonoCard height={cardHeight} >
      
