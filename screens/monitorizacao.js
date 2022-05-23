@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import { StyleSheet, View, Text} from 'react-native';
 import { globalStyles } from '../styles/global';
 import MonoCard from '../shared/monoCard';
@@ -10,16 +10,19 @@ import {getMeasurePoints, getMeasurePointData, onShare,getMeasurePointDataLastDa
 import Svg, { G, Circle } from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
+import LottieView from 'lottie-react-native';
 
 
 export default function Monitorizacao() {
 
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
+  const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
   const [monitoringData, setmonitoringData] = useState();
   const [monitoringDataLastDay, setmonitoringDataLastDay] = useState();
   const [humCircleChartColor, setHumCircleChartColor] = useState();
   const [tempCircleChartColor, setTempCircleChartColor] = useState(null);
+  const [graphDataStatus, setGraphDataStatus] = useState(null);
   const {sessionPassword, sessionEmail,sessionPharmacy} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
@@ -42,7 +45,7 @@ export default function Monitorizacao() {
     setmonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
     let temperatura = measurePointData[0].temp;
-    console.log(measurePointData[0].hum_max_admissivel);
+   // console.log(measurePointData[0].hum_max_admissivel);
     if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel ||  humidade < measurePointData[0].hum_min_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
     }
@@ -76,8 +79,15 @@ export default function Monitorizacao() {
     
     let measurePointDataLastDay = await getMeasurePointDataLastDay(sn);
     setmonitoringDataLastDay(measurePointDataLastDay);
-    console.log(measurePointDataLastDay);
-  
+    console.log(graphDataStatus);
+    if(measurePointDataLastDay.message == "No data found") {
+      setGraphDataStatus(false);
+    }else{
+      setGraphDataStatus(true);
+    }
+    console.log("breakpoint test: " + measurePointDataLastDay.message + '/');
+   
+    //console.log("breakpoint test: " + JSON.stringify(graphDataStatus));
   }
   
   useEffect(() => {
@@ -209,6 +219,7 @@ export default function Monitorizacao() {
       
         }
 
+
  {monitoringDataLastDay && monitoringDataLastDay.length > 0 && <LineChart
         data={{
           labels : ["6pm", "9pm"],
@@ -238,6 +249,26 @@ export default function Monitorizacao() {
         chartConfig={chartConfig}
         style={{marginVertical:"2%"}}
       />}
+
+
+        {graphDataStatus != true && <LottieView
+        
+              ref={animation}
+              style={{
+                width: 100,
+                height: 240,
+                backgroundColor: 'transparent',
+                zIndex:1
+              }}
+              loop={true}
+              autoPlay={true}
+              // Find more Lottie files at https://lottiefiles.com/featured
+              source={require('../assets/no_data.json')}
+            />
+        
+        
+        }
+        
 
 
      <View style={styles.buttonContainer}> 
