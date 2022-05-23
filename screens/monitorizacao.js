@@ -40,9 +40,9 @@ export default function Monitorizacao() {
     let measurePointData = await getMeasurePointData(sn);
     setmonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
-    let temperatura = Math.round(measurePointData[0].temp);
+    let temperatura = measurePointData[0].temp;
     console.log(measurePointData[0].hum_max_admissivel);
-    if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
+    if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel ||  humidade < measurePointData[0].hum_min_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
     }
 
@@ -56,7 +56,7 @@ export default function Monitorizacao() {
 
     // INICIO TESTES TEMPERATURA
 
-    if(temperatura >= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel || temperatura > measurePointData[0].temp_max_admissivel ) {
+    if(temperatura >= measurePointData[0].temp_min_admissivel && temperatura <= measurePointData[0].temp_max_admissivel ||   temperatura < measurePointData[0].temp_min_admissivel || temperatura > measurePointData[0].temp_max_admissivel  ) {
       setTempCircleChartColor('#ba0000');
     }
 
