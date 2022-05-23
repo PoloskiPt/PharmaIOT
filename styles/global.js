@@ -155,7 +155,15 @@ export const globalStyles = StyleSheet.create({
     height:'100%',
     flexDirection:'column',
   },
-  
+  pickerButton:{
+    backgroundColor: "#286cbe",
+    shadowOffset: { width: 4, height: 4 },
+    borderRadius: 10, 
+    marginRight: '4%', 
+    shadowColor: "rgba(0,0,0,0.25)", 
+    flex: 1, 
+    flexDirection: 'row'
+  },
   input:{
     borderWidth:1,
     borderColor: '#ddd',
@@ -163,6 +171,10 @@ export const globalStyles = StyleSheet.create({
     fontSize:18,
     borderRadius:6,
     marginBottom:4,
+  },
+  arrowIcon:{
+    color: 'white', 
+    alignSelf: 'center' 
   },
   errorText: {
     color: 'crimson',
@@ -188,15 +200,7 @@ pickerContainer:{
   justifyContent: 'space-between', 
   alignItems: 'center',
 },
-pickerButton:{
-  backgroundColor: "#286cbe",
-  shadowOffset: { width: 4, height: 4 },
-  borderRadius: 10, 
-  marginRight: '4%', 
-  shadowColor: "rgba(0,0,0,0.25)", 
-  flex: 1, 
-  flexDirection: 'row'
-},
+
 
 buttonContainer:{
   width:'100%',
@@ -209,10 +213,7 @@ arrow:{
   alignSelf: 'center', 
   marginLeft: '3%' 
 },
-arrowIcon:{
-  color: 'white', 
-  alignSelf: 'center' 
-},
+
 showDate:{
   borderWidth: 1.3, 
   borderColor: '#C4C4C4', 
@@ -249,6 +250,7 @@ containerDatePicker:{
   marginLeft:'1%'
 }
 });
+
 export const pickerSelectStyles = StyleSheet.create({
 inputAndroid: {
   fontFamily: 'roboto-medium',
@@ -269,6 +271,25 @@ inputIOS: {
   height: '100%'
 },
 });
+
+export const pickerSelectStyless = StyleSheet.create({
+  inputAndroid: { 
+    fontFamily: 'roboto-medium',
+    color: 'white',
+    textAlign:'left',
+    fontSize: 16,
+    marginLeft:'9%',
+    height:'100%',
+    width: '90%',
+  }, 
+  inputIOS: {
+    fontFamily: 'roboto-medium',
+    color:'white',
+    textAlign:'left',
+    marginLeft:'9%',
+    height:'100%'
+  },
+  });
 
 export const perfilStyles = StyleSheet.create({
   perfilContainer:{
@@ -303,6 +324,115 @@ export const perfilStyles = StyleSheet.create({
   },
   inputText:{
     color:'black', fontSize:16
+  },
+  success:{
+    position:'absolute', 
+    top:'40%', 
+    alignSelf: 'center'
+  }
+})
+export const monitorizacaoStyles = StyleSheet.create({
+  monoContainer:{
+    height:'87.5%',
+    padding: '4%',
+  },
+  buttonContainer:{
+    marginTop:'4%',
+    alignItems:'center',
+    marginLeft: '18%',
+    borderWidth: 2,
+    width: '66%',
+    borderColor:"rgba(110,110,110,1)",
+    borderRadius:15,
+    position:'relative',
+    marginBottom:'1.5%',
+    padding:2
+  },
+pickerContainer: {
+  height:'8%', 
+  width:'40%', 
+  flexDirection:'row', 
+  justifyContent:'center',
+  marginBottom:'-4%'
+},
+arrow: {
+  width:'20%',alignSelf:'center',marginLeft:'3%'
+},
+text:{
+  textAlign: 'center', 
+  fontSize:24, 
+  fontFamily: 'roboto-bold'
+},
+pieChart: {
+  alignItems:'center', 
+  justifyContent:'center'
+},
+pieChartText: {
+  position:'absolute', 
+  textAlign: 'center', 
+  fontSize:28, 
+  fontFamily: 'roboto-light'
+}
+})
+
+export const configuracoesStyles = StyleSheet.create({
+
+  listItemDefault: {
+       borderBottomWidth:1, 
+       borderColor:'#C4C4C4', 
+       padding:'5%',
+  },
+  lastListItem: {
+       padding:'5%'
+  },
+  defaultText:{
+       fontFamily: 'roboto-light',
+       fontSize:18,
+       color:'black',
+       marginLeft: '5%'
+  }
+
+})
+
+export const notificacoesStyles = StyleSheet.create({
+  modalStyle:{
+      position: 'absolute',
+  },
+  statusView:{
+      flexDirection:'row',
+      padding:'1%',
+      alignItems:'center',
+     
+  },
+  notificationCard:{
+      borderRadius: 8,
+      padding:'2%',
+      elevation: 10,
+      backgroundColor: '#fff',
+      shadowOffset: {width: 1, height: 1},
+      shadowColor: 'black',
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      marginHorizontal: '1%',
+      marginVertical: '1.2%',
+    
+  },
+  closeIcon:{
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: '1%',
+  },
+  statusResolved:{
+      color:'green',
+      fontFamily: 'roboto-light',
+  },
+  statusNotResolved:{
+      color:'red',
+      fontFamily: 'roboto-light',
+  },
+  notificationSubtitleText:{
+      fontSize:18,   
+      fontFamily: 'roboto-light',
   }
 })
 export const images = {

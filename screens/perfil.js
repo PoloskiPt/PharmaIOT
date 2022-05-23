@@ -153,7 +153,7 @@ export default function Perfil(props) {
       <KeyboardAvoidingView>
         <View style={perfilStyles.perfilContainer}>
         
-           <View style={{position:'absolute', top:'40%', alignSelf: 'center'}}>
+           <View style={perfilStyles.success}>
 
   
               <LottieView

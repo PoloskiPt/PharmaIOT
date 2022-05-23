@@ -152,7 +152,7 @@ export default function Consulta() {
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
       <View style={consultaStyles.pickerContainer}>
 
-        <View style={consultaStyles.pickerButton}>
+        <View style={globalStyles.pickerButton}>
           <View style={{ width: '70%' }}>
             <RNPickerSelect
               style={pickerSelectStyles}
@@ -165,12 +165,12 @@ export default function Consulta() {
           </View>
 
           <View style={consultaStyles.arrow}>
-            <Icon name='caret-down-outline' style={consultaStyles.arrowIcon} size={16} type="Ionicons" />
+            <Icon name='caret-down-outline' style={globalStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
 
         </View>
 
-        <View style={consultaStyles.pickerButton}>
+        <View style={globalStyles.pickerButton}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
               style={pickerSelectStyles}
@@ -187,7 +187,7 @@ export default function Consulta() {
           </View>
 
           <View style={consultaStyles.arrow}>
-            <Icon name='caret-down-outline' style={consultaStyles.arrowIcon} size={16} type="Ionicons" />
+            <Icon name='caret-down-outline' style={globalStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
         </View>
       </View>
