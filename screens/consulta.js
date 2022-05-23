@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Platform, Alert  } from 'react-native';
+import { consultaStyles,pickerSelectStyles } from '../styles/global';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
 import { LineChart } from "react-native-chart-kit";
@@ -149,37 +150,12 @@ export default function Consulta() {
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: '-4%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',}}>
+      <View style={consultaStyles.pickerContainer}>
 
-        <View style={{
-          backgroundColor: "#286cbe",
-          shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10, 
-          marginRight: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
-        }}>
+        <View style={consultaStyles.pickerButton}>
           <View style={{ width: '70%' }}>
             <RNPickerSelect
-              style={{
-                inputAndroid: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '6%',
-                  height: '100%',
-                  width: '90%',
-                  
-                },
-                inputIOS: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '6%',
-                  height: '100%'
-                },
-
-              }}
+              style={pickerSelectStyles}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => requestMeasurePointDataInterval(value, datepickEnd,datepick) && setCurrentSn(value)}
               placeholder={{}}
@@ -188,51 +164,21 @@ export default function Consulta() {
 
           </View>
 
-          <View style={{ width: '15%', alignSelf: 'center', marginLeft: '3%' }}>
-
-            <Icon name='caret-down-outline' style={{ color: 'white', alignSelf: 'center' }} size={16} type="Ionicons" />
-
+          <View style={consultaStyles.arrow}>
+            <Icon name='caret-down-outline' style={consultaStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
-
 
         </View>
 
-        <View style={{
-          backgroundColor: "#286cbe",
-          shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10,  
-          marginLeft: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
-        }}>
+        <View style={consultaStyles.pickerButton}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
-              style={{
-                inputAndroid: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '9%',
-                  height: '100%',
-                  width: '90%',
-                },
-                inputIOS: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  marginLeft: '6%',
-                  fontSize: 14.5,
-                  height: '100%'
-                },
-
-              }}
-
+              style={pickerSelectStyles}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => requestMeasurePointDataInterval(currentSn,value,datepick) &&  setDatepickEnd(value)} 
               placeholder={{}}
 
               items={[
-                //put value of items as last string datepickend
-                
                 { label: 'Últimas 24 horas', value: "2022-05- 17:40:21"},
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
@@ -240,17 +186,15 @@ export default function Consulta() {
             />
           </View>
 
-          <View style={{ width: '15%', justifyContent: 'center', marginLeft: '3%' }}>
-
-            <Icon name='caret-down-outline' style={{ color: 'white' }} size={16} type="Ionicons" />
-
+          <View style={consultaStyles.arrow}>
+            <Icon name='caret-down-outline' style={consultaStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
         </View>
       </View>
       <View height="94%" style={{borderColor:'red', borderWidth:2,}}>
         <MainCard height={cardHeight}>
 
-        <View style={styles.consultaContainer}>
+        <View style={consultaStyles.consultaContainer}>
 
           {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
@@ -292,19 +236,19 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-          <View style={styles.containerDates}>
-            <View style={styles.containerDatePicker}>
+          <View style={consultaStyles.containerDates}>
+            <View style={consultaStyles.containerDatePicker}>
               <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>      
-           <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                  <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center', marginRight:'8%', marginLeft:'8%'}}>{text}
+           <View style={consultaStyles.showDate}> 
+                  <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{text}
                   <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={22} type="Ionicons" /> 
                   </Text>           
               </View>
             </View> 
-            <View style={styles.containerDatePicker}>
+            <View style={consultaStyles.containerDatePicker}>
               <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>     
-                 <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row',justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                      <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center' ,marginRight:'8%', marginLeft:'8%'}}>{textEnd}
+                 <View style={consultaStyles.showDate}> 
+                      <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{textEnd}
                       <Icon name='calendar-outline' style={{ color: 'black'}} size={13} type="Ionicons" />
                       </Text>       
                   </View>
@@ -340,7 +284,7 @@ export default function Consulta() {
         
         </View>
 
-      <View style={styles.buttonContainer}> 
+      <View style={consultaStyles.buttonContainer}> 
           <FlatButton 
           text="Filtrar" 
           textColor= "white"
@@ -353,10 +297,8 @@ export default function Consulta() {
           onPress={verificarDateInputs}         
           />   
          </View> 
-         
         </MainCard>
       </View>
-
     </View>
 
   );
@@ -390,35 +332,8 @@ const chartConfig = {
   } 
 };
 
-const styles = StyleSheet.create({
-  consultaContainer:{
-    height:'87.5%',
-    padding: '4%',
-  },
-  
-  buttonContainer:{
-    width:'100%',
-    marginTop:'10%',
-    alignItems:'center',
-    position:'relative',
-  },
-  containerDates:{
-    padding:'2%',
-    flex: 1, 
-    flexDirection: 'row', 
-    //borderWidth: 1, 
-    //borderColor: 'red', 
-    width:'100%'
-  },
-  
-  containerDatePicker:{
-    flex:1, 
-    flexDirection: 'row', 
-    //borderWidth:2, 
-    //borderColor:'green', 
-    justifyContent:'center',
-    alignItems: 'center',
-    marginLeft:'1%'
-  }
 
-});
+
+
+
+

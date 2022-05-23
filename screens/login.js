@@ -196,7 +196,7 @@ return(
              {/*Fim password section */} 
                   
                   <View>
-                      {message && ( <Text style={{color:"red",fontFamily:"roboto-bold"}}>{message}</Text> )}
+                      {message && ( <Text style={loginStyles.message}>{message}</Text> )}
                   </View>
 
                    <View style={loginStyles.lembrarDadosSection}>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback, Button } from 'react-native';
-import { globalStyles } from '../styles/global';
+import { globalStyles,perfilStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -32,6 +32,7 @@ export default function Perfil(props) {
   const [countryUpdate, setCountryUpdate] = useState();
   const [phoneUpdate, setPhoneUpdate] = useState();
   const [nameUpdate, setNameUpdate] = useState();
+  
   const [surnameUpdate, setSurnameUpdate] = useState();
   const [userId, setUserId] = useState();
  
@@ -140,7 +141,7 @@ export default function Perfil(props) {
          
       {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
       <SafeAreaView >
-      <View style={styles.backIcon}>
+      <View style={perfilStyles.backIcon}>
       <TouchableHighlight>   
       <Icon name='arrow-back-outline' style={{color:'white'}} size={40}  type="Ionicons" onPress={() => navigateBack.pop()}/>
       </TouchableHighlight>
@@ -150,7 +151,7 @@ export default function Perfil(props) {
    
       <ScrollView>
       <KeyboardAvoidingView>
-        <View style={styles.perfilContainer}>
+        <View style={perfilStyles.perfilContainer}>
         
            <View style={{position:'absolute', top:'40%', alignSelf: 'center'}}>
 
@@ -171,10 +172,10 @@ export default function Perfil(props) {
             />
           </View>
 
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Nome </Text>
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>Nome </Text>
             {profileData && <TextInput 
-            style={styles.inputText} 
+            style={perfilStyles.inputText} 
             editable = {editableState}
             onChangeText={(text) => setNameUpdate(text)}
             >
@@ -182,42 +183,42 @@ export default function Perfil(props) {
              
             </View>   
 
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Apelido </Text>
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>Apelido </Text>
               {profileData && <TextInput 
-              style={styles.inputText} 
+              style={perfilStyles.inputText} 
               editable = {editableState}
               onChangeText={(text) => setSurnameUpdate(text)}
               >
                 {profileData.surname}</TextInput>}
             </View>   
            
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Endereço de e-mail </Text>
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>Endereço de e-mail </Text>
               {profileData && <TextInput 
-              style={styles.inputText} 
+              style={perfilStyles.inputText} 
               editable = {editableState}
               onChangeText={(text) => setEmailUpdate(text)}
               >
                 {profileData.email}</TextInput>}
             </View>
            
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Contacto telefónico </Text>
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>Contacto telefónico </Text>
               {profileData && <TextInput 
-              style={styles.inputText} 
+              style={perfilStyles.inputText} 
               editable = {editableState} 
               onChangeText={(val) => setPhoneUpdate(val)}
               >
                 {profileData.tel}</TextInput>}
             </View>
            
-            <View style={styles.borderContainer}>
-                <Text style={styles.titleText}>Morada </Text>
+            <View style={perfilStyles.borderContainer}>
+                <Text style={perfilStyles.titleText}>Morada </Text>
                 {
                   profileData && 
                   <TextInput 
-                  style={styles.inputText} 
+                  style={perfilStyles.inputText} 
                     editable = {editableState}
                     onChangeText={(val) => setAddressUpdate(val)}
                   >
@@ -226,12 +227,12 @@ export default function Perfil(props) {
                 }
             </View>
 
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>Cidade </Text>
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>Cidade </Text>
               {
                   profileData && 
                   <TextInput 
-                  style={styles.inputText} 
+                  style={perfilStyles.inputText} 
                       editable = {editableState}
                       onChangeText={(val) => setCityUpdate(val)}
                   >
@@ -240,9 +241,9 @@ export default function Perfil(props) {
               }
             </View>
 
-            <View style={styles.borderContainer}>
-              <Text style={styles.titleText}>País </Text>
-              {profileData && <TextInput style={styles.inputText} 
+            <View style={perfilStyles.borderContainer}>
+              <Text style={perfilStyles.titleText}>País </Text>
+              {profileData && <TextInput style={perfilStyles.inputText} 
               editable = {editableState}
               onChangeText={(val) => setCountryUpdate(val)}
               >
@@ -250,7 +251,7 @@ export default function Perfil(props) {
             </View>
            
         </View> 
-        <View style={styles.buttonContainer}> 
+        <View style={perfilStyles.buttonContainer}> 
         <FlatButton 
          text={btnEditText}
          textColor= "white"
@@ -272,38 +273,3 @@ export default function Perfil(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  perfilContainer:{
-    padding:28,
-    height:'84%'
-  },
-  borderContainer:{
-    borderBottomWidth:1 ,
-    borderBottomColor: 'black',   
-    paddingBottom: '3%',
-    marginBottom: '3%'
-
-  },
-  buttonContainer:{
-    width:'100%',
-    marginTop:'6%',
-    alignItems:'center',
-    position:'relative',
-  },
-  backIcon:{
-    marginRight: '78%',
-    justifyContent: 'center',
-    marginTop: '0.5%',
-    marginBottom: '-5.5%',
-},
-  resultText:{
-    fontSize:14
-  },
-  titleText:{
-    fontSize: 20,
-    fontFamily: 'roboto-bold',
-  },
-  inputText:{
-    color:'black', fontSize:16
-  }
-})

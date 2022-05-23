@@ -125,6 +125,10 @@ webConnectLogoContainer:{
   alignItems:'center',
   left:15,
   height:60
+},
+message:{
+  color:"red",
+  fontFamily:"roboto-bold"
 }
 
  
@@ -169,6 +173,138 @@ export const globalStyles = StyleSheet.create({
   }
 });
 
+export const consultaStyles = StyleSheet.create({
+consultaContainer:{
+  height:'87.5%',
+  padding: '4%',
+},
+
+pickerContainer:{
+  flex:1,
+  height: '8%', 
+  width: '85%',
+  marginBottom: '-4%', 
+  flexDirection: 'row', 
+  justifyContent: 'space-between', 
+  alignItems: 'center',
+},
+pickerButton:{
+  backgroundColor: "#286cbe",
+  shadowOffset: { width: 4, height: 4 },
+  borderRadius: 10, 
+  marginRight: '4%', 
+  shadowColor: "rgba(0,0,0,0.25)", 
+  flex: 1, 
+  flexDirection: 'row'
+},
+
+buttonContainer:{
+  width:'100%',
+  marginTop:'10%',
+  alignItems:'center',
+  position:'relative',
+},
+arrow:{
+  width: '15%', 
+  alignSelf: 'center', 
+  marginLeft: '3%' 
+},
+arrowIcon:{
+  color: 'white', 
+  alignSelf: 'center' 
+},
+showDate:{
+  borderWidth: 1.3, 
+  borderColor: '#C4C4C4', 
+  flex:1, 
+  flexDirection: 'row', 
+  justifyContent: 'center', 
+  alignItems: 'center', 
+  height:30, 
+  width:80
+},
+picked:{
+  fontFamily: 'roboto-bold', 
+  fontSize: 14, 
+  alignItems: 'center' ,
+  marginRight:'8%',
+  marginLeft:'8%'
+},
+containerDates:{
+  padding:'2%',
+  flex: 1, 
+  flexDirection: 'row', 
+  //borderWidth: 1, 
+  //borderColor: 'red', 
+  width:'100%'
+},
+
+containerDatePicker:{
+  flex:1, 
+  flexDirection: 'row', 
+  //borderWidth:2, 
+  //borderColor:'green', 
+  justifyContent:'center',
+  alignItems: 'center',
+  marginLeft:'1%'
+}
+});
+export const pickerSelectStyles = StyleSheet.create({
+inputAndroid: {
+  fontFamily: 'roboto-medium',
+  color: 'white',
+  textAlign: 'left',
+  fontSize: 14.5,
+  marginLeft: '6%',
+  height: '100%',
+  width: '90%',
+  
+},
+inputIOS: {
+  fontFamily: 'roboto-medium',
+  color: 'white',
+  textAlign: 'left',
+  fontSize: 14.5,
+  marginLeft: '6%',
+  height: '100%'
+},
+});
+
+export const perfilStyles = StyleSheet.create({
+  perfilContainer:{
+    padding:28,
+    height:'84%'
+  },
+  borderContainer:{
+    borderBottomWidth:1 ,
+    borderBottomColor: 'black',   
+    paddingBottom: '3%',
+    marginBottom: '3%'
+
+  },
+  buttonContainer:{
+    width:'100%',
+    marginTop:'6%',
+    alignItems:'center',
+    position:'relative',
+  },
+  backIcon:{
+    marginRight: '78%',
+    justifyContent: 'center',
+    marginTop: '0.5%',
+    marginBottom: '-5.5%',
+},
+  resultText:{
+    fontSize:14
+  },
+  titleText:{
+    fontSize: 20,
+    fontFamily: 'roboto-bold',
+  },
+  inputText:{
+    color:'black', fontSize:16
+  }
+})
 export const images = {
   ratings:{
     '1' : require('../assets/rating-1.png'),
