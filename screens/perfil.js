@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback } from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback, Button } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -10,8 +10,10 @@ import * as SecureStore from 'expo-secure-store';
 import md5 from 'md5';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {save} from '../functions/genericFunctions';
+import LottieView from 'lottie-react-native';
 
 export default function Perfil(props) {
+  const animation = useRef(null);
   const navigateBack = useNavigation();
   let cardHeight = Platform.OS === 'android'? '90%': "90%";
   const [email, setEmail] = useState();
@@ -21,7 +23,7 @@ export default function Perfil(props) {
   const [btnEditText,setBtnEditText] = useState('Editar');
   const [btnEditColor,setBtnEditColor] = useState('#FFC222');
   const [editableState, setEditableState] = useState(false);
-  
+  const [animationState, setAnimationState] = useState(false);
   // use states updated values
  
   const [emailUpdate,setEmailUpdate] = useState();
@@ -52,8 +54,9 @@ export default function Perfil(props) {
 
     if(btnEditText == "Editar"){ setBtnEditText('Confirmar'); setEditableState(true); setBtnEditColor("#4CBB17");}     
      
-    else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); updateInformation();}  
+    else{ setBtnEditText('Editar'); setEditableState(false); setBtnEditColor("#FFC222"); updateInformation(); setAnimationState(true); animation.current?.play(); }  
      
+    
   }
 
   const saveProfileDataUrl = "https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile_info.php";
@@ -145,14 +148,34 @@ export default function Perfil(props) {
       </View> 
       
       <PerfilCard height={cardHeight}>  
+   
       <ScrollView>
       <KeyboardAvoidingView>
         <View style={styles.perfilContainer}>
-            
+        
+           <View style={{position:'absolute', top:'40%', alignSelf: 'center'}}>
+
+  
+              <LottieView
+              ref={animation}
+              style={{
+                width: 220,
+                height: 220,
+                backgroundColor: 'transparent',
+                zIndex:1
+              }}
+              loop={false}
+              onAnimationFinish = {() => navigateBack.pop()}
+              autoPlay={false}
+              // Find more Lottie files at https://lottiefiles.com/featured
+              source={require('../assets/success.json')}
+            />
+          </View>
+
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Nome </Text>
             {profileData && <TextInput 
-            style={{color:'black'}} 
+            style={styles.inputText} 
             editable = {editableState}
             onChangeText={(text) => setNameUpdate(text)}
             >
@@ -163,7 +186,7 @@ export default function Perfil(props) {
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Apelido </Text>
               {profileData && <TextInput 
-              style={{color:'black'}} 
+              style={styles.inputText} 
               editable = {editableState}
               onChangeText={(text) => setSurnameUpdate(text)}
               >
@@ -173,7 +196,7 @@ export default function Perfil(props) {
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Endereço de e-mail </Text>
               {profileData && <TextInput 
-              style={{color:'black'}} 
+              style={styles.inputText} 
               editable = {editableState}
               onChangeText={(text) => setEmailUpdate(text)}
               >
@@ -183,7 +206,7 @@ export default function Perfil(props) {
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>Contacto telefónico </Text>
               {profileData && <TextInput 
-              style={{color:'black'}} 
+              style={styles.inputText} 
               editable = {editableState} 
               onChangeText={(val) => setPhoneUpdate(val)}
               >
@@ -195,7 +218,7 @@ export default function Perfil(props) {
                 {
                   profileData && 
                   <TextInput 
-                    style={{color:'black'}} 
+                  style={styles.inputText} 
                     editable = {editableState}
                     onChangeText={(val) => setAddressUpdate(val)}
                   >
@@ -209,7 +232,7 @@ export default function Perfil(props) {
               {
                   profileData && 
                   <TextInput 
-                      style={{color:'black'}} 
+                  style={styles.inputText} 
                       editable = {editableState}
                       onChangeText={(val) => setCityUpdate(val)}
                   >
@@ -220,7 +243,7 @@ export default function Perfil(props) {
 
             <View style={styles.borderContainer}>
               <Text style={styles.titleText}>País </Text>
-              {profileData && <TextInput style={{color:'black'}} 
+              {profileData && <TextInput style={styles.inputText} 
               editable = {editableState}
               onChangeText={(val) => setCountryUpdate(val)}
               >
@@ -280,5 +303,8 @@ const styles = StyleSheet.create({
   titleText:{
     fontSize: 20,
     fontFamily: 'roboto-bold',
+  },
+  inputText:{
+    color:'black', fontSize:16
   }
 })
