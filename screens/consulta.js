@@ -198,7 +198,7 @@ export default function Consulta() {
           </View>
         </View>
       </View>
-      <View height="94%" style={{borderColor:'red', borderWidth:2,}}>
+      <View height="94%" style={{width:'88%'}}>
         <MainCard height={cardHeight}>
 
         <View style={consultaStyles.consultaContainer}>
