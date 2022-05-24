@@ -30,8 +30,6 @@ const styles = (height)  => StyleSheet.create({
         marginTop: Platform.OS === 'ios'? '8%': '8%',
         marginHorizontal: 4,
         marginVertical: 6,
-        borderColor:'purple',
-        borderWidth:2
     },
     cardContent:{
         marginHorizontal: 18,
