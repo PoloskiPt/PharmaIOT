@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import { Platform } from 'react-native';
 
 export default function PerfilCard(props){
