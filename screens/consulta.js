@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import { StyleSheet, View, Text, Platform, Alert  } from 'react-native';
 import { consultaStyles,pickerSelectStyles } from '../styles/global';
 import MainCard from '../shared/mainCard';
@@ -10,9 +10,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getMeasurePoints, getMeasurePointDataInterval} from '../functions/genericFunctions';
+import LottieView from 'lottie-react-native';
 
 export default function Consulta() {
 
+
+  const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
   const [DataInterval, setDataInterval] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +26,7 @@ export default function Consulta() {
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
   const [datepickEnd, setDatepickEnd] = useState(null);
+  const [graphDataStatus, setGraphDataStatus] = useState(null);
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -30,27 +34,31 @@ export default function Consulta() {
     requestMeasurePoints(0);
   }, []);
 
-
-  //console.log(datepickEnd);
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
     let resultMeasurePoints = await getMeasurePoints();
     setMeasurePoints(resultMeasurePoints);
-    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-05-11 17:40:21");
-    
-    
+    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-05-22 17:40:21", "2022-05-24 17:40:21");
+     
   }
  
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
-   
+
     setIsLoading(true);
- 
+
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
     setDataInterval(measurePointInterval);
+   ;
 
     //console.log(measurePointInterval);
     setIsLoading(false);
+    if(measurePointInterval.message == "No data found") {
+      setGraphDataStatus(false);
+    }else{
+      setGraphDataStatus(true);
+    }
+    console.log("breakpoint test: " + measurePointInterval.message + '/')
 
   }
   useEffect(() => {
@@ -59,15 +67,14 @@ export default function Consulta() {
     setDatepick(date);
    
     let today1 = new Date();
-    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours() + 1 )+ ':' + today1.getMinutes() + ':' + today1.getSeconds();
+    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
    
     requestMeasurePoints(0);
   }, []);
-  console.log(datepickEnd);
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -179,7 +186,7 @@ export default function Consulta() {
               placeholder={{}}
 
               items={[
-                { label: 'Últimas 24 horas', value: "2022-05- 17:40:21"},
+                { label: 'Últimas 24 horas', value: "2022-05-24 17:40:21"},
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
@@ -235,6 +242,23 @@ export default function Consulta() {
             height={240}
             chartConfig={chartConfig}
           />}
+
+        {graphDataStatus != true && <LottieView
+        ref={animation}
+        style={{
+          width: 100,
+          height: 240,
+          backgroundColor: 'transparent',
+          zIndex:1
+        }}
+        loop={true}
+        autoPlay={true}
+        // Find more Lottie files at https://lottiefiles.com/featured
+        source={require('../assets/no_data.json')}
+      />
+  
+  
+  }
 
           <View style={consultaStyles.containerDates}>
             <View style={consultaStyles.containerDatePicker}>
