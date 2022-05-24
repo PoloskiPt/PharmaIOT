@@ -204,7 +204,7 @@ pickerContainer:{
 
 buttonContainer:{
   width:'100%',
-  marginTop:'10%',
+  marginTop:'6%',
   alignItems:'center',
   position:'relative',
 },

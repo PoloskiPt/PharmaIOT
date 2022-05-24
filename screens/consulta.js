@@ -305,22 +305,24 @@ export default function Consulta() {
               onChange={onChangeEnd}
             />
           )}
+
+        <View style={consultaStyles.buttonContainer}> 
+            <FlatButton 
+            text="Filtrar" 
+            textColor= "white"
+            fontFamily= 'roboto-light'
+            color="#17A2B8" 
+            borderRadius={25}    
+            paddingVertical={11}
+            paddingHorizontal={52}
+            fontSize={16}
+            onPress={verificarDateInputs}         
+            />   
+         </View> 
         
         </View>
 
-      <View style={consultaStyles.buttonContainer}> 
-          <FlatButton 
-          text="Filtrar" 
-          textColor= "white"
-          fontFamily= 'roboto-light'
-          color="#17A2B8" 
-          borderRadius={25}    
-          paddingVertical={11}
-          paddingHorizontal={52}
-          fontSize={16}
-          onPress={verificarDateInputs}         
-          />   
-         </View> 
+    
         </MainCard>
       </View>
     </View>
