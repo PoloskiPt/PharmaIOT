@@ -1,17 +1,16 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
-import { StyleSheet, View, Text} from 'react-native';
-import { globalStyles,monitorizacaoStyles,pickerSelectStyless } from '../styles/global';
+import {View, Text} from 'react-native';
+import {globalStyles,monitorizacaoStyles,pickerSelectStyless } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { UserContext } from '../store/userContext';
+import {UserContext} from '../store/userContext';
 import {getMeasurePoints, getMeasurePointData, onShare,getMeasurePointDataLastDay} from '../functions/genericFunctions';
-import Svg, { G, Circle } from "react-native-svg";
+import Svg, {G, Circle} from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
 import LottieView from 'lottie-react-native';
-
 
 export default function Monitorizacao() {
 
@@ -75,6 +74,7 @@ export default function Monitorizacao() {
     setIsLoading(false);
 
   }
+
   async function requestMeasurePointDataLastDay(sn){
     
     let measurePointDataLastDay = await getMeasurePointDataLastDay(sn);
@@ -85,7 +85,6 @@ export default function Monitorizacao() {
     }else{
       setGraphDataStatus(true);
     }
-    console.log("breakpoint test: " + measurePointDataLastDay.message + '/');
    
     //console.log("breakpoint test: " + JSON.stringify(graphDataStatus));
   }
@@ -100,7 +99,6 @@ export default function Monitorizacao() {
 
    return (
      
-  
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={monitorizacaoStyles.pickerContainer}>
@@ -193,7 +191,6 @@ export default function Monitorizacao() {
       
         }
 
-
  {monitoringDataLastDay && monitoringDataLastDay.length > 0 && <LineChart
         data={{
           labels : ["6pm", "9pm"],
@@ -224,9 +221,7 @@ export default function Monitorizacao() {
         style={{marginVertical:"2%"}}
       />}
 
-
-        {graphDataStatus != true && <LottieView
-        
+        {graphDataStatus != true && <LottieView      
               ref={animation}
               style={{
                 width: 100,
@@ -238,13 +233,9 @@ export default function Monitorizacao() {
               autoPlay={true}
               // Find more Lottie files at https://lottiefiles.com/featured
               source={require('../assets/no_data.json')}
-            />
-        
-        
+            />      
         }
         
-
-
      <View style={monitorizacaoStyles.buttonContainer}> 
         <FlatButton 
          text="Certificado de calibração" 
@@ -255,7 +246,6 @@ export default function Monitorizacao() {
          onPress={onShare}         
          />   
        </View>
-  
     </View>
         
     </MonoCard>
