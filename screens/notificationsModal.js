@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView ,Modal, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { notificacoesStyles } from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const NotificationModal = (props) => {
@@ -11,22 +12,22 @@ const NotificationModal = (props) => {
     notificationData.map(element => {
     
     notificationsArray.push(
-        <View key={element['input']} style={styles.notificationCard}>
+        <View key={element['input']} style={notificacoesStyles.notificationCard}>
             
-            <View style={styles.statusView}>
-                <Text style={styles.notificationSubtitleText}>Data: </Text> 
+            <View style={notificacoesStyles.statusView}>
+                <Text style={notificacoesStyles.notificationSubtitleText}>Data: </Text> 
                 <Text>{element['dt']}</Text>
             </View>
 
-            <View style={styles.statusView}>
-                <Text style={styles.notificationSubtitleText}>Mensagem: 
+            <View style={notificacoesStyles.statusView}>
+                <Text style={notificacoesStyles.notificationSubtitleText}>Mensagem: 
                         {<Text style={{flexShrink: 1, fontSize:14}}> {element['message']}</Text>}
                 </Text>
             </View>
             
-            <View style={styles.statusView}>
-                <Text style={styles.notificationSubtitleText}>Status: </Text>
-                {element['solved'] === 1 ? <Text style={styles.statusResolved}>Resolvido</Text> : <Text style={styles.statusNotResolved}>Por resolver</Text>}
+            <View style={notificacoesStyles.statusView}>
+                <Text style={notificacoesStyles.notificationSubtitleText}>Status: </Text>
+                {element['solved'] === 1 ? <Text style={notificacoesStyles.statusResolved}>Resolvido</Text> : <Text style={notificacoesStyles.statusNotResolved}>Por resolver</Text>}
             </View>
             
         </View>
@@ -40,7 +41,7 @@ const NotificationModal = (props) => {
                 Visible={props.modalState} >      
                 <SafeAreaView>
                 <View style={{display:'flex', height:'100%'}} >
-                <View style={styles.closeIcon}>
+                <View style={notificacoesStyles.closeIcon}>
                 <TouchableHighlight  >   
                 <Icon name='close-outline' style={{color:'black'}} size={40}  type="Ionicons" onPress={() => props.navigation.pop()}/>
                 </TouchableHighlight>
@@ -57,44 +58,3 @@ const NotificationModal = (props) => {
 
 export default NotificationModal;
 
-const styles = StyleSheet.create({
-    modalStyle:{
-        position: 'absolute',
-    },
-    statusView:{
-        flexDirection:'row',
-        padding:'1%',
-        alignItems:'center',
-       
-    },
-    notificationCard:{
-        borderRadius: 8,
-        padding:'2%',
-        elevation: 10,
-        backgroundColor: '#fff',
-        shadowOffset: {width: 1, height: 1},
-        shadowColor: 'black',
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        marginHorizontal: '1%',
-        marginVertical: '1.2%',
-      
-    },
-    closeIcon:{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        marginTop: '1%',
-    },
-    statusResolved:{
-        color:'green',
-        fontFamily: 'roboto-light',
-    },
-    statusNotResolved:{
-        color:'red',
-        fontFamily: 'roboto-light',
-    },
-    notificationSubtitleText:{
-        fontSize:18,   
-        fontFamily: 'roboto-light',
-    }
-})

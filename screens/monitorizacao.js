@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import { StyleSheet, View, Text} from 'react-native';
-import { globalStyles } from '../styles/global';
+import { globalStyles,monitorizacaoStyles,pickerSelectStyless } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
@@ -103,58 +103,32 @@ export default function Monitorizacao() {
   
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
-      <View style={{ height:'8%', width:'40%', flexDirection:'row', justifyContent:'center',marginBottom:'-4%'}}>
-        <View style={{backgroundColor: "#286cbe", 
-        shadowOffset: { width: 4, height: 4 }, 
-        borderRadius:10,shadowColor:"rgba(0,0,0,0.25)",
-        flex:1,flexDirection:'row'}}>
-   
+      <View style={monitorizacaoStyles.pickerContainer}>
+        <View style={globalStyles.pickerButton}>
           <View style={{width:'80%'}}>
                 <RNPickerSelect
-                          style={{ 
-                            inputAndroid: { 
-                            fontFamily: 'roboto-medium',
-                            color: 'white',
-                            textAlign:'left',
-                            fontSize: 16,
-                            marginLeft:'9%',
-                            height:'100%',
-                            width: '90%',
-                          }, 
-                          inputIOS: {
-                            fontFamily: 'roboto-medium',
-                            color:'white',
-                            textAlign:'left',
-                            marginLeft:'9%',
-                            height:'100%'
-                          },
-
-                      }}  
+                          style={pickerSelectStyless} 
                           useNativeAndroidPickerStyle={false}
                           onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value)} 
                           placeholder={{}}
                           items={measurePoints}
-                          
                       />
-  </View>
- 
-  <View style={{width:'20%',alignSelf:'center',marginLeft:'3%'}}>
+          </View>
 
-  <Icon name='caret-down-outline' style={{color:'white', alignSelf:'center'}} size={16}  type="Ionicons" />
+          <View style={monitorizacaoStyles.arrow}>
+            <Icon name='caret-down-outline' style={globalStyles.arrowIcon} size={16}  type="Ionicons" />
+          </View>
+        </View> 
+      </View>
 
-  </View>
-  </View> 
-</View>
-<View style={{height:"100%", width:'88%'}}> 
-      
+    <View style={{height:"100%", width:'88%'}}> 
       <MonoCard height={cardHeight} >
-     
-    <View style={styles.monoContainer}>
-   
+
+    <View style={monitorizacaoStyles.monoContainer}>
          {monitoringData &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-bold'}}>Humidade</Text>
-         <View style={{alignItems:'center', justifyContent:'center'}}>       
+         <Text style={monitorizacaoStyles.text}>Humidade</Text>
+         <View style={monitorizacaoStyles.pieChart}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
             <Circle
@@ -179,7 +153,7 @@ export default function Monitorizacao() {
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontFamily: 'roboto-light',}}>{Math.round(monitoringData[0].hum) + "%"}</Text>
+        <Text style={monitorizacaoStyles.pieChartText}>{Math.round(monitoringData[0].hum) + "%"}</Text>
         </View>
         </View>
       
@@ -187,8 +161,8 @@ export default function Monitorizacao() {
 
 {monitoringData && 
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
-         <Text style={{textAlign: 'center', fontSize:24, fontFamily: 'roboto-bold'}}>Temperatura</Text>
-         <View style={{alignItems:'center', justifyContent:'center'}}>       
+         <Text style={monitorizacaoStyles.text}>Temperatura</Text>
+         <View style={monitorizacaoStyles.pieChart}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
             <Circle
@@ -213,7 +187,7 @@ export default function Monitorizacao() {
           </G>
          
         </Svg>
-        <Text style={{position:'absolute', textAlign: 'center', fontSize:28, fontFamily: 'roboto-light',}}>{Math.round(monitoringData[0].temp) + "°"}</Text>
+        <Text style={monitorizacaoStyles.pieChartText}>{Math.round(monitoringData[0].temp) + "°"}</Text>
         </View>
         </View>
       
@@ -271,7 +245,7 @@ export default function Monitorizacao() {
         
 
 
-     <View style={styles.buttonContainer}> 
+     <View style={monitorizacaoStyles.buttonContainer}> 
         <FlatButton 
          text="Certificado de calibração" 
          fontFamily= 'roboto-regular'
@@ -321,29 +295,3 @@ const chartConfig = {
     x:"50"  
   } 
 };
-
-const styles = StyleSheet.create({
-  monoContainer:{
-    height:'87.5%',
-    padding: '4%',
-  },
-  buttonContainer:{
-    marginTop:'4%',
-    alignItems:'center',
-    marginLeft: '18%',
-    borderWidth: 2,
-    width: '66%',
-    borderColor:"rgba(110,110,110,1)",
-    borderRadius:15,
-    position:'relative',
-    marginBottom:'1.5%',
-    padding:2
-  },
-  modalClose: {
-    marginTop:20,
-    marginBottom:0
-  },
-  modalContent:{
-    flex: 1,
-  }
-})

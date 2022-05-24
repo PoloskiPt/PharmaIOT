@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import ConfiguracoesCard from '../shared/configuracoesCard';
-import { globalStyles } from '../styles/global';
+import { globalStyles,configuracoesStyles } from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Configuracoes({navigation}) {
@@ -13,17 +13,17 @@ export default function Configuracoes({navigation}) {
            
            <View style={{paddingTop:'2%', paddingBottom:'2%'}}>
                <FlatList/>
-           <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarAlarmes')}>       
-                 <Text style={styles.defaultText}>Gerir Alarmes</Text> 
+           <TouchableOpacity style={configuracoesStyles.listItemDefault} onPress={() => navigation.navigate('GerenciarAlarmes')}>       
+                 <Text style={configuracoesStyles.defaultText}>Gerir Alarmes</Text> 
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarUnidades')}>       
-                 <Text style={styles.defaultText}>Gerir Unidades</Text>            
+            <TouchableOpacity style={configuracoesStyles.listItemDefault} onPress={() => navigation.navigate('GerenciarUnidades')}>       
+                 <Text style={configuracoesStyles.defaultText}>Gerir Unidades</Text>            
             </TouchableOpacity>
-            <TouchableOpacity style={styles.listItemDefault} onPress={() => navigation.navigate('GerenciarContactos')}>       
-                 <Text style={styles.defaultText}>Gerir Contactos</Text>            
+            <TouchableOpacity style={configuracoesStyles.listItemDefault} onPress={() => navigation.navigate('GerenciarContactos')}>       
+                 <Text style={configuracoesStyles.defaultText}>Gerir Contactos</Text>            
             </TouchableOpacity>
-            <TouchableOpacity style={styles.lastListItem} onPress={() => navigation.navigate('GerenciarUtilizadores')}>       
-                 <Text style={styles.defaultText}>Gerir Utilizadores</Text>            
+            <TouchableOpacity style={configuracoesStyles.lastListItem} onPress={() => navigation.navigate('GerenciarUtilizadores')}>       
+                 <Text style={configuracoesStyles.defaultText}>Gerir Utilizadores</Text>            
             </TouchableOpacity>
           
            </View>
@@ -34,21 +34,3 @@ export default function Configuracoes({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-
-     listItemDefault: {
-          borderBottomWidth:1, 
-          borderColor:'#C4C4C4', 
-          padding:'5%',
-     },
-     lastListItem: {
-          padding:'5%'
-     },
-     defaultText:{
-          fontFamily: 'roboto-light',
-          fontSize:18,
-          color:'black',
-          marginLeft: '5%'
-     }
-
-})

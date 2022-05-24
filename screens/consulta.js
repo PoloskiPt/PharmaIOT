@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import { StyleSheet, View, Text, Platform, Alert  } from 'react-native';
+import { consultaStyles,pickerSelectStyles } from '../styles/global';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
 import { LineChart } from "react-native-chart-kit";
@@ -9,9 +10,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getMeasurePoints, getMeasurePointDataInterval} from '../functions/genericFunctions';
+import LottieView from 'lottie-react-native';
 
 export default function Consulta() {
 
+
+  const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
   const [DataInterval, setDataInterval] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +26,7 @@ export default function Consulta() {
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
   const [datepickEnd, setDatepickEnd] = useState(null);
+  const [graphDataStatus, setGraphDataStatus] = useState(null);
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -29,27 +34,31 @@ export default function Consulta() {
     requestMeasurePoints(0);
   }, []);
 
-
-  //console.log(datepickEnd);
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
     let resultMeasurePoints = await getMeasurePoints();
     setMeasurePoints(resultMeasurePoints);
-    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-04-02 17:40:21", "2022-05-11 17:40:21");
-    
-    
+    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-05-22 17:40:21", "2022-05-24 17:40:21");
+     
   }
  
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
-   
+
     setIsLoading(true);
- 
+
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
     setDataInterval(measurePointInterval);
+   ;
 
     //console.log(measurePointInterval);
     setIsLoading(false);
+    if(measurePointInterval.message == "No data found") {
+      setGraphDataStatus(false);
+    }else{
+      setGraphDataStatus(true);
+    }
+    console.log("breakpoint test: " + measurePointInterval.message + '/')
 
   }
   useEffect(() => {
@@ -58,15 +67,14 @@ export default function Consulta() {
     setDatepick(date);
    
     let today1 = new Date();
-    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours() + 1 )+ ':' + today1.getMinutes() + ':' + today1.getSeconds();
+    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
    
     requestMeasurePoints(0);
   }, []);
-  console.log(datepickEnd);
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -149,37 +157,12 @@ export default function Consulta() {
 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading} textContent={'A carregar...'} textStyle={{ color: 'black' }} />}
-      <View style={{ flex:1,height: '8%', width: '85%',marginBottom: '-4%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',}}>
+      <View style={consultaStyles.pickerContainer}>
 
-        <View style={{
-          backgroundColor: "#286cbe",
-          shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10, 
-          marginRight: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
-        }}>
+        <View style={globalStyles.pickerButton}>
           <View style={{ width: '70%' }}>
             <RNPickerSelect
-              style={{
-                inputAndroid: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '6%',
-                  height: '100%',
-                  width: '90%',
-                  
-                },
-                inputIOS: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '6%',
-                  height: '100%'
-                },
-
-              }}
+              style={pickerSelectStyles}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => requestMeasurePointDataInterval(value, datepickEnd,datepick) && setCurrentSn(value)}
               placeholder={{}}
@@ -188,69 +171,37 @@ export default function Consulta() {
 
           </View>
 
-          <View style={{ width: '15%', alignSelf: 'center', marginLeft: '3%' }}>
-
-            <Icon name='caret-down-outline' style={{ color: 'white', alignSelf: 'center' }} size={16} type="Ionicons" />
-
+          <View style={consultaStyles.arrow}>
+            <Icon name='caret-down-outline' style={globalStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
-
 
         </View>
 
-        <View style={{
-          backgroundColor: "#286cbe",
-          shadowOffset: { width: 4, height: 4 },
-          borderRadius: 10,  
-          marginLeft: '4%', shadowColor: "rgba(0,0,0,0.25)", flex: 1, flexDirection: 'row'
-        }}>
+        <View style={globalStyles.pickerButton}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
-              style={{
-                inputAndroid: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  fontSize: 14.5,
-                  marginLeft: '9%',
-                  height: '100%',
-                  width: '90%',
-                },
-                inputIOS: {
-                  fontFamily: 'roboto-medium',
-                  color: 'white',
-                  textAlign: 'left',
-                  marginLeft: '6%',
-                  fontSize: 14.5,
-                  height: '100%'
-                },
-
-              }}
-
+              style={pickerSelectStyles}
               useNativeAndroidPickerStyle={false}
               onValueChange={(value) => requestMeasurePointDataInterval(currentSn,value,datepick) &&  setDatepickEnd(value)} 
               placeholder={{}}
 
               items={[
-                //put value of items as last string datepickend
-                
-                { label: 'Últimas 24 horas', value: "2022-05- 17:40:21"},
+                { label: 'Últimas 24 horas', value: "2022-05-24 17:40:21"},
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
             />
           </View>
 
-          <View style={{ width: '15%', justifyContent: 'center', marginLeft: '3%' }}>
-
-            <Icon name='caret-down-outline' style={{ color: 'white' }} size={16} type="Ionicons" />
-
+          <View style={consultaStyles.arrow}>
+            <Icon name='caret-down-outline' style={globalStyles.arrowIcon} size={16} type="Ionicons" />
           </View>
         </View>
       </View>
       <View height="94%" style={{borderColor:'red', borderWidth:2,}}>
         <MainCard height={cardHeight}>
 
-        <View style={styles.consultaContainer}>
+        <View style={consultaStyles.consultaContainer}>
 
           {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
@@ -292,19 +243,36 @@ export default function Consulta() {
             chartConfig={chartConfig}
           />}
 
-          <View style={styles.containerDates}>
-            <View style={styles.containerDatePicker}>
+        {graphDataStatus != true && <LottieView
+        ref={animation}
+        style={{
+          width: 100,
+          height: 240,
+          backgroundColor: 'transparent',
+          zIndex:1
+        }}
+        loop={true}
+        autoPlay={true}
+        // Find more Lottie files at https://lottiefiles.com/featured
+        source={require('../assets/no_data.json')}
+      />
+  
+  
+  }
+
+          <View style={consultaStyles.containerDates}>
+            <View style={consultaStyles.containerDatePicker}>
               <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>      
-           <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                  <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center', marginRight:'8%', marginLeft:'8%'}}>{text}
+           <View style={consultaStyles.showDate}> 
+                  <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{text}
                   <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={22} type="Ionicons" /> 
                   </Text>           
               </View>
             </View> 
-            <View style={styles.containerDatePicker}>
+            <View style={consultaStyles.containerDatePicker}>
               <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>     
-                 <View style={{borderWidth: 1.3, borderColor: '#C4C4C4', flex:1, flexDirection: 'row',justifyContent: 'center', alignItems: 'center', height:30, width:80}}> 
-                      <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={{ fontFamily: 'roboto-bold', fontSize: 14, alignItems: 'center' ,marginRight:'8%', marginLeft:'8%'}}>{textEnd}
+                 <View style={consultaStyles.showDate}> 
+                      <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{textEnd}
                       <Icon name='calendar-outline' style={{ color: 'black'}} size={13} type="Ionicons" />
                       </Text>       
                   </View>
@@ -340,7 +308,7 @@ export default function Consulta() {
         
         </View>
 
-      <View style={styles.buttonContainer}> 
+      <View style={consultaStyles.buttonContainer}> 
           <FlatButton 
           text="Filtrar" 
           textColor= "white"
@@ -353,10 +321,8 @@ export default function Consulta() {
           onPress={verificarDateInputs}         
           />   
          </View> 
-         
         </MainCard>
       </View>
-
     </View>
 
   );
@@ -390,35 +356,8 @@ const chartConfig = {
   } 
 };
 
-const styles = StyleSheet.create({
-  consultaContainer:{
-    height:'87.5%',
-    padding: '4%',
-  },
-  
-  buttonContainer:{
-    width:'100%',
-    marginTop:'10%',
-    alignItems:'center',
-    position:'relative',
-  },
-  containerDates:{
-    padding:'2%',
-    flex: 1, 
-    flexDirection: 'row', 
-    //borderWidth: 1, 
-    //borderColor: 'red', 
-    width:'100%'
-  },
-  
-  containerDatePicker:{
-    flex:1, 
-    flexDirection: 'row', 
-    //borderWidth:2, 
-    //borderColor:'green', 
-    justifyContent:'center',
-    alignItems: 'center',
-    marginLeft:'1%'
-  }
 
-});
+
+
+
+
