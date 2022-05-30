@@ -177,7 +177,7 @@ export default function Consulta() {
 
         </View>
 
-        <View style={globalStyles.pickerButton}>
+        <View style={globalStyles.pickerButton1}>
           <View style={{ width: '80%' }}>
             <RNPickerSelect
               style={pickerSelectStyles}

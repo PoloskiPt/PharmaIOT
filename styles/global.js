@@ -175,7 +175,16 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#286cbe",
     shadowOffset: { width: 4, height: 4 },
     borderRadius: 10, 
-    marginRight: '4%', 
+    marginRight: '3%', 
+    shadowColor: "rgba(0,0,0,0.25)", 
+    flex: 1, 
+    flexDirection: 'row'
+  },
+  pickerButton1 :{
+    backgroundColor: "#286cbe",
+    shadowOffset: { width: 4, height: 4 },
+    borderRadius: 10, 
+    marginLeft: '3%', 
     shadowColor: "rgba(0,0,0,0.25)", 
     flex: 1, 
     flexDirection: 'row'
@@ -208,9 +217,10 @@ consultaContainer:{
 },
 
 pickerContainer:{
+  marginLeft:'2%',
   flex:1,
   height: '8%', 
-  width: '85%',
+  width: '87.5%',
   marginBottom: '-4%', 
   flexDirection: 'row', 
   justifyContent: 'space-between', 
