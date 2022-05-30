@@ -10,6 +10,12 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "web": {
+      "backgroundColor": "#ffffff",
+      "description": "This is a demo app",
+      "display": "standalone",
+      "themeColor": "#008080"
+   },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -28,9 +34,6 @@
       },
       "package": "com.poloski.PharmaIoT",
       "googleServicesFile": "./google-services.json"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

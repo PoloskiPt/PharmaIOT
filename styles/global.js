@@ -112,6 +112,22 @@ lembrarDadosSection:{
   alignItems:'flex-start',
   marginTop:20,
 },
+
+informacoesLabel:{
+  textDecorationLine: 'underline',
+  color: 'black',
+  height:30,
+  marginLeft:8,
+  marginTop: Platform.OS === 'ios'? 6: 2,
+  fontSize: 16,
+},
+
+informacoesSection:{
+  flexDirection: 'row',
+  alignItems:'flex-start',
+  marginTop:20,
+  marginBottom:'5%'
+},
 borderTextInput:{
     borderBottomWidth:2,
     borderBottomColor:'grey',
@@ -120,11 +136,11 @@ borderTextInput:{
 },
 webConnectLogoContainer:{
   position:'relative',
-  bottom: Platform.OS === 'ios'? -50: -15,
+  bottom: Platform.OS === 'ios'? '-5%': '2%',
   justifyContent:'center',
   alignItems:'center',
   left:15,
-  height:60
+  height:40,
 },
 message:{
   color:"red",
