@@ -1,5 +1,5 @@
 import React, { useEffect, useState ,useRef} from 'react';
-import { StyleSheet, View, Text, Platform, Alert  } from 'react-native';
+import { View, Text, Platform, Alert  } from 'react-native';
 import { consultaStyles,pickerSelectStyles } from '../styles/global';
 import MainCard from '../shared/mainCard';
 import { globalStyles } from '../styles/global';
@@ -14,7 +14,6 @@ import LottieView from 'lottie-react-native';
 
 export default function Consulta() {
 
-
   const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
   const [DataInterval, setDataInterval] = useState(null);
@@ -27,6 +26,8 @@ export default function Consulta() {
   const [datepick, setDatepick] = useState(null);
   const [datepickEnd, setDatepickEnd] = useState(null);
   const [graphDataStatus, setGraphDataStatus] = useState(null);
+  const [dataInicialMiliseconds, setDataInicialMiliseconds] = useState(null);
+  const [dataFinalMiliseconds, setDataFinalMiliseconds] = useState(null);
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
@@ -105,6 +106,10 @@ export default function Consulta() {
 
     console.log("resultado data final: " + dataFinal + " data inicial: " +  dataInicial);
 
+    if(dataFinalMiliseconds < dataInicialMiliseconds){
+      console.log("erro");
+    }
+
   }
 
   const onChange = (event, selectedDate) => {
@@ -118,6 +123,8 @@ export default function Consulta() {
     setText(fDate);
     setDataInicial(fDate);
     console.log(fDate + ' (' + fTime + ')');
+    console.log(tempDate.getTime());
+    setDataInicialMiliseconds(tempDate.getTime());
     
   }
 
@@ -142,14 +149,14 @@ export default function Consulta() {
     setDataFinal(fDate);
     console.log(fDate + ' (' + fTime + ')');
     console.log(fDate);
+    console.log(tempDate.getTime());
+    setDataFinalMiliseconds(tempDate.getTime())
   }
 
   const showModeEnd = (currentMode) => {
     setShowEnd(true);
     setModeEnd(currentMode);
   }
-
-  
 
   let cardHeight = Platform.OS === 'android' ? '90%' : "90%";
 
@@ -190,6 +197,7 @@ export default function Consulta() {
                 { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
                 { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
               ]}
+              
             />
           </View>
 
@@ -255,17 +263,14 @@ export default function Consulta() {
         autoPlay={true}
         // Find more Lottie files at https://lottiefiles.com/featured
         source={require('../assets/no_data.json')}
-      />
-  
-  
+      /> 
   }
-
           <View style={consultaStyles.containerDates}>
             <View style={consultaStyles.containerDatePicker}>
               <Text style={{fontFamily: 'roboto-regular', fontSize:16, marginRight:'2%',width:'20%', textAlign:'center'}}>De:</Text>      
            <View style={consultaStyles.showDate}> 
                   <Text onPress={() => showMode('date')}  placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{text}
-                  <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={22} type="Ionicons" /> 
+                  <Icon name='calendar-outline' style={{ color: 'black', marginLeft: '1%' }} size={20} type="Ionicons" /> 
                   </Text>           
               </View>
             </View> 
@@ -273,7 +278,7 @@ export default function Consulta() {
               <Text style={{fontFamily: 'roboto-regular',fontSize:16,marginRight:'2%', width:'20%'}}>Até:</Text>     
                  <View style={consultaStyles.showDate}> 
                       <Text onPress={() => showModeEnd('date')} placeholder="dd/mm/aaaa" style={consultaStyles.picked}>{textEnd}
-                      <Icon name='calendar-outline' style={{ color: 'black'}} size={13} type="Ionicons" />
+                      <Icon name='calendar-outline' style={{ color: 'black'}} size={20} type="Ionicons" />
                       </Text>       
                   </View>
               </View>   

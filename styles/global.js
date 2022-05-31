@@ -245,7 +245,7 @@ showDate:{
   borderColor: '#C4C4C4', 
   flex:1, 
   flexDirection: 'row', 
-  justifyContent: 'center', 
+  justifyContent: 'space-between', 
   alignItems: 'center', 
   height:30, 
   width:80
@@ -261,19 +261,16 @@ containerDates:{
   padding:'2%',
   flex: 1, 
   flexDirection: 'row', 
-  //borderWidth: 1, 
-  //borderColor: 'red', 
   width:'100%'
 },
 
 containerDatePicker:{
   flex:1, 
   flexDirection: 'row', 
-  //borderWidth:2, 
-  //borderColor:'green', 
-  justifyContent:'center',
+  justifyContent:'flex-start',
   alignItems: 'center',
-  marginLeft:'1%'
+  marginLeft:'1%',
+  width: '100%'
 }
 });
 

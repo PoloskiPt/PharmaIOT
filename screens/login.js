@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, Text, TouchableWithoutFeedback, StyleSheet ,Keyboard,Image, Pressable ,TextInput, Modal, ScrollView,TouchableOpacity} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, StyleSheet ,Keyboard,Image,TextInput, Modal, ScrollView,TouchableOpacity} from 'react-native';
 import { loginStyles } from '../styles/global';
 import Card from '../shared/card';
 import CheckBox from 'react-native-check-box';
@@ -9,7 +9,6 @@ import md5 from 'md5';
 import { UserContext } from '../store/userContext';
 import {save,storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Login(){
 const [name, setName] = useState('');
