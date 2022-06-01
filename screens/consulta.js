@@ -28,12 +28,48 @@ export default function Consulta() {
   const [graphDataStatus, setGraphDataStatus] = useState(null);
   const [dataInicialMiliseconds, setDataInicialMiliseconds] = useState(null);
   const [dataFinalMiliseconds, setDataFinalMiliseconds] = useState(null);
+  const [yesterdayDate, setYesterdayDate] = useState(null);
+  const [lastWeekDate, setLastWeekDate] = useState(null);
+  const [lastMonthDate, setLastMonthDate] = useState(null);
+
   useEffect(() => {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     setDatepick(date);
     requestMeasurePoints(0);
+    getYesterdayDate();
+    getLastWeekDate();
+    getLastMonthDate();
   }, []);
+
+  
+  const getYesterdayDate = () => {
+
+    let dateTeste = new Date();
+    dateTeste.setDate(dateTeste.getDate() - 1);
+    let fDateTeste = dateTeste.getFullYear() + '-' + (dateTeste.getMonth() + 1) + '-' +  dateTeste.getDate();
+    setYesterdayDate(fDateTeste);
+
+  }
+
+  const getLastWeekDate = () => {
+
+    let dateTeste = new Date();
+    dateTeste.setDate(dateTeste.getDate() - 7);
+    let fDateTeste = dateTeste.getFullYear() + '-' + (dateTeste.getMonth() + 1) + '-' +  dateTeste.getDate();
+    setLastWeekDate(fDateTeste);
+
+  }
+
+  const getLastMonthDate = () => {
+
+    let dateTeste = new Date();
+    dateTeste.setDate(dateTeste.getDate());
+    dateTeste.setMonth(dateTeste.getMonth()-1);
+    let fDateTeste = dateTeste.getFullYear() + '-' + (dateTeste.getMonth() + 1) + '-' +  dateTeste.getDate();
+    setLastMonthDate(fDateTeste);
+
+  }
 
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
@@ -52,14 +88,12 @@ export default function Consulta() {
     setDataInterval(measurePointInterval);
    ;
 
-    //console.log(measurePointInterval);
     setIsLoading(false);
     if(measurePointInterval.message == "No data found") {
       setGraphDataStatus(false);
     }else{
       setGraphDataStatus(true);
     }
-    console.log("breakpoint test: " + measurePointInterval.message + '/')
 
   }
   useEffect(() => {
@@ -71,11 +105,14 @@ export default function Consulta() {
     let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
+    console.log(datepickEnd);
    
     requestMeasurePoints(0);
+    console.log('data de ontem : ' +  yesterdayDate);
   }, []);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+ 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -125,7 +162,7 @@ export default function Consulta() {
     console.log(fDate + ' (' + fTime + ')');
     console.log(tempDate.getTime());
     setDataInicialMiliseconds(tempDate.getTime());
-    
+
   }
 
   const showMode = (currentMode) => {
@@ -193,9 +230,9 @@ export default function Consulta() {
               placeholder={{}}
 
               items={[
-                { label: 'Últimas 24 horas', value: "2022-05-24 17:40:21"},
-                { label: 'Mês Passado', value: "2022-04-04 17:40:21" },
-                { label: 'Últimos 7 dias', value: "2022-03-04 17:40:21" },
+                { label: 'Últimas 24 horas', value: yesterdayDate},    
+                { label: 'Últimos 7 dias', value: lastWeekDate },
+                { label: 'Mês Passado', value: lastMonthDate },
               ]}
               
             />
