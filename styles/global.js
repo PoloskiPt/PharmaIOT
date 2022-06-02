@@ -118,7 +118,7 @@ informacoesLabel:{
   color: 'black',
   height:30,
   marginLeft:8,
-  marginTop: Platform.OS === 'ios'? 6: 2,
+  marginTop: Platform.OS === 'ios'? 20: 7,
   fontSize: 16,
 },
 

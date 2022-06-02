@@ -76,7 +76,7 @@ export default function Consulta() {
    
     let resultMeasurePoints = await getMeasurePoints();
     setMeasurePoints(resultMeasurePoints);
-    requestMeasurePointDataInterval(resultMeasurePoints[id].value, "2022-05-22 17:40:21", "2022-05-24 17:40:21");
+    requestMeasurePointDataInterval(currentSn, datepickEnd, datepick);
      
   }
  
@@ -102,6 +102,7 @@ export default function Consulta() {
     setDatepick(date);
    
     let today1 = new Date();
+    today1.setDate(today1.getDate() - 1);
     let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
@@ -146,7 +147,7 @@ export default function Consulta() {
     if(dataFinalMiliseconds < dataInicialMiliseconds){
       console.log("erro");
     }
-
+    requestMeasurePointDataInterval(currentSn,date,dateEnd)
   }
 
   const onChange = (event, selectedDate) => {
