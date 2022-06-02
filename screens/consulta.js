@@ -330,7 +330,7 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="calendar"
+              display="default"
               locale="pt-PT"
               onChange={onChange}
             />
@@ -343,9 +343,10 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="calendar"
+              display="default"
               locale="pt-PT"
               onChange={onChangeEnd}
+              preferredDataPickerStyle='default'
             />
           )}
 
