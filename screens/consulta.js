@@ -329,7 +329,7 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="spinner"
+              display="calendar"
               locale="pt-PT"
               onChange={onChange}
             />
@@ -342,7 +342,7 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="spinner"
+              display="calendar"
               locale="pt-PT"
               onChange={onChangeEnd}
             />
