@@ -284,10 +284,10 @@ return(
             <Text>{nomesCreditos[1].content}</Text>
             <Text>{nomesCreditos[2].content}</Text>
             <Text>{nomesCreditos[3].content}</Text>
-0
-            <View style={{marginBottom:'2%'}}>
+
+            <View style={{marginTop:'2%'}}>
             <Text style={{fontWeight:'bold'}}>Versão</Text>
-            <Text>Versão: 2.7.4 R3</Text>
+            <Text>Versão: 2.7.4 R3.</Text>
             </View>
             </ScrollView>
             
@@ -300,7 +300,7 @@ return(
                     textColor="white" 
                     color="#398BEA"  
                     onPress={() => setModalVisible(!modalVisible)}
-                    paddingVertical={14}
+                    paddingVertical={10}
                     paddingHorizontal={16}
                     textAlign = 'center'  
                     />      
