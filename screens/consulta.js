@@ -146,6 +146,7 @@ export default function Consulta() {
 
     if(dataFinalMiliseconds < dataInicialMiliseconds){
       console.log("erro");
+      Alert.alert("Data inválida","A data inicial não pode ser maior que a data final.", [{text:'Compreendo'}]);
     }
     requestMeasurePointDataInterval(currentSn,date,dateEnd)
   }
@@ -330,7 +331,7 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="default"
+              display="calendar"
               locale="pt-PT"
               onChange={onChange}
             />
@@ -343,10 +344,9 @@ export default function Consulta() {
               is24Hour={true}
               animationType={"fade"}
               androidMode={"default"}
-              display="default"
+              display="calendar"
               locale="pt-PT"
               onChange={onChangeEnd}
-              preferredDataPickerStyle='default'
             />
           )}
 
