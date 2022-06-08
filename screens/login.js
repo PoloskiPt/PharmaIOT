@@ -101,11 +101,33 @@ useEffect(() => {
 }, [contextEmail, setContextEmail ,contextPassword,setContextPassword, contextRememberMe, setContextRememberMe])
 
 const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
+const firstLoginLayer = "https://app.pharmaiot.pt/pharmaiotApi/api/users/loginFirstLayer.php";
 
 //fazer Login
 async function login(){  
+  
+  let loginState;
+
+  let reqFirstLayer = await fetch(firstLoginLayer,{
+    method: 'POST',
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    body: JSON.stringify({
+        email: email,
+    })
+  });
+    let respFirstLayer = await reqFirstLayer.json()
+    .then(console.log(respFirstLayer))
+    .catch((respFirstLayer) => alert(respFirstLayer.error))
+    console.log("Resultado first Layer: " + respFirstLayer[0].bd);
+ /// end of first layer of verification
+    loginState = respFirstLayer[0].bd;
     
-    let reqs = await fetch(loginUrl,{
+    if(loginState != '' || loginState != false){
+
+      let reqs = await fetch(loginUrl,{
         method: 'POST',
         headers:{
             'Accept':'application/json',
@@ -121,17 +143,17 @@ async function login(){
     .catch((error) => alert(resp.error))
 
     if(checkBoxState === true){
-        setContextRememberMe("true");  
-        save('rememberMe', "true");
-        save('email', email);
-        save('pass', password);
-        save('name', resp.name + ' ' + resp.surname);
-    }else if(checkBoxState === false){
-        setContextRememberMe("false");  
-        save('rememberMe', 'false');
-    }
-   
-    getValueForEmail();
+      setContextRememberMe("true");  
+      save('rememberMe', "true");
+      save('email', email);
+      save('pass', password);
+      save('name', resp.name + ' ' + resp.surname);
+  }else if(checkBoxState === false){
+      setContextRememberMe("false");  
+      save('rememberMe', 'false');
+  }
+
+  getValueForEmail();
     getValueForPassword();
     getValueFor('email');
     getValueFor('pass');
@@ -147,6 +169,7 @@ async function login(){
     let datatime = "12/02/12";
     let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime);
     console.log("resutado query: " + JSON.stringify(tokenResult));
+    console.log(resp);
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen', params: {}}],
@@ -154,7 +177,12 @@ async function login(){
 
     }else{
         setMessage("Credenciais inválidas");
-   }  
+   } 
+
+    }else{
+      setMessage("Credenciais inválidas");
+ } 
+     
 }
 
 return(
