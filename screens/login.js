@@ -11,7 +11,7 @@ import {save,storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
 
 export default function Login(){
-const [name, setName] = useState('');
+const [name, setName] = useState();
 const [result, onChangeResult] = useState('');    
 const [modalVisible, setModalVisible] = useState(false);
 const nomesCreditos = [
@@ -313,6 +313,10 @@ return(
             <Text>{nomesCreditos[2].content}</Text>
             <Text>{nomesCreditos[3].content}</Text>
 
+            <View style={{marginTop:'2%'}}>
+            <Text style={{fontWeight:'bold'}}>Versão</Text>
+            <Text>Versão: 2.7.4 R3.</Text>
+            </View>
             </ScrollView>
             
             <View style={{position:'relative', bottom:'-2%'}}>
@@ -324,7 +328,7 @@ return(
                     textColor="white" 
                     color="#398BEA"  
                     onPress={() => setModalVisible(!modalVisible)}
-                    paddingVertical={14}
+                    paddingVertical={10}
                     paddingHorizontal={16}
                     textAlign = 'center'  
                     />      
