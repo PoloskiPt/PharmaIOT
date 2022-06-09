@@ -25,7 +25,7 @@ const updateProfileEndpoint="https://app.pharmaiot.pt/pharmaiotApi/api/users/upd
 
 //** GET MEASURE POINTS **/
 
-export async function getMeasurePoints() {
+export async function getMeasurePoints(db_name) {
     let measurePointsArray = [];
     
     let reqs = await fetch(measurePointsEndpoint,{
@@ -35,11 +35,15 @@ export async function getMeasurePoints() {
             'Content-Type':'application/json',
             'charset': 'utf-8',
         },
+        body: JSON.stringify({
+            db_name: db_name,
+            username: db_name
+        })
     });
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    
+    console.log('getMeasurePointsdb: ' + db_name);
     resp.map(element => {
         measurePointsArray.push(
           { label: element['name'], value: element['sn'] },
@@ -51,7 +55,7 @@ export async function getMeasurePoints() {
 
 //** GET MEASURE POINTS **/
 
-export async function getMeasurePointData(sn) {
+export async function getMeasurePointData(sn, db_name) {
     let reqs = await fetch(measurePointDataEndpoint,{
         method: 'POST',
         headers:{
@@ -60,15 +64,18 @@ export async function getMeasurePointData(sn) {
         },
         body: JSON.stringify({
             sn: sn,
+            db_name: db_name,
+            username: db_name
         })
     });
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
+    console.log('getMeasurePointData teste: ' + db_name);
     return resp;
     }
 
-    export async function getMeasurePointDataLastDay(sn) {
+    export async function getMeasurePointDataLastDay(sn, db_name) {
         let reqs = await fetch(measurePointDataLastDayEndpoint,{
             method: 'POST',
             headers:{
@@ -77,17 +84,20 @@ export async function getMeasurePointData(sn) {
             },
             body: JSON.stringify({
                 sn: sn,
+                db_name: db_name,
+                username: db_name
             })
         });
         let resp = await reqs.json()
         .then(console.log())
         .catch((error) => alert(error))
+        console.log('getMeasurePointDataLastDay teste: ' + db_name);
         return resp;
         }
 
     //** GET MEASURE POINTS **/
 
-export async function getMeasurePointDataInterval(sn,dt,dt1) {
+export async function getMeasurePointDataInterval(sn,dt,dt1, db_name) {
     let reqs = await fetch(measurePointsDataIntervalEndpoint,{
         method: 'POST',
         headers:{
@@ -98,6 +108,8 @@ export async function getMeasurePointDataInterval(sn,dt,dt1) {
             sn: sn,
             dt:dt,
             dt1:dt1,
+            db_name: db_name,
+            username: db_name
         })
     });
     let resp = await reqs.json()
@@ -108,7 +120,7 @@ export async function getMeasurePointDataInterval(sn,dt,dt1) {
 
 //**  GET NOTIFICATIONS **/
 
-export async function getNotifications() {
+export async function getNotifications(db_name) {
     let reqs = await fetch(notificationsEndpoint,{
         method: 'POST',
         headers:{
@@ -116,6 +128,10 @@ export async function getNotifications() {
             'Content-Type':'application/json',
             'charset': 'utf-8',
         },
+        body: JSON.stringify({
+            db_name: db_name,
+            username: db_name
+        })
     });
     let resp = await reqs.json()
     .then(console.log())
@@ -126,7 +142,7 @@ export async function getNotifications() {
 
 //**  STORE NOTIFICAITON TOKENS DATABASE **/
 
-export async function storeNotificationToken(token,pharmacy,datatime) {
+export async function storeNotificationToken(token,pharmacy,datatime, db_name) {
     let reqs = await fetch(tokensEndpoint,{
         method: 'POST',
         headers:{
@@ -136,7 +152,9 @@ export async function storeNotificationToken(token,pharmacy,datatime) {
         body: JSON.stringify({
             token: token,
             pharmacy: pharmacy,
-            datatime: datatime
+            datatime: datatime,
+            db_name: db_name,
+            username: db_name
         })
     });
     let resp = await reqs.json()

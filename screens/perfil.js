@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback, Button } from 'react-native';
 import { globalStyles,perfilStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,6 +11,7 @@ import md5 from 'md5';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {save} from '../functions/genericFunctions';
 import LottieView from 'lottie-react-native';
+import {UserContext} from '../store/userContext';
 
 export default function Perfil(props) {
   const animation = useRef(null);
@@ -24,6 +25,7 @@ export default function Perfil(props) {
   const [btnEditColor,setBtnEditColor] = useState('#FFC222');
   const [editableState, setEditableState] = useState(false);
   const [animationState, setAnimationState] = useState(false);
+  const {sessionDb} = useContext(UserContext);
   // use states updated values
  
   const [emailUpdate,setEmailUpdate] = useState();
@@ -78,7 +80,9 @@ export default function Perfil(props) {
           name : nameUpdate,
           surname : surnameUpdate,
           pass : password,
-          input : userId
+          input : userId,
+          db_name: sessionDb,
+          username: sessionDb
         })
     });
     const data = await response.json()
@@ -113,7 +117,9 @@ export default function Perfil(props) {
         },
         body: JSON.stringify({
             email: email,
-            pass: password
+            pass: password,
+            db_name: sessionDb,
+            username: sessionDb
         })
     });
       const data = await response.json()
@@ -133,7 +139,7 @@ export default function Perfil(props) {
 
     
     fetchMyAPI();
-  },[]);
+  },[sessionDb]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

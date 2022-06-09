@@ -33,11 +33,13 @@ export default function App() {
   const [IsReady, SetIsReady] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [contextEmail, setContextEmail] = useState(null);
+  const [contextDb, setContextDb] = useState(null);
   const [contextPassword, setContextPassword] = useState(null);
   const [sessionPharmacy, setSessionPharmacy] = useState(null);
   const [contextRememberMe, setContextRememberMe] = useState(null);
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
+  const [sessionDb, setSessionDb] = useState('');
   let getToken;
  
  
@@ -54,6 +56,8 @@ async function getValueForSession(){
     setSessionEmail(sessionEmail);
     let sessionPassword = await SecureStore.getItemAsync('sessionPassword');
     setSessionPassword(sessionPassword);
+    let sessionDB = await SecureStore.getItemAsync('sessionDb');
+    setSessionDb(sessionDB);
     //let sessionPharmacy = await SecureStore.getItemAsync('')
     setIsLoggedIn(true);
     }else{
@@ -78,6 +82,16 @@ async function getValueForEmail(){
     setContextEmail(result);
   }else{
     setContextEmail('');
+  }
+}
+
+async function getValueForSessionContextDb(){
+     
+  let result = await SecureStore.getItemAsync('contextDb');
+  if(result){
+    setContextDb(result);
+  }else{
+    setContextDb('');
   }
 }
 
@@ -106,6 +120,7 @@ async function getValueForToken(){
   useEffect(() => {
     getValueForSession();
     getValueForEmail();
+    getValueForSessionContextDb();
     getValueForPassword();
     getValueForRememberMe();
     getValueForSessionPharmacy();
@@ -148,6 +163,10 @@ async function getValueForToken(){
     return (     
       <UserContext.Provider 
       value={{
+      sessionDb,
+      setSessionDb,
+      contextDb,
+      setContextDb,
       contextEmail, 
       setContextEmail,
       contextPassword,

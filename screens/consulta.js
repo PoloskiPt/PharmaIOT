@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,useRef} from 'react';
+import React, { useEffect, useState ,useRef, useContext} from 'react';
 import { View, Text, Platform, Alert  } from 'react-native';
 import { consultaStyles,pickerSelectStyles } from '../styles/global';
 import MainCard from '../shared/mainCard';
@@ -7,6 +7,7 @@ import { LineChart } from "react-native-chart-kit";
 import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {UserContext} from '../store/userContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getMeasurePoints, getMeasurePointDataInterval} from '../functions/genericFunctions';
@@ -31,6 +32,7 @@ export default function Consulta() {
   const [yesterdayDate, setYesterdayDate] = useState(null);
   const [lastWeekDate, setLastWeekDate] = useState(null);
   const [lastMonthDate, setLastMonthDate] = useState(null);
+  const {sessionDb} = useContext(UserContext);
 
   useEffect(() => {
     let today = new Date();
@@ -40,7 +42,7 @@ export default function Consulta() {
     getYesterdayDate();
     getLastWeekDate();
     getLastMonthDate();
-  }, []);
+  }, [sessionDb]);
 
   
   const getYesterdayDate = () => {
@@ -74,7 +76,7 @@ export default function Consulta() {
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
-    let resultMeasurePoints = await getMeasurePoints();
+    let resultMeasurePoints = await getMeasurePoints(sessionDb);
     setMeasurePoints(resultMeasurePoints);
     requestMeasurePointDataInterval(currentSn, datepickEnd, datepick);
      
@@ -84,7 +86,7 @@ export default function Consulta() {
 
     setIsLoading(true);
 
-    let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1);
+    let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1, sessionDb);
     setDataInterval(measurePointInterval);
    ;
 

@@ -14,6 +14,7 @@ export default function Login(){
 const [name, setName] = useState();
 const [result, onChangeResult] = useState('');    
 const [modalVisible, setModalVisible] = useState(false);
+const [dbName, setDbName] = useState('');
 const nomesCreditos = [
    
     {content: 'Bruno Silva [Business Development Director]'},
@@ -32,7 +33,11 @@ const {contextEmail,
     setSessionPassword,
     sessionPharmacy, 
     setSessionPharmacy,
-    expoPushToken
+    expoPushToken,
+    contextDb,
+    setContextDb,
+    sessionDb,
+    setSessionDb,
 } = useContext(UserContext);
 
 async function getValueForEmail(){
@@ -121,11 +126,13 @@ async function login(){
     let respFirstLayer = await reqFirstLayer.json()
     .then(console.log(respFirstLayer))
     .catch((respFirstLayer) => alert(respFirstLayer.error))
-    console.log("Resultado first Layer: " + respFirstLayer[0].bd);
+    setDbName(respFirstLayer[0].bd);
+    setContextDb(respFirstLayer[0].bd);
+    console.log("Resultado first Layer: " + loginState);
  /// end of first layer of verification
     loginState = respFirstLayer[0].bd;
     
-    if(loginState != '' || loginState != false){
+    if(loginState != false && loginState != ''){
 
       let reqs = await fetch(loginUrl,{
         method: 'POST',
@@ -135,17 +142,20 @@ async function login(){
         },
         body: JSON.stringify({
             email: email,
-            pass: md5(password)
+            pass: md5(password),
+            db_name: 'pharmaio_' + loginState,
+            username: 'pharmaio_' + loginState
         })
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(resp.error))
+    .catch()
 
     if(checkBoxState === true){
       setContextRememberMe("true");  
       save('rememberMe', "true");
       save('email', email);
+      save('contextDb', loginState);
       save('pass', password);
       save('name', resp.name + ' ' + resp.surname);
   }else if(checkBoxState === false){
@@ -162,12 +172,14 @@ async function login(){
     save('session', "true");
     save('sessionEmail', email);
     save('sessionPassword', password);
+    save('sessionDb', 'pharmaio_' + loginState)
     save('pharmacy', resp.pharmacy);
     setSessionEmail(email);
     setSessionPassword(password);
+    setSessionDb('pharmaio_' + loginState);
     setSessionPharmacy(JSON.stringify(resp.pharmacy));
     let datatime = "12/02/12";
-    let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime);
+    let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime, loginState);
     console.log("resutado query: " + JSON.stringify(tokenResult));
     console.log(resp);
     navigation.reset({
