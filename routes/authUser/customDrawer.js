@@ -14,7 +14,6 @@ async function deleteItem(key){
 
 useEffect(() => {
     getValueForName();
-    console.log(name);
 })
 
 async function getValueForName(){

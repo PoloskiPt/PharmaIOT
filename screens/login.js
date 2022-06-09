@@ -10,6 +10,7 @@ import { UserContext } from '../store/userContext';
 import {save,storeNotificationToken} from '../functions/genericFunctions';
 import * as SecureStore from 'expo-secure-store';
 
+
 export default function Login(){
 const [name, setName] = useState();
 const [result, onChangeResult] = useState('');    
@@ -94,6 +95,7 @@ const hideShowPassword = () => {
 useEffect(() => {
     //setEmail(contextEmail);
     //setPassword(contextPassword);
+    console.log('loginexpopishtoken: ' + expoPushToken);
     if(contextRememberMe == "true"){     
         setEmail(contextEmail);
         setPassword(contextPassword);
@@ -103,10 +105,17 @@ useEffect(() => {
         setPassword("");
         setCheckBoxState(false);
     }
-}, [contextEmail, setContextEmail ,contextPassword,setContextPassword, contextRememberMe, setContextRememberMe])
+}, [contextEmail, setContextEmail ,contextPassword,expoPushToken,setContextPassword, contextRememberMe, setContextRememberMe])
 
 const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
 const firstLoginLayer = "https://app.pharmaiot.pt/pharmaiotApi/api/users/loginFirstLayer.php";
+
+const generateCurrentDate = () => {
+  
+  let tempDate = new Date();
+  let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+  return fDate;
+}
 
 //fazer Login
 async function login(){  
@@ -125,10 +134,10 @@ async function login(){
   });
     let respFirstLayer = await reqFirstLayer.json()
     .then(console.log(respFirstLayer))
-    .catch((respFirstLayer) => alert(respFirstLayer.error))
+    .catch((respFirstLayer) => console.log("sera que aparece: " + respFirstLayer.error))
     setDbName(respFirstLayer[0].bd);
     setContextDb(respFirstLayer[0].bd);
-    console.log("Resultado first Layer: " + loginState);
+    //console.log("Resultado first Layer: " + loginState);
  /// end of first layer of verification
     loginState = respFirstLayer[0].bd;
     
@@ -178,10 +187,9 @@ async function login(){
     setSessionPassword(password);
     setSessionDb('pharmaio_' + loginState);
     setSessionPharmacy(JSON.stringify(resp.pharmacy));
-    let datatime = "12/02/12";
-    let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), datatime, loginState);
+    console.log(JSON.stringify(resp.pharmacy));
+    let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), generateCurrentDate(), 'pharmaio_' + loginState);
     console.log("resutado query: " + JSON.stringify(tokenResult));
-    console.log(resp);
     navigation.reset({
         index: 0,
         routes: [{name: 'homeScreen', params: {}}],
@@ -400,7 +408,7 @@ return(
                        <CheckBox 
                        style={loginStyles.checkBox}
                        isChecked={checkBoxState}
-                       onClick={() => {{setCheckBoxState(!checkBoxState), console.log(checkBoxState)}}}
+                       onClick={() => {{setCheckBoxState(!checkBoxState)}}}
                        />
                        <Text style={loginStyles.lembrarDadosLabel}>Lembrar os meus dados</Text>
                    </View>   
@@ -408,7 +416,7 @@ return(
                    <TouchableOpacity onPress={() => setModalVisible(true)}>
                    <View style={loginStyles.informacoesSection}>
                    <Image style={loginStyles.loginIcons}source= {require('../assets/info.png')}/>
-                       <Text style={loginStyles.informacoesLabel}>Ver termos e condições</Text>
+                    <Text style={loginStyles.informacoesLabel}>Ver termos e condições</Text>
                    </View> 
                    </TouchableOpacity> 
                            

@@ -43,7 +43,6 @@ export async function getMeasurePoints(db_name) {
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    console.log('getMeasurePointsdb: ' + db_name);
     resp.map(element => {
         measurePointsArray.push(
           { label: element['name'], value: element['sn'] },
@@ -71,7 +70,6 @@ export async function getMeasurePointData(sn, db_name) {
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => alert(error))
-    console.log('getMeasurePointData teste: ' + db_name);
     return resp;
     }
 
@@ -91,7 +89,6 @@ export async function getMeasurePointData(sn, db_name) {
         let resp = await reqs.json()
         .then(console.log())
         .catch((error) => alert(error))
-        console.log('getMeasurePointDataLastDay teste: ' + db_name);
         return resp;
         }
 
@@ -143,6 +140,7 @@ export async function getNotifications(db_name) {
 //**  STORE NOTIFICAITON TOKENS DATABASE **/
 
 export async function storeNotificationToken(token,pharmacy,datatime, db_name) {
+    console.log("token generic: " + token);
     let reqs = await fetch(tokensEndpoint,{
         method: 'POST',
         headers:{
@@ -158,8 +156,9 @@ export async function storeNotificationToken(token,pharmacy,datatime, db_name) {
         })
     });
     let resp = await reqs.json()
-    .then(console.log())
-    .catch((error) => alert(error))
+    .then()
+    .catch((error) => console.log(error))
+    console.log("resultado: " + JSON.stringify(resp));
     return resp;
     }
 

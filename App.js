@@ -14,6 +14,8 @@ LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you\'re using an old API with gesature components, check out new Gestures system!",
 ]);
 
+LogBox.ignoreAllLogs();
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -126,8 +128,8 @@ async function getValueForToken(){
     getValueForSessionPharmacy();
     getValueForToken();
 
-   let device =  getValueForToken();
-   
+    let device =  getValueForToken();
+    
     
     //console.log('f' + getToken);
    
@@ -149,7 +151,7 @@ async function getValueForToken(){
 
   }, []);
 
-  if (!IsReady && isLoggedIn != null) {
+  if (!IsReady && isLoggedIn != null && expoPushToken != null) {
     return (
       <AppLoading
         startAsync={LoadFontsAndRestoreToken}
@@ -158,7 +160,6 @@ async function getValueForToken(){
       />
     );
   }
-  
   
     return (     
       <UserContext.Provider 
@@ -238,7 +239,9 @@ async function getValueForToken(){
           lightColor: '#FF231F7C',
         });
       }
+      
       setExpoPushToken(token.data);
+      console.log('token app.js: ' + expoPushToken);
     }
 
 }

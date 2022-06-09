@@ -78,14 +78,12 @@ export default function Monitorizacao() {
     
     let measurePointDataLastDay = await getMeasurePointDataLastDay(sn, sessionDb);
     setmonitoringDataLastDay(measurePointDataLastDay);
-    console.log(graphDataStatus);
     if(measurePointDataLastDay.message == "No data found") {
       setGraphDataStatus(false);
     }else{
       setGraphDataStatus(true);
     }
    
-    //console.log("breakpoint test: " + JSON.stringify(graphDataStatus));
   }
   
   useEffect(() => {
@@ -93,7 +91,6 @@ export default function Monitorizacao() {
     requestMeasurePoints(0); 
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
-    console.log("session db teste: " + sessionDb);
 
   }, [sessionPassword, sessionEmail, sessionPharmacy, sessionDb])
 
@@ -123,7 +120,7 @@ export default function Monitorizacao() {
       <MonoCard height={cardHeight} >
 
     <View style={monitorizacaoStyles.monoContainer}>
-         {monitoringData &&
+         {monitoringData  && monitoringData.length > 0 &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
          <Text style={monitorizacaoStyles.text}>Humidade</Text>
          <View style={monitorizacaoStyles.pieChart}>       
@@ -157,7 +154,7 @@ export default function Monitorizacao() {
       
         }
 
-{monitoringData && 
+{monitoringData && monitoringData.length > 0 &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
          <Text style={monitorizacaoStyles.text}>Temperatura</Text>
          <View style={monitorizacaoStyles.pieChart}>       
