@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { StyleSheet, Text, View,Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {getNotifications} from '../functions/genericFunctions';
+import {UserContext} from '../store/userContext';
+
 
 export default function Header( {navigation, title} ){
+    const {sessionDb} = useContext(UserContext);
     const headerIconSize = Platform.OS === 'android' ? 30 : 40;
     
     const navigation2 = useNavigation();
+    
+    useEffect(() => {
+      }, [sessionDb]);
    
     const openMenu = () => {
         navigation.openDrawer();
@@ -15,13 +21,11 @@ export default function Header( {navigation, title} ){
    
     async function openNotifications(){
 
-        let notificationsData = await getNotifications();
+        let notificationsData = await getNotifications(sessionDb);
         navigation2.navigate('notificationsModal', {notificationsData});          
 
     }
    
-    
-
         return(
             <View style={styles.header}>
                 <MaterialIcons name='menu' size={headerIconSize} onPress={openMenu} style={styles.iconHamburguer}/>
