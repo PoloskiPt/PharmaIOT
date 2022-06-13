@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import { StyleSheet, Text, View,Platform } from 'react-native';
+import { StyleSheet, Text, View,Platform, StatusBar } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {getNotifications} from '../functions/genericFunctions';
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         height: 80,
         backgroundColor: "#398BEA",
         margin:0,
-       
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
     headerText: {
         fontFamily: 'roboto-bold',

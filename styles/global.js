@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
 
 export const loginStyles = StyleSheet.create({
   loginContainer: {
@@ -12,7 +12,7 @@ export const loginStyles = StyleSheet.create({
   loginContent:{
     display:"flex",
     flexDirection:"column",
-    height:'90%'
+    height:'90%',
   },
   loginLogoText:{
     color: '#fff',
@@ -136,7 +136,6 @@ borderTextInput:{
 },
 webConnectLogoContainer:{
   position:'relative',
-  bottom: Platform.OS === 'ios'? '-5%': '2%',
   justifyContent:'center',
   alignItems:'center',
   left:15,
@@ -444,6 +443,7 @@ export const notificacoesStyles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       marginTop: '1%',
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
   statusResolved:{
       color:'green',
