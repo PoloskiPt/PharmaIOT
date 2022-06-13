@@ -20,8 +20,8 @@ const nomesCreditos = [
    
     {content: 'Bruno Silva [Business Development Director]'},
     {content: 'Bernardino Neves [Project Manager]'},
-    {content: 'Igor Soares [Sofware Developer]'},
-    {content: 'Marco Francisco [Sofware Developer]'},
+    {content: 'Igor Soares [Software Developer]'},
+    {content: 'Marco Francisco [Software Developer]'},
 ]; 
 
 const {contextEmail, 
@@ -107,8 +107,8 @@ useEffect(() => {
     }
 }, [contextEmail, setContextEmail ,contextPassword,expoPushToken,setContextPassword, contextRememberMe, setContextRememberMe])
 
-const loginUrl= "https://app.pharmaiot.pt/api/users/login.php";
-const firstLoginLayer = "https://app.pharmaiot.pt/api/users/loginFirstLayer.php";
+const loginUrl= "https://app.pharmaiot.pt/api/api/users/login.php";
+const firstLoginLayer = "https://app.pharmaiot.pt/api/api/users/loginFirstLayer.php";
 
 const generateCurrentDate = () => {
   
