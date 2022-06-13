@@ -15,13 +15,13 @@ export const onShare = async () => {
   }
 
 /** ENDPOINTS **/
-const notificationsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAlarmHistory.php";
-const tokensEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/tokens/createToken.php";
-const measurePointsEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints.php";
-const measurePointsDataIntervalEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePointsInterval.php";
-const measurePointDataEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getAllMeasurePoints_status.php";
-const measurePointDataLastDayEndpoint= "https://app.pharmaiot.pt/pharmaiotApi/api/monitorizacao/getMeasurePointsLastDay.php";
-const updateProfileEndpoint="https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile.php";
+const notificationsEndpoint= "https://app.pharmaiot.pt/api/monitorizacao/getAlarmHistory.php";
+const tokensEndpoint= "https://app.pharmaiot.pt/api/tokens/createToken.php";
+const measurePointsEndpoint= "https://app.pharmaiot.pt/api/monitorizacao/getAllMeasurePoints.php";
+const measurePointsDataIntervalEndpoint= "https://app.pharmaiot.pt/api/monitorizacao/getAllMeasurePointsInterval.php";
+const measurePointDataEndpoint= "https://app.pharmaiot.pt/api/monitorizacao/getAllMeasurePoints_status.php";
+const measurePointDataLastDayEndpoint= "https://app.pharmaiot.pt/api/monitorizacao/getMeasurePointsLastDay.php";
+const updateProfileEndpoint="https://app.pharmaiot.pt/api/users/update_profile.php";
 
 //** GET MEASURE POINTS **/
 

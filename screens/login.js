@@ -107,8 +107,8 @@ useEffect(() => {
     }
 }, [contextEmail, setContextEmail ,contextPassword,expoPushToken,setContextPassword, contextRememberMe, setContextRememberMe])
 
-const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
-const firstLoginLayer = "https://app.pharmaiot.pt/pharmaiotApi/api/users/loginFirstLayer.php";
+const loginUrl= "https://app.pharmaiot.pt/api/users/login.php";
+const firstLoginLayer = "https://app.pharmaiot.pt/api/users/loginFirstLayer.php";
 
 const generateCurrentDate = () => {
   
