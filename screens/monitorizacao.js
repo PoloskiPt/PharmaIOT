@@ -100,7 +100,7 @@ export default function Monitorizacao() {
   }, [sessionPassword, sessionEmail, sessionPharmacy, sessionDb])
 
    return (
-     
+ 
     <View style={globalStyles.container}>
       {isLoading && <Spinner visible={isLoading}  textContent={'A carregar...'}  textStyle={{color:'black'}}/>} 
       <View style={monitorizacaoStyles.pickerContainer}>
