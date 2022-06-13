@@ -107,8 +107,8 @@ useEffect(() => {
     }
 }, [contextEmail, setContextEmail ,contextPassword,expoPushToken,setContextPassword, contextRememberMe, setContextRememberMe])
 
-const loginUrl= "https://app.pharmaiot.pt/api/users/login.php";
-const firstLoginLayer = "https://app.pharmaiot.pt/api/users/loginFirstLayer.php";
+const loginUrl= "https://app.pharmaiot.pt/api/api/users/login.php";
+const firstLoginLayer = "https://app.pharmaiot.pt/api/api/users/loginFirstLayer.php";
 
 const generateCurrentDate = () => {
   
@@ -139,6 +139,7 @@ async function login(){
     setContextDb(respFirstLayer[0].bd);
     //console.log("Resultado first Layer: " + loginState);
  /// end of first layer of verification
+     
     loginState = respFirstLayer[0].bd;
     
     if(loginState != false && loginState != ''){
