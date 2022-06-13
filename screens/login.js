@@ -20,8 +20,8 @@ const nomesCreditos = [
    
     {content: 'Bruno Silva [Business Development Director]'},
     {content: 'Bernardino Neves [Project Manager]'},
-    {content: 'Igor Soares [Sofware Developer]'},
-    {content: 'Marco Francisco [Sofware Developer]'},
+    {content: 'Igor Soares [Software Developer]'},
+    {content: 'Marco Francisco [Software Developer]'},
 ]; 
 
 const {contextEmail, 

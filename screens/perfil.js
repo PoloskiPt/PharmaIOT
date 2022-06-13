@@ -40,7 +40,7 @@ export default function Perfil(props) {
  
 
   let response;
-  const loginUrl= "https://app.pharmaiot.pt/pharmaiotApi/api/users/login.php";
+  const loginUrl= "https://app.pharmaiot.pt/api/api/users/login.php";
   
   async function getValueForEmail(){
      
@@ -62,7 +62,7 @@ export default function Perfil(props) {
     
   }
 
-  const saveProfileDataUrl = "https://app.pharmaiot.pt/pharmaiotApi/api/users/update_profile_info.php";
+  const saveProfileDataUrl = "https://app.pharmaiot.pt/api/api/users/update_profile_info.php";
   
   async function updateInformation()  {
     response = await fetch(saveProfileDataUrl,{
