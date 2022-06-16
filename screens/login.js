@@ -366,6 +366,7 @@ return(
                 <Text style={loginStyles.loginLogoText}>PharmaIOT</Text>
             </View>
             <Card>
+              <ScrollView>
             <Text style={loginStyles.loginLabel}>Login</Text>           
                 <View style={loginStyles.loginForm}>       
                    <View style={loginStyles.emailSection}>
@@ -438,7 +439,7 @@ return(
                 <View style={loginStyles.webConnectLogoContainer}>
                      <Image source={require('../assets/logo_2bWebConnect.png')}/>
                 </View> 
-           
+           </ScrollView>
             </Card>
 
             </View>
