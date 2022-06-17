@@ -18,6 +18,7 @@ export default function Monitorizacao() {
   const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
   const [monitoringData, setmonitoringData] = useState();
+  const [currentSn, setCurrentSn] = useState();
   const [monitoringDataLastDay, setmonitoringDataLastDay] = useState();
   const [humCircleChartColor, setHumCircleChartColor] = useState();
   const [tempCircleChartColor, setTempCircleChartColor] = useState(null);
@@ -33,8 +34,8 @@ export default function Monitorizacao() {
      
       let resultMeasurePoints = await getMeasurePoints(sessionDb);
       setMeasurePoints(resultMeasurePoints);
-      requestMeasurePointData(resultMeasurePoints[id].value);
-      requestMeasurePointDataLastDay(resultMeasurePoints[id].value);
+      requestMeasurePointData(currentSn);
+      requestMeasurePointDataLastDay(currentSn);
     
   }
 
@@ -109,7 +110,7 @@ export default function Monitorizacao() {
                 <RNPickerSelect
                           style={pickerSelectStyless} 
                           useNativeAndroidPickerStyle={false}
-                          onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value)} 
+                          onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value) && setCurrentSn(value)} 
                           placeholder={{}}
                           items={measurePoints}
                       />
@@ -125,9 +126,10 @@ export default function Monitorizacao() {
       <MonoCard height={cardHeight} >
 
     <View style={monitorizacaoStyles.monoContainer}>
-         {monitoringData  && monitoringData.length > 0 &&
+         {monitoringData  && monitoringData.length > 0 && measurePoints &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
          <Text style={monitorizacaoStyles.text}>Humidade</Text>
+         <Text style={monitorizacaoStyles.text}>{monitoringData[0].dt}</Text>
          <View style={monitorizacaoStyles.pieChart}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
@@ -160,8 +162,10 @@ export default function Monitorizacao() {
         }
 
 {monitoringData && monitoringData.length > 0 &&
+
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
          <Text style={monitorizacaoStyles.text}>Temperatura</Text>
+         <Text style={monitorizacaoStyles.text}>{monitoringData[0].dt}</Text>
          <View style={monitorizacaoStyles.pieChart}>       
          <Svg height="140" width="140" viewBox="0 0 180 180" >
           <G rotation={-90} originX="90" originY="90">
