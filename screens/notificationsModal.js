@@ -13,9 +13,10 @@ const NotificationModal = (props) => {
     let notificationsExist = false;
     let notificationsArray = [];
     const notificationData = props.route.params.notificationsData;  
-//console.log(input)
+
     const saveProfileDataUrl = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
-  async function updateInformation()  {
+   
+  async function updateInformation(id)  {
     response = await fetch(saveProfileDataUrl,{
         method: 'PUT',
         headers:{
@@ -24,13 +25,14 @@ const NotificationModal = (props) => {
         },
         body: JSON.stringify({
            
-          input:input,
+          input:id,
           solved: "1",
           db_name: sessionDb,
           username: sessionDb
         })
-        
+      
     });
+   
     const data = await response.json()
 }
 
@@ -41,7 +43,7 @@ const NotificationModal = (props) => {
             notificationsArray.push(
                 
                 <View key={element['input']}   style={notificacoesStyles.notificationCard}>
-                    <TouchableOpacity onPress={() => setInput(element['input']) && updateInformation() }>
+                    <TouchableOpacity onPress={() =>  updateInformation(element['input']) }>
                    <View style={loginStyles.informacoesSection}>
                    <Image style={loginStyles.loginIcons}source= {require('../assets/info.png')}/>
                    <Text>{element['input']}</Text>
@@ -73,7 +75,7 @@ const NotificationModal = (props) => {
             notificationsExist = false;
         }    
         
-        //console.log(input)
+        console.log(input)
   
   
     return (  
