@@ -9,20 +9,17 @@ import {getNotifications} from '../functions/genericFunctions';
 
 const NotificationModal = (props) => {
     const animation = useRef(null);
-    const [input,setInput] = useState();
     const {sessionDb} = useContext(UserContext);
     let notificationsExist = false;
-    let notificationsArray = [];
     const [notificationsData, setNotificationsData] = useState(props.route.params.notificationsData);
 
     const saveProfileDataUrl = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
    
-
     const deleteSelectedElement = (id) => {
  
         Alert.alert(
-          'Tem a certeza que pretende realizar esta operação? ',
-          'Selecione uma das opções',
+          'Tem a certeza que pretende definir este alerta como resolvido? ',
+          '',
           [
             { text: 'Cancelar', onPress: () => { } },
             {
@@ -36,9 +33,8 @@ const NotificationModal = (props) => {
           ])
       }
 
-
   async function updateInformation(id)  {
-    response = await fetch(saveProfileDataUrl,{
+   let response = await fetch(saveProfileDataUrl,{
         method: 'PUT',
         headers:{
             'Accept':'application/json',
@@ -53,7 +49,6 @@ const NotificationModal = (props) => {
         })
       
     });
-    deleteSelectedElement(id);
     const data = await response.json()
   
 }
@@ -64,7 +59,6 @@ const NotificationModal = (props) => {
         }else{       
             notificationsExist = false;
         }    
-  
   
     return (  
 
@@ -80,7 +74,6 @@ const NotificationModal = (props) => {
                 </TouchableHighlight>
                 </View>
                 
-
             { !notificationsExist && <View style={{backgroundColor: '#fff',alignItems: 'center',justifyContent: 'center', flex: 1,}}>
     
                         <LottieView
@@ -105,18 +98,23 @@ const NotificationModal = (props) => {
                  keyExtractor={(item) => item.input}
                  data={notificationsData}
                  renderItem={({item}) =>               
-                 <View key={item['input']}   style={notificacoesStyles.notificationCard}>
-                 <TouchableOpacity onPress={() =>  updateInformation(item['input']) && deleteSelectedElement(item['input'])}>
-                <View style={loginStyles.informacoesSection}>
-                <Image style={loginStyles.loginIcons}source= {require('../assets/info.png')}/>
-                <Text>{item['input']}</Text>
-                </View> 
-                </TouchableOpacity> 
+                 <View style={notificacoesStyles.notificationCard}>
+                
+                 <View style={{flex:1, flexDirection:'row', justifyContent: 'space-between'}}>
+                    
                  <View style={notificacoesStyles.statusView}>
                      <Text style={notificacoesStyles.notificationSubtitleText}>Data: </Text> 
                      <Text>{item['dt']}</Text>
                  </View>
-     
+
+                 <TouchableOpacity onPress={() =>  updateInformation(item['input']) && deleteSelectedElement(item['input'])}>
+                    <View style={loginStyles.informacoesSection}>
+                    <Image style={loginStyles.loginIcons}source= {require('../assets/success-notifications.png')}/>
+                    </View> 
+                </TouchableOpacity> 
+                    
+                </View>       
+                 
                  <View style={notificacoesStyles.statusView}>
                      <Text style={notificacoesStyles.notificationSubtitleText}>Mensagem: 
                              {<Text style={{flexShrink: 1, fontSize:14}}> {item['message']}</Text>}
