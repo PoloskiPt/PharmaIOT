@@ -6,6 +6,7 @@ import NotificationsStack from "./notificationsStack";
 import InformacoesStack from "./informacoesStack";
 import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon1 from 'react-native-vector-icons/FontAwesome';
 import { Platform } from "react-native";
 import React from "react";
 
@@ -36,7 +37,7 @@ const RootDrawerNavigator = createDrawerNavigator({
                 color:'red'
             },
             drawerIcon: (             
-                <Icon name='document' style={{height:40, width:40, marginLeft:'50%',color:'white', display:"flex"}} size={40}  type="Ionicons" />
+                <Icon1 name='bell-o' style={{height:40, width:40, marginLeft:'50%',color:'white', display:"flex"}} size={40}  type="FontAwesome" />
             ),
           }, 
     },

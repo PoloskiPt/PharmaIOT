@@ -29,6 +29,7 @@ export default function Monitorizacao() {
   const [isLoading, setIsLoading] = useState(false);
   const radius = 70;
   const circleCircumference = 2 * Math.PI * radius;
+  const [Data, setData] = useState();
 
   async function requestMeasurePoints(id){
      
@@ -36,7 +37,7 @@ export default function Monitorizacao() {
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(currentSn);
       requestMeasurePointDataLastDay(currentSn);
-    
+     
   }
 
   async function requestMeasurePointData(sn){
@@ -44,12 +45,16 @@ export default function Monitorizacao() {
     let measurePointData = await getMeasurePointData(sn, sessionDb);
     console.log("VERIFICAR: " + JSON.stringify(measurePointData));
     if(measurePointData.message == 'No data found'){
+      setData=[measurePointData.message];
       setIsLoading(false);
+      
       return;
     }
+    console.log("antero " + measurePoints[0].name);
     setmonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
     let temperatura = measurePointData[0].temp;
+    
     if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel ||  humidade < measurePointData[0].hum_min_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
     }
@@ -79,19 +84,19 @@ export default function Monitorizacao() {
     setIsLoading(false);
 
   }
-
+ 
   async function requestMeasurePointDataLastDay(sn){
     
     let measurePointDataLastDay = await getMeasurePointDataLastDay(sn, sessionDb);
     setmonitoringDataLastDay(measurePointDataLastDay);
-    if(measurePointDataLastDay.message == "No data found") {
+    if((measurePointDataLastDay.message == "No data found"   && Data == "No data found")) {
       setGraphDataStatus(false);
     }else{
       setGraphDataStatus(true);
     }
    
   }
-  
+
   useEffect(() => {
   
     requestMeasurePoints(0); 
@@ -110,7 +115,7 @@ export default function Monitorizacao() {
                 <RNPickerSelect
                           style={pickerSelectStyless} 
                           useNativeAndroidPickerStyle={false}
-                          onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value) && setCurrentSn(value)} 
+                          onValueChange={(value) => requestMeasurePointData(value) && requestMeasurePointDataLastDay(value) && setCurrentSn(value)  } 
                           placeholder={{}}
                           items={measurePoints}
                       />
