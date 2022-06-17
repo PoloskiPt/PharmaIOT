@@ -114,7 +114,6 @@ export async function getMeasurePointDataInterval(sn,dt,dt1, db_name) {
     .catch((error) => alert(error))
     return resp;
     }
-
 //**  GET NOTIFICATIONS **/
 
 export async function getNotifications(db_name) {
