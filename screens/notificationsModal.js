@@ -1,22 +1,52 @@
-import React, {useRef, useState} from 'react';
-import {Text, View, ScrollView ,Modal, TouchableHighlight} from 'react-native';
+import React, {useRef, useState,useContext} from 'react';
+import {Text, View, ScrollView ,Modal, TouchableHighlight,TouchableOpacity,Image} from 'react-native';
+import {UserContext} from '../store/userContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { notificacoesStyles } from '../styles/global';
+import { notificacoesStyles,loginStyles } from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
 
 const NotificationModal = (props) => {
     const animation = useRef(null);
+    const [input,setInput] = useState();
+    const {sessionDb} = useContext(UserContext);
     let notificationsExist = false;
     let notificationsArray = [];
     const notificationData = props.route.params.notificationsData;  
+//console.log(input)
+    const saveProfileDataUrl = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
+  async function updateInformation()  {
+    response = await fetch(saveProfileDataUrl,{
+        method: 'PUT',
+        headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+           
+          input:input,
+          solved: "1",
+          db_name: sessionDb,
+          username: sessionDb
+        })
+        
+    });
+    const data = await response.json()
+}
+
         if(notificationData.message != "No data found"){
             notificationsExist = true;
             notificationData.map(element => {
             
             notificationsArray.push(
-                <View key={element['input']} style={notificacoesStyles.notificationCard}>
-                    
+                
+                <View key={element['input']}   style={notificacoesStyles.notificationCard}>
+                    <TouchableOpacity onPress={() => setInput(element['input']) && updateInformation() }>
+                   <View style={loginStyles.informacoesSection}>
+                   <Image style={loginStyles.loginIcons}source= {require('../assets/info.png')}/>
+                   <Text>{element['input']}</Text>
+                   </View> 
+                   </TouchableOpacity> 
                     <View style={notificacoesStyles.statusView}>
                         <Text style={notificacoesStyles.notificationSubtitleText}>Data: </Text> 
                         <Text>{element['dt']}</Text>
@@ -39,10 +69,11 @@ const NotificationModal = (props) => {
            
         }else{
             console.log("data das notificacoes: " + JSON.stringify(notificationData));
+          
             notificationsExist = false;
         }    
         
- 
+        //console.log(input)
   
   
     return (  

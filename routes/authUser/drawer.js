@@ -2,8 +2,8 @@ import { createDrawerNavigator} from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
 import MonitorizacaoStack from "./monitorizacaoStack";
 import ConsultaStack from "./consultaStack";
-import RelatorioStack from "./relatorioStack";
-import ConfiguracoesStack from "./configuracoesStack";
+import NotificationsStack from "./notificationsStack";
+import InformacoesStack from "./informacoesStack";
 import CustomDrawer from "./customDrawer";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Platform } from "react-native";
@@ -28,8 +28,8 @@ const RootDrawerNavigator = createDrawerNavigator({
             ),
           }, 
     },   
-    Relatório: {
-        screen: RelatorioStack,
+    Notificações: {
+        screen: NotificationsStack,
         
         navigationOptions: {
             style:{
@@ -40,11 +40,11 @@ const RootDrawerNavigator = createDrawerNavigator({
             ),
           }, 
     },
-    Configurações: {    
-        screen: ConfiguracoesStack,   
+    Informações: {    
+        screen: InformacoesStack,   
         navigationOptions: {
             drawerIcon: (             
-                <Icon name='settings' style={{height:40, width:40, marginLeft:'50%',color:'white', display:"flex"}} size={40}  type="Ionicons" />
+                <Icon name='information-circle-outline' style={{height:40, width:40, marginLeft:'50%',color:'white', display:"flex"}} size={40}  type="Ionicons" />
             ),
           }, 
     },

@@ -7,7 +7,7 @@ export default function HeaderConfiguracoes( {navigation, title} ){
    
     const openMenu = () => {
         //navigation.openDrawer();
-        navigation.navigate('Configuracoes');
+        navigation.navigate('Informacoes');
     }
 
     let headerIconSize = Platform.OS === 'android' ? 30 : 40;

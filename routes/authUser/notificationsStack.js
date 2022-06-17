@@ -1,15 +1,15 @@
 import { createStackNavigator } from "react-navigation-stack";
-import Relatorio from '../../screens/relatorio';
+import Notifications from '../../screens/notificationsModal';
 import Header from "../../shared/header";
 import React from 'react';
 
 const screens = {
 
-    Relatorio: {
-        screen: Relatorio,
+    Notifications: {
+        screen: Notifications,
         navigationOptions: ({ navigation }) => {
             return {
-                header: () => <Header navigation ={navigation} title= 'Relatório' tipo='titulo'/>,
+                header: () => <Header navigation ={navigation} title= 'Notificaçóes' tipo='titulo'/>,
             }
         }
     },

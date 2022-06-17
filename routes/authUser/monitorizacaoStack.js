@@ -1,6 +1,5 @@
 import { createStackNavigator } from "react-navigation-stack";
 import Monitorizacao from "../../screens/monitorizacao";
-import ReviewDetails from "../../screens/reviewDetails";
 import Header from "../../shared/header";
 import React from 'react';
 
@@ -14,13 +13,6 @@ const screens = {
             }
         }
     },
-    ReviewDetails: {
-        screen: ReviewDetails,
-        navigationOptions:{
-            title: 'Review Details',
-              //headerStyle: {backgroundColor: "#eee"}
-        }
-    }
 
 }
 

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 80,
+        height: 97,
         backgroundColor: "#398BEA",
         margin:0,
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0

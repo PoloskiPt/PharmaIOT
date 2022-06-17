@@ -397,7 +397,7 @@ pieChartText: {
 }
 })
 
-export const configuracoesStyles = StyleSheet.create({
+export const informacoesStyles = StyleSheet.create({
 
   listItemDefault: {
        borderBottomWidth:1, 
