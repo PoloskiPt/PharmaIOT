@@ -21,10 +21,12 @@ const NotificationModal = (props) => {
           'Tem a certeza que pretende definir este alerta como resolvido? ',
           '',
           [
-            { text: 'Cancelar', onPress: () => { } },
+            { text: 'Cancelar', onPress: () => { return; } },
             {
               text: 'Sim', onPress: () => {
                 // Filter Data 
+
+                updateInformation(id);
                 const filteredData = notificationsData.filter(item => item.input !== id);
                 //Updating List Data State with NEW Data.
                 setNotificationsData(filteredData);
@@ -100,17 +102,15 @@ const NotificationModal = (props) => {
                  renderItem={({item}) =>               
                  <View style={notificacoesStyles.notificationCard}>
                 
-                 <View style={{flex:1, flexDirection:'row', justifyContent: 'space-between'}}>
+                 <View style={{flex:1, flexDirection:'row', justifyContent: 'space-between', paddingBottom:10   }}>
                     
                  <View style={notificacoesStyles.statusView}>
                      <Text style={notificacoesStyles.notificationSubtitleText}>Data: </Text> 
                      <Text>{item['dt']}</Text>
                  </View>
 
-                 <TouchableOpacity onPress={() =>  updateInformation(item['input']) && deleteSelectedElement(item['input'])}>
-                    <View style={loginStyles.informacoesSection}>
-                    <Image style={loginStyles.loginIcons}source= {require('../assets/success-notifications.png')}/>
-                    </View> 
+                 <TouchableOpacity onPress={() => deleteSelectedElement(item['input'])}>              
+                    <Image style={{height:35, width:35, marginRight:'2%'}} source= {require('../assets/success-notifications.png')}/>
                 </TouchableOpacity> 
                     
                 </View>       

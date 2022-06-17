@@ -200,16 +200,10 @@ async function login(){
 
 return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-       <View style={loginStyles.loginContainer}>
-            
-     
-      
+       <View style={loginStyles.loginContainer}>    
             
             <View style={{position:'relative', bottom:'-2%'}}>
       
-           
-
-  
         </View>
     
             
