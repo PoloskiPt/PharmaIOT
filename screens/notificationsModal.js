@@ -1,11 +1,10 @@
-import React, {useRef, useState,useContext, useEffect} from 'react';
-import {Text, View, ScrollView ,Modal, TouchableHighlight,TouchableOpacity,Image,FlatList, Alert} from 'react-native';
+import React, {useRef, useState,useContext} from 'react';
+import {Text, View, Modal, TouchableHighlight,TouchableOpacity,Image,FlatList, Alert} from 'react-native';
 import {UserContext} from '../store/userContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { notificacoesStyles,loginStyles } from '../styles/global';
+import { notificacoesStyles} from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
-import {getNotifications} from '../functions/genericFunctions';
 
 const NotificationModal = (props) => {
     const animation = useRef(null);
@@ -13,7 +12,7 @@ const NotificationModal = (props) => {
     let notificationsExist = false;
     const [notificationsData, setNotificationsData] = useState(props.route.params.notificationsData);
 
-    const saveProfileDataUrl = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
+    const updateAlertStatus = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
    
     const deleteSelectedElement = (id) => {
  
@@ -36,7 +35,7 @@ const NotificationModal = (props) => {
       }
 
   async function updateInformation(id)  {
-   let response = await fetch(saveProfileDataUrl,{
+   let response = await fetch(updateAlertStatus,{
         method: 'PUT',
         headers:{
             'Accept':'application/json',
@@ -51,8 +50,9 @@ const NotificationModal = (props) => {
         })
       
     });
-    const data = await response.json()
-  
+   
+    const data = await response.json();
+
 }
 
         if(notificationsData.message != "No data found"){
@@ -140,9 +140,7 @@ const NotificationModal = (props) => {
                     
                 </Modal>    
             </View>
-    );
-
-                         
+    );              
 
 }
 
