@@ -147,19 +147,20 @@ export default function Informacoes({navigation}) {
 const styles = StyleSheet.create({
 centeredView: {
      flex: 1,
-     justifyContent: 'center',
      alignItems: 'center',
-     marginTop: 22,
    },
    modalView: {
-     height: '95%',
-     width: '95%',
+     height: '98%',
+     width: '96%',
      backgroundColor: 'white',
      borderTopRightRadius:10,
      borderTopLeftRadius:10, 
      borderBottomRightRadius:10,
      borderBottomLeftRadius:10, 
-     padding: 25,
+     paddingBottom:25,
+     paddingLeft:25,
+     paddingRight:25,
+     paddingTop:4,
      alignItems: 'center',
      shadowColor: '#000',
      shadowOffset: {

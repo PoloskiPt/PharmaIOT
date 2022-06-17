@@ -128,6 +128,7 @@ informacoesSection:{
   marginTop:20,
   marginBottom:'5%'
 },
+
 borderTextInput:{
     borderBottomWidth:2,
     borderBottomColor:'grey',
@@ -442,8 +443,7 @@ export const notificacoesStyles = StyleSheet.create({
   closeIcon:{
       flexDirection: 'row',
       justifyContent: 'center',
-      marginTop: '1%',
-      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+
   },
   statusResolved:{
       color:'green',
