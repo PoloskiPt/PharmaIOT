@@ -75,7 +75,7 @@ export default function Notifications({navigation}) {
             <RefreshControl
             refreshing={refreshing}
             onRefresh={updateInformation}         
-    />
+            />
         }
         keyExtractor={(item) => item.input}
         data={notificationsData}
@@ -115,8 +115,6 @@ export default function Notifications({navigation}) {
                                             
                 </View>   
                 </SafeAreaView>   
-
-  
   
   );
 }
