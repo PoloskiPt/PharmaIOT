@@ -1,18 +1,31 @@
 import React, {useRef, useState,useContext} from 'react';
-import {Text, View, Modal, TouchableHighlight,TouchableOpacity,Image,FlatList, Alert} from 'react-native';
+import {Text, View, Modal, TouchableHighlight,TouchableOpacity,Image,FlatList, Alert, RefreshControl} from 'react-native';
 import {UserContext} from '../store/userContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { notificacoesStyles} from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
+import {getNotifications} from '../functions/genericFunctions';
+
+const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
 
 const NotificationModal = (props) => {
     const animation = useRef(null);
+    const [refreshing, setRefreshing] = useState(false);
     const {sessionDb} = useContext(UserContext);
     let notificationsExist = false;
     const [notificationsData, setNotificationsData] = useState(props.route.params.notificationsData);
 
     const updateAlertStatus = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
+
+    const refreshInformation = async () => {
+        setRefreshing(true);
+        let notificationsFetchResult = await getNotifications(sessionDb);
+        setNotificationsData(notificationsFetchResult);
+        wait(1600).then(() => setRefreshing(false));
+    }
    
     const deleteSelectedElement = (id) => {
  
@@ -98,7 +111,13 @@ const NotificationModal = (props) => {
                 
              <FlatList
                  keyExtractor={(item) => item.input}
-                 data={notificationsData}
+                 refreshControl={
+                    <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={refreshInformation}         
+                    />
+                }
+                 data={notificationsData}                 
                  renderItem={({item}) =>               
                  <View style={notificacoesStyles.notificationCard}>
                 
@@ -143,7 +162,6 @@ const NotificationModal = (props) => {
     );              
 
 }
-
 
 export default NotificationModal;
 
