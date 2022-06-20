@@ -19,7 +19,50 @@ export default function Notifications({navigation}) {
     const [notificationsExist, setNotificationsExist] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
-    const updateInformation = async () => {
+    const updateAlertStatus = "https://app.pharmaiot.pt/api/api/monitorizacao/update_alert_status.php";
+
+    const deleteSelectedElement = (id) => {
+ 
+        Alert.alert(
+          'Tem a certeza que pretende definir este alerta como resolvido? ',
+          '',
+          [
+            { text: 'Cancelar', onPress: () => { return; } },
+            {
+              text: 'Sim', onPress: () => {
+                // Filter Data 
+
+                updateInformation(id);
+                const filteredData = notificationsData.filter(item => item.input !== id);
+                //Updating List Data State with NEW Data.
+                setNotificationsData(filteredData);
+              }
+            },
+          ])
+      }
+
+    async function updateInformation(id)  {
+        let response = await fetch(updateAlertStatus,{
+             method: 'PUT',
+             headers:{
+                 'Accept':'application/json',
+                 'Content-Type':'application/json'
+             },
+             body: JSON.stringify({
+                
+               input: id,
+               solved: "1",
+               db_name: sessionDb,
+               username: sessionDb
+             })
+           
+         });
+        
+         const data = await response.json();
+     
+     }
+
+    const refreshInformation = async () => {
         setRefreshing(true);
         let notificationsFetchResult = await getNotifications(sessionDb);
         setNotificationsData(notificationsFetchResult);
@@ -43,12 +86,10 @@ export default function Notifications({navigation}) {
     }, [getNotifications])
 
   return (
-  
-
     
-   <SafeAreaView>
+   <SafeAreaView style={{backgroundColor: '#398BEA'}}>
      {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
-    <View style={{display:'flex', height:'100%'}} >
+   
 
 {isLoading === false && notificationsExist === false &&
     <View style={{backgroundColor: '#fff',alignItems: 'center',justifyContent: 'center', flex: 1}}>
@@ -67,14 +108,13 @@ export default function Notifications({navigation}) {
 } 
    
 {isLoading === false && notificationsExist === true &&
- 
-                
+            
     <FlatList
         style={{height:'100%'}}
         refreshControl={
             <RefreshControl
             refreshing={refreshing}
-            onRefresh={updateInformation}         
+            onRefresh={refreshInformation}         
             />
         }
         keyExtractor={(item) => item.input}
@@ -110,10 +150,7 @@ export default function Notifications({navigation}) {
     }
     />
 
-   
-} 
-                                            
-                </View>   
+}                                                
                 </SafeAreaView>   
   
   );
