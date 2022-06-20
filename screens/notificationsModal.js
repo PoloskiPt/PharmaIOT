@@ -77,12 +77,13 @@ const NotificationModal = (props) => {
   
     return (  
 
-            <View >
-                <Modal animationType="slide" 
-                Visible={props.modalState} >      
-                
-                <SafeAreaView>
-                <View style={{display:'flex', height:'100%'}} >
+          
+                <Modal animationType="slide"             
+                Visible={props.modalState} 
+                statusBarTranslucent={true}
+                >            
+                <SafeAreaView style={{backgroundColor:'#398BEA'}}>
+                <View style={{display:'flex', height:'100%', backgroundColor:'#398BEA'}} >
                 <View style={notificacoesStyles.closeIcon}>
                 <TouchableHighlight  >   
                 <Icon name='close-outline' style={{color:'black'}} size={40}  type="Ionicons" onPress={() => props.navigation.pop()}/>
@@ -158,7 +159,7 @@ const NotificationModal = (props) => {
                 </SafeAreaView>   
                     
                 </Modal>    
-            </View>
+          
     );              
 
 }

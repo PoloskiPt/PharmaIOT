@@ -1,5 +1,5 @@
 import React, {useRef, useState,useContext, useEffect} from 'react';
-import {Text, View, ScrollView ,Modal, TouchableHighlight,TouchableOpacity,Image,FlatList, Alert, RefreshControl} from 'react-native';
+import {Text, View,TouchableOpacity,Image,FlatList, Alert, RefreshControl} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {getNotifications} from '../functions/genericFunctions';
 import {UserContext} from '../store/userContext';
@@ -11,7 +11,7 @@ const wait = timeout => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   };
 
-export default function Notifications({navigation}) {
+export default function Notifications() {
     const {sessionDb} = useContext(UserContext);
     const [notificationsData, setNotificationsData] = useState();
     const animation = useRef(null);
