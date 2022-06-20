@@ -48,7 +48,7 @@ export default function Notifications({navigation}) {
     
    <SafeAreaView>
      {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
-                <View style={{display:'flex', height:'100%', borderWidth:2, borderColor:'red'}} >
+    <View style={{display:'flex', height:'100%'}} >
 
 {isLoading === false && notificationsExist === false &&
     <View style={{backgroundColor: '#fff',alignItems: 'center',justifyContent: 'center', flex: 1}}>
@@ -67,10 +67,10 @@ export default function Notifications({navigation}) {
 } 
    
 {isLoading === false && notificationsExist === true &&
-    <SafeAreaView>
+ 
                 
     <FlatList
-        style={{borderWidth:3, borderColor:'purple', height:'100%'}}
+        style={{height:'100%'}}
         refreshControl={
             <RefreshControl
             refreshing={refreshing}
@@ -82,7 +82,7 @@ export default function Notifications({navigation}) {
         renderItem={({item}) =>               
         <View style={notificacoesStyles.notificationCard}>
        
-        <View style={{flex:1, flexDirection:'row', justifyContent: 'space-between', paddingBottom:10, borderWidth:2, borderColor:'green'}}>
+        <View style={{flex:1, flexDirection:'row', justifyContent: 'space-between', paddingBottom:10}}>
            
         <View style={notificacoesStyles.statusView}>
             <Text style={notificacoesStyles.notificationSubtitleText}>Data: </Text> 
@@ -110,7 +110,7 @@ export default function Notifications({navigation}) {
     }
     />
 
-</SafeAreaView>       
+   
 } 
                                             
                 </View>   
