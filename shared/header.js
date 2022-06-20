@@ -56,20 +56,24 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: 'white',
         letterSpacing: 1,
-        marginTop: Platform.OS === 'android'? 16: 40,
+        marginTop: Platform.OS === 'android'? "5%": 40,
+        marginBottom: Platform.OS === 'android'? "1%": 40,
+       
         
     },
     iconHamburguer: {
         position: 'absolute',
         left:16,
-        top: Platform.OS === 'android'? 34: 40,  
+        top: Platform.OS === 'android'? "80%": 40, 
+       
        
  
     },
     iconNotifications: {
         position: 'absolute',
         right:16,
-        top: Platform.OS === 'android'? 34: 40,  
+        top: Platform.OS === 'android'? "80%": 40,
+       
        
     },
     headerTitle:{
