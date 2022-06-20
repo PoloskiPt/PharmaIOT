@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import { StyleSheet, Text, View,Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, View,Platform, StatusBar, SafeAreaView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import {getNotifications} from '../functions/genericFunctions';
@@ -27,13 +27,15 @@ export default function Header( {navigation, title} ){
     }
    
         return(
-            <View style={styles.header}>
+            
+            <View style={styles.header}>       
+                <SafeAreaView style={{width:'100%', flex:1, flexDirection:'row', justifyContent: 'space-between'}}>
                 <MaterialIcons name='menu' size={headerIconSize} onPress={openMenu} style={styles.iconHamburguer}/>
-                <View style={styles.headerTitle}>
-    
+                <View style={styles.headerTitle}>  
                     <Text style={styles.headerText}>{title}</Text>
                 </View>
                 <MaterialIcons name='notifications' onPress={openNotifications} color="#FFBE72" size={headerIconSize} style={styles.iconNotifications}/>
+                </SafeAreaView>
             </View>
         )
 }
@@ -41,40 +43,25 @@ export default function Header( {navigation, title} ){
 const styles = StyleSheet.create({
     header:{
         width: '100%',
-        height: '100%',
-        //flexDirection: 'row',
+        flexDirection: 'row',
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        height: 97,
         backgroundColor: "#398BEA",
         margin:0,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     headerText: {
         fontFamily: 'roboto-bold',
         fontSize: 30,
         color: 'white',
-        letterSpacing: 1,
-        marginTop: Platform.OS === 'android'? "5%": 40,
-        marginBottom: Platform.OS === 'android'? "1%": 40,
-       
-        
+        letterSpacing: 1,  
     },
     iconHamburguer: {
-        position: 'absolute',
-        left:16,
-        top: Platform.OS === 'android'? "80%": 40, 
-       
-       
- 
+        left:16,           
     },
     iconNotifications: {
-        position: 'absolute',
-        right:16,
-        top: Platform.OS === 'android'? "80%": 40,
-       
-       
+        right:16,          
     },
     headerTitle:{
         flexDirection: 'row'
