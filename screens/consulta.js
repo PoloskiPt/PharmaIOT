@@ -33,6 +33,7 @@ export default function Consulta() {
   const [lastWeekDate, setLastWeekDate] = useState(null);
   const [lastMonthDate, setLastMonthDate] = useState(null);
   const {sessionDb} = useContext(UserContext);
+  const [datasGrafico, setDatasGrafico] = useState();
 
   useEffect(() => {
     let today = new Date();
@@ -83,13 +84,21 @@ export default function Consulta() {
   }
  
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
-
     setIsLoading(true);
-
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1, sessionDb);
-    setDataInterval(measurePointInterval);
-   ;
+    let auxDatas = parseInt(measurePointInterval.length);
+    console.log(auxDatas);
+    if(auxDatas > 3){
 
+    }else{
+      for(let i = 0; i <= auxDatas; i++){
+        setDatasGrafico(measurePointInterval[i].dt);
+      }
+    }
+    
+    
+
+    setDataInterval(measurePointInterval);
     setIsLoading(false);
     if(measurePointInterval.message == "No data found") {
       setGraphDataStatus(false);
@@ -108,10 +117,8 @@ export default function Consulta() {
     let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
     
     setDatepickEnd(date1);
-    console.log(datepickEnd);
-   
+  
     requestMeasurePoints(0);
-    console.log('data de ontem : ' +  yesterdayDate);
   }, []);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -147,7 +154,6 @@ export default function Consulta() {
     console.log("resultado data final: " + dataFinal + " data inicial: " +  dataInicial);
 
     if(dataFinalMiliseconds < dataInicialMiliseconds){
-      console.log("erro");
       Alert.alert("Data inválida","A data inicial não pode ser maior que a data final.", [{text:'Compreendo'}]);
     }
     requestMeasurePointDataInterval(currentSn,date,dateEnd)
