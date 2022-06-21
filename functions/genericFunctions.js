@@ -27,7 +27,6 @@ const updateProfileEndpoint="https://app.pharmaiot.pt/api/api/users/update_profi
 
 export async function getMeasurePoints(db_name) {
     let measurePointsArray = [];
-    
     let reqs = await fetch(measurePointsEndpoint,{
         method: 'POST',
         headers:{
@@ -42,7 +41,7 @@ export async function getMeasurePoints(db_name) {
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
+    .catch((error) => console.log(error))
     resp.map(element => {
         measurePointsArray.push(
           { label: element['name'], value: element['sn'] },
@@ -69,7 +68,7 @@ export async function getMeasurePointData(sn, db_name) {
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
+    .catch((error) => console.log(error))
     return resp;
     }
 
@@ -88,7 +87,7 @@ export async function getMeasurePointData(sn, db_name) {
         });
         let resp = await reqs.json()
         .then(console.log())
-        .catch((error) => alert(error))
+        .catch((error) => console.log(error))
         return resp;
         }
 
@@ -111,7 +110,7 @@ export async function getMeasurePointDataInterval(sn,dt,dt1, db_name) {
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
+    .catch((error) => console.log(error))
     return resp;
     }
 //**  GET NOTIFICATIONS **/
@@ -131,7 +130,7 @@ export async function getNotifications(db_name) {
     });
     let resp = await reqs.json()
     .then(console.log())
-    .catch((error) => alert(error))
+    .catch((error) => console.log(error))
     return resp;
 
     }

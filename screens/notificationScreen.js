@@ -87,12 +87,12 @@ export default function Notifications() {
 
   return (
     
-   <SafeAreaView style={{backgroundColor: '#398BEA'}}>
+   <SafeAreaView style={{backgroundColor: '#398BEA',height:'100%'}}>
      {isLoading && <Spinner visible={isLoading}  textContent={'Loading...'}  textStyle={{color:'black'}}/>} 
    
 
 {isLoading === false && notificationsExist === false &&
-    <View style={{backgroundColor: '#fff',alignItems: 'center',justifyContent: 'center', flex: 1}}>
+    <View style={{backgroundColor: '#fff',alignItems: 'center',justifyContent: 'center', flex: 1,height:'100%'}}>
          <LottieView
             ref={animation}
             style={{

@@ -98,7 +98,7 @@ export default function Monitorizacao() {
   }
 
   useEffect(() => {
-  
+    console.log("sessiondb: " + sessionDb);
     requestMeasurePoints(0); 
     setUserPassword(sessionPassword);
     setUserEmail(sessionEmail);
