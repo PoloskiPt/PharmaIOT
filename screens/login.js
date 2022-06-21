@@ -58,7 +58,7 @@ async function getValueFor(key){
     if(result){
         onChangeResult(result);
     }else{
-        alert('Inválid key')
+        console.log('Inválid key')
     }
 }
 
