@@ -84,7 +84,7 @@ export async function getMeasurePointData(sn, db_name) {
                 db_name: db_name,
                 username: db_name
             })
-        });
+        }); 
         let resp = await reqs.json()
         .then(console.log())
         .catch((error) => console.log(error))
@@ -111,6 +111,7 @@ export async function getMeasurePointDataInterval(sn,dt,dt1, db_name) {
     let resp = await reqs.json()
     .then(console.log())
     .catch((error) => console.log(error))
+    console.log("VERIFICAR: " + JSON.stringify(resp));
     return resp;
     }
 //**  GET NOTIFICATIONS **/

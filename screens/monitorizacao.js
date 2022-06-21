@@ -43,7 +43,6 @@ export default function Monitorizacao() {
   async function requestMeasurePointData(sn){
     setIsLoading(true);
     let measurePointData = await getMeasurePointData(sn, sessionDb);
-    console.log("VERIFICAR: " + JSON.stringify(measurePointData));
     if(measurePointData.message == 'No data found'){
       setData=[measurePointData.message];
       setIsLoading(false);
