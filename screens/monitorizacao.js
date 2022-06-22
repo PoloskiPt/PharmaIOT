@@ -1,12 +1,12 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,RefreshControl, ScrollView} from 'react-native';
 import {globalStyles,monitorizacaoStyles,pickerSelectStyless } from '../styles/global';
 import MonoCard from '../shared/monoCard';
 import FlatButton from '../shared/button';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../store/userContext';
-import {getMeasurePoints, getMeasurePointData, onShare,getMeasurePointDataLastDay} from '../functions/genericFunctions';
+import {getMeasurePoints, getMeasurePointData, onShare,getMeasurePointDataLastDay, wait} from '../functions/genericFunctions';
 import Svg, {G, Circle} from "react-native-svg";
 import { LineChart } from "react-native-chart-kit";
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -17,7 +17,7 @@ export default function Monitorizacao() {
   let cardHeight = Platform.OS === 'android'? '85%': "85%";
   const animation = useRef(null);
   const [measurePoints, setMeasurePoints] = useState([]);
-  const [monitoringData, setmonitoringData] = useState();
+  const [monitoringData, setMonitoringData] = useState();
   const [currentSn, setCurrentSn] = useState();
   const [monitoringDataLastDay, setmonitoringDataLastDay] = useState();
   const [humCircleChartColor, setHumCircleChartColor] = useState();
@@ -30,39 +30,15 @@ export default function Monitorizacao() {
   const radius = 70;
   const circleCircumference = 2 * Math.PI * radius;
   const [Data, setData] = useState();
+  const [refreshing, setRefreshing] = useState(false);
 
 
-    //converte o numero do mes para o seu respetivo nome
-    const convertMonthNumberToText = (month) => {
-
-      switch (month) {
-        case '01':
-           return "Jan";
-        case '02':
-           return "Fev";
-        case '03':
-           return "Mar";
-        case '04':
-           return "Abr";
-        case '05':
-           return "Maio";
-        case '06':
-           return "Junho";
-        case '07':
-           return "Julho";
-        case '08':
-           return "Ago";
-        case '09':
-           return "Setembro";
-        case '10':
-           return "Outubro";
-        case '11':
-           return "Novembro";
-        case '12':
-           return "Dezembro";
-     }
-  
-    } 
+  const refreshInformation = async () => {
+    setRefreshing(true);
+    let measurePointDataFetchResult = await getMeasurePointData(currentSn, sessionDb);
+    setMonitoringData(measurePointDataFetchResult);
+    wait(1600).then(() => setRefreshing(false));
+}
 
   async function requestMeasurePoints(id){
      
@@ -83,7 +59,7 @@ export default function Monitorizacao() {
       return;
     }
     console.log("antero " + measurePoints[0].name);
-    setmonitoringData(measurePointData);
+    setMonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
     let temperatura = measurePointData[0].temp;
     
@@ -158,10 +134,13 @@ export default function Monitorizacao() {
           </View>
         </View> 
       </View>
-
     <View style={{height:"100%", width:'88%'}}> 
-      <MonoCard height={cardHeight} >
 
+      <MonoCard height={cardHeight} scrollViewRefreshProp={<RefreshControl
+              refreshing={refreshing}
+              onRefresh={refreshInformation}         
+              />}>
+      
     <View style={monitorizacaoStyles.monoContainer}>
          {monitoringData  && monitoringData.length > 0 && measurePoints &&
          <View style={{ flex: 1, flexjustifyContent: 'center', alignItems:'center'}} >     
@@ -236,7 +215,7 @@ export default function Monitorizacao() {
 
  {monitoringDataLastDay && monitoringDataLastDay.length > 0 && <LineChart
         data={{
-          labels : datasGrafico,
+          labels : ['14 mar'],
           datasets: [ 
             {
               data:monitoringDataLastDay.map((item) => {

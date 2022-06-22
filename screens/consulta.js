@@ -50,8 +50,6 @@ export default function Consulta() {
     getLastMonthDate();
   }, [sessionDb]);
 
- 
-
   // converte a data em numerico para texto
   const convertNumberedDateToText = (datas) => {
 

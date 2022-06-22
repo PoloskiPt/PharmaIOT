@@ -24,7 +24,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-
 export default function App() {
 
   //notifications

@@ -2,6 +2,11 @@ import * as SecureStore from 'expo-secure-store';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 
+
+export const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
 /** DOWNLOAD Cerificado Calibração PDF **/
 export const onShare = async () => {
     const {uri: localUri} = await FileSystem.downloadAsync(

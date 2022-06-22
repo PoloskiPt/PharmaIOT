@@ -6,7 +6,7 @@ export default function MonoCard(props){
     return(
         <View style={styles(props.height).mainCard}>
             <View style={styles.cardContent}>            
-                 <ScrollView
+                 <ScrollView refreshControl={props.scrollViewRefreshProp}
                     showsVerticalScrollIndicator ={false}
                     showsHorizontalScrollIndicator={false}>
                     {props.children}

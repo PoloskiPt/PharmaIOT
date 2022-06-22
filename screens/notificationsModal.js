@@ -5,11 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { notificacoesStyles} from '../styles/global';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LottieView from 'lottie-react-native';
-import {getNotifications} from '../functions/genericFunctions';
-
-const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
+import {getNotifications,wait} from '../functions/genericFunctions';
 
 const NotificationModal = (props) => {
     const animation = useRef(null);

@@ -1,15 +1,11 @@
 import React, {useRef, useState,useContext, useEffect} from 'react';
 import {Text, View,TouchableOpacity,Image,FlatList, Alert, RefreshControl} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {getNotifications} from '../functions/genericFunctions';
+import {getNotifications,wait} from '../functions/genericFunctions';
 import {UserContext} from '../store/userContext';
 import LottieView from 'lottie-react-native';
 import { notificacoesStyles} from '../styles/global';
 import Spinner from 'react-native-loading-spinner-overlay';
-
-const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
 
 export default function Notifications() {
     const {sessionDb} = useContext(UserContext);
