@@ -45,7 +45,54 @@ export default function Consulta() {
     getLastMonthDate();
   }, [sessionDb]);
 
-  
+  //converte o numero do mes para o seu respetivo nome
+  const convertMonthNumberToText = (month) => {
+
+    switch (month) {
+      case '01':
+         return "Jan";
+      case '02':
+         return "Fev";
+      case '03':
+         return "Mar";
+      case '04':
+         return "Abr";
+      case '05':
+         return "Maio";
+      case '06':
+         return "Junho";
+      case '07':
+         return "Julho";
+      case '08':
+         return "Ago";
+      case '09':
+         return "Setembro";
+      case '10':
+         return "Outubro";
+      case '11':
+         return "Novembro";
+      case '12':
+         return "Dezembro";
+   }
+
+  } 
+
+
+  // converte a data em numerico para texto
+  const convertNumberedDateToText = (datas) => {
+
+      let dateArrayAux = [];
+
+      for(let i = 0; i < datas.length; i++){
+       
+        let auxDataMonth = convertMonthNumberToText(datas[i].substring(5,7));
+        let auxDataDay = datas[i].substring(8,10);
+        dateArrayAux.push(auxDataDay + ' ' + auxDataMonth);
+
+      }
+      return dateArrayAux;
+  }
+   
   const getYesterdayDate = () => {
 
     let dateTeste = new Date();
@@ -84,20 +131,29 @@ export default function Consulta() {
   }
  
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
+    
     setIsLoading(true);
     let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1, sessionDb);
     let auxDatas = parseInt(measurePointInterval.length);
-    console.log(auxDatas);
-    if(auxDatas > 3){
-
+    let datas = [];
+    
+    console.log("valor aux datas: " + auxDatas);
+    if(auxDatas >= 3){
+      console.log("é maior ou igual a 3");
+      for(let i = 0; i < auxDatas; i++){
+        if(i == 0 || i == auxDatas - 1){
+        datas.push(measurePointInterval[i].dt);  
+      }   
+    }     
+      let datasConvertidas = convertNumberedDateToText(datas);
+      console.log(datasConvertidas);
+      setDatasGrafico(datasConvertidas);
     }else{
-      for(let i = 0; i <= auxDatas; i++){
-        setDatasGrafico(measurePointInterval[i].dt);
-      }
+
+      
+      
     }
     
-    
-
     setDataInterval(measurePointInterval);
     setIsLoading(false);
     if(measurePointInterval.message == "No data found") {
@@ -260,7 +316,7 @@ export default function Consulta() {
 
           {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
-              labels: ["14 Mar"],
+              labels: datasGrafico,
               datasets: [
                 {
                   data: DataInterval.map((item) => {
@@ -280,7 +336,7 @@ export default function Consulta() {
 
           {DataInterval && DataInterval.length > 0 && <LineChart
             data={{
-              labels: ["14 Mar"],
+              labels: datasGrafico,
               datasets: [
                 {
                   data: DataInterval.map((item) => {
