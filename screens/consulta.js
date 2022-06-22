@@ -21,7 +21,6 @@ export default function Consulta() {
   const [isLoading, setIsLoading] = useState(true);
   // useStates pickers topo
   const [currentSn, setCurrentSn] = useState();
-  const [selectedTimeSpan, setSelectedTimeSpan] = useState();
   const [dataInicial, setDataInicial] = useState();
   const [dataFinal, setDataFinal] = useState();
   const [datepick, setDatepick] = useState(null);
