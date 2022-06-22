@@ -114,13 +114,16 @@ export default function Consulta() {
       console.log("é maior ou igual a 3");
       console.log("datas aux: " + auxDatas/2)
       for(let i = 0; i < auxDatas; i++){
-        if(i == 0 || i == auxDatas - 1 || i == (auxDatas/2) ){
-        datas.push(measurePointInterval[i].dt);  
-      }   
-    }     
+        if( i == 0|| i == auxDatas - 1 || i == Math.round(auxDatas/2)){
+          datas.push(measurePointInterval[i].dt); 
+        }
+            
+    }    
       let datasConvertidas = convertNumberedDateToText(datas);
-      console.log(datasConvertidas);
-      setDatasGrafico(datasConvertidas);
+      const  data= [... new Set(datasConvertidas)]
+      console.log(data);
+    
+      setDatasGrafico(data);
     }else{
       for(let i = 0; i < auxDatas; i++){  
         datas.push(measurePointInterval[i].dt);  

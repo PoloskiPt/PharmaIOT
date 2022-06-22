@@ -36,6 +36,7 @@ export default function Monitorizacao() {
   const refreshInformation = async () => {
     setRefreshing(true);
     requestMeasurePointData(currentSn);
+    requestMeasurePointDataLastDay(currentSn)
     wait(1600).then(() => setRefreshing(false));
 }
 
@@ -60,7 +61,7 @@ export default function Monitorizacao() {
     console.log("antero " + measurePoints[0].name);
     setMonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
-    let temperatura = measurePointData[0].temp;
+    let temperatura = Math.round(measurePointData[0].temp);
     
     if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel ||  humidade < measurePointData[0].hum_min_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
