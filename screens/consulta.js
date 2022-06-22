@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {UserContext} from '../store/userContext';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { getMeasurePoints, getMeasurePointDataInterval} from '../functions/genericFunctions';
+import { getMeasurePoints, getMeasurePointDataInterval,convertMonthNumberToText} from '../functions/genericFunctions';
 import LottieView from 'lottie-react-native';
 
 export default function Consulta() {
@@ -39,44 +39,19 @@ export default function Consulta() {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     setDatepick(date);
+
+    let today1 = new Date();
+    today1.setDate(today1.getDate() - 1);
+    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
+    setDatepickEnd(date1);
+    
     requestMeasurePoints(0);
     getYesterdayDate();
     getLastWeekDate();
     getLastMonthDate();
   }, [sessionDb]);
 
-  //converte o numero do mes para o seu respetivo nome
-  const convertMonthNumberToText = (month) => {
-
-    switch (month) {
-      case '01':
-         return "Jan";
-      case '02':
-         return "Fev";
-      case '03':
-         return "Mar";
-      case '04':
-         return "Abr";
-      case '05':
-         return "Maio";
-      case '06':
-         return "Junho";
-      case '07':
-         return "Julho";
-      case '08':
-         return "Ago";
-      case '09':
-         return "Setembro";
-      case '10':
-         return "Outubro";
-      case '11':
-         return "Novembro";
-      case '12':
-         return "Dezembro";
-   }
-
-  } 
-
+ 
 
   // converte a data em numerico para texto
   const convertNumberedDateToText = (datas) => {
@@ -163,19 +138,7 @@ export default function Consulta() {
     }
 
   }
-  useEffect(() => {
-    let today = new Date();
-    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + (today.getHours()+1) + ':' + today.getMinutes() + ':' + today.getSeconds();
-    setDatepick(date);
-   
-    let today1 = new Date();
-    today1.setDate(today1.getDate() - 1);
-    let date1 = today1.getFullYear() + '-' + 0 + (today1.getMonth() + 1 ) + '-' + 0 + (today1.getDate() - 1) + ' ' + (today1.getHours()-1) + ':' + today1.getMinutes() + ':' + today1.getSeconds();
-    
-    setDatepickEnd(date1);
-  
-    requestMeasurePoints(0);
-  }, []);
+
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
  
