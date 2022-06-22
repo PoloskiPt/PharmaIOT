@@ -115,8 +115,9 @@ export default function Consulta() {
     console.log("valor aux datas: " + auxDatas);
     if(auxDatas >= 3){
       console.log("é maior ou igual a 3");
+      console.log("datas aux: " + auxDatas/2)
       for(let i = 0; i < auxDatas; i++){
-        if(i == 0 || i == auxDatas - 1){
+        if(i == 0 || i == auxDatas - 1 || i == (auxDatas/2) ){
         datas.push(measurePointInterval[i].dt);  
       }   
     }     
@@ -124,8 +125,13 @@ export default function Consulta() {
       console.log(datasConvertidas);
       setDatasGrafico(datasConvertidas);
     }else{
-
-      
+      for(let i = 0; i < auxDatas; i++){  
+        datas.push(measurePointInterval[i].dt);  
+      }
+     
+      let datasConvertidas = convertNumberedDateToText(datas);
+      console.log(datasConvertidas);
+      setDatasGrafico(datasConvertidas);
       
     }
     
