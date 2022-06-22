@@ -35,8 +35,7 @@ export default function Monitorizacao() {
 
   const refreshInformation = async () => {
     setRefreshing(true);
-    let measurePointDataFetchResult = await getMeasurePointData(currentSn, sessionDb);
-    setMonitoringData(measurePointDataFetchResult);
+    requestMeasurePointData(currentSn);
     wait(1600).then(() => setRefreshing(false));
 }
 
