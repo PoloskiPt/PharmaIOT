@@ -31,6 +31,8 @@ const {contextEmail,
     setContextDb,
     sessionDb,
     setSessionDb,
+    sessionHost, 
+    setSessionHost
 } = useContext(UserContext);
 
 async function getValueForEmail(){
@@ -146,7 +148,8 @@ async function login(){
             email: email,
             pass: md5(password),
             db_name: 'pharmaio_' + loginState,
-            username: 'pharmaio_' + loginState
+            username: 'pharmaio_' + loginState,
+            host: loginState + '.pharmaiot.pt'
         })
     });
     let resp = await reqs.json()
@@ -174,11 +177,14 @@ async function login(){
     save('session', "true");
     save('sessionEmail', email);
     save('sessionPassword', password);
-    save('sessionDb', 'pharmaio_' + loginState)
+    save('sessionDb', 'pharmaio_' + loginState);
+    save('sessionHost', loginState + '.pharmaiot.pt');
+    console.log("login state: " + loginState + '.pharmaiot.pt');
     save('pharmacy', resp.pharmacy);
     setSessionEmail(email);
     setSessionPassword(password);
     setSessionDb('pharmaio_' + loginState);
+    setSessionHost(loginState + '.pharmaiot.pt');
     setSessionPharmacy(JSON.stringify(resp.pharmacy));
     console.log(JSON.stringify(resp.pharmacy));
     let tokenResult = await storeNotificationToken(expoPushToken, JSON.stringify(resp.pharmacy), generateCurrentDate(), 'pharmaio_' + loginState);

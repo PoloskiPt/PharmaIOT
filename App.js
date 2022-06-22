@@ -41,6 +41,7 @@ export default function App() {
   const [sessionEmail, setSessionEmail] = useState('');
   const [sessionPassword, setSessionPassword] = useState('');
   const [sessionDb, setSessionDb] = useState('');
+  const [sessionHost, setSessionHost] = useState('');
   let getToken;
  
  
@@ -59,6 +60,8 @@ async function getValueForSession(){
     setSessionPassword(sessionPassword);
     let sessionDB = await SecureStore.getItemAsync('sessionDb');
     setSessionDb(sessionDB);
+    let sessionHost = await SecureStore.getItemsAsync('sessionHost');
+    setSessionHost(sessionHost);
     //let sessionPharmacy = await SecureStore.getItemAsync('')
     setIsLoggedIn(true);
     }else{
@@ -129,10 +132,6 @@ async function getValueForToken(){
 
     let device =  getValueForToken();
     
-    
-    //console.log('f' + getToken);
-   
-   
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       setNotification(notification);
@@ -163,6 +162,8 @@ async function getValueForToken(){
     return (     
       <UserContext.Provider 
       value={{
+      sessionHost, 
+      setSessionHost,
       sessionDb,
       setSessionDb,
       contextDb,

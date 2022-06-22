@@ -23,7 +23,7 @@ export default function Monitorizacao() {
   const [humCircleChartColor, setHumCircleChartColor] = useState();
   const [tempCircleChartColor, setTempCircleChartColor] = useState(null);
   const [graphDataStatus, setGraphDataStatus] = useState(null);
-  const {sessionPassword, sessionEmail,sessionPharmacy, sessionDb} = useContext(UserContext);
+  const {sessionPassword, sessionEmail,sessionPharmacy, sessionDb, sessionHost} = useContext(UserContext);
   const [userEmail, setUserEmail] = useState(null);
   const [userPassword, setUserPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ export default function Monitorizacao() {
 
   async function requestMeasurePoints(id){
      
-      let resultMeasurePoints = await getMeasurePoints(sessionDb);
+      let resultMeasurePoints = await getMeasurePoints(sessionDb, sessionHost);
       setMeasurePoints(resultMeasurePoints);
       requestMeasurePointData(currentSn);
       requestMeasurePointDataLastDay(currentSn);
@@ -50,7 +50,7 @@ export default function Monitorizacao() {
 
   async function requestMeasurePointData(sn){
     setIsLoading(true);
-    let measurePointData = await getMeasurePointData(sn, sessionDb);
+    let measurePointData = await getMeasurePointData(sn, sessionDb,sessionHost);
     if(measurePointData.message == 'No data found'){
       setData=[measurePointData.message];
       setIsLoading(false);
@@ -60,7 +60,7 @@ export default function Monitorizacao() {
     console.log("antero " + measurePoints[0].name);
     setMonitoringData(measurePointData);
     let humidade = Math.round(measurePointData[0].hum);
-    let temperatura = measurePointData[0].temp;
+    let temperatura = Math.round(measurePointData[0].temp);
     
     if(humidade >= measurePointData[0].hum_min_admissivel && humidade <= measurePointData[0].hum_max_admissivel ||  humidade < measurePointData[0].hum_min_admissivel || humidade > measurePointData[0].hum_max_admissivel) {
       setHumCircleChartColor('#ba0000');
@@ -94,7 +94,7 @@ export default function Monitorizacao() {
  
   async function requestMeasurePointDataLastDay(sn){
     
-    let measurePointDataLastDay = await getMeasurePointDataLastDay(sn, sessionDb);
+    let measurePointDataLastDay = await getMeasurePointDataLastDay(sn, sessionDb,sessionHost);
     setmonitoringDataLastDay(measurePointDataLastDay);
     if((measurePointDataLastDay.message == "No data found"   && Data == "No data found")) {
       setGraphDataStatus(false);
