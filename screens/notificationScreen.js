@@ -8,7 +8,7 @@ import { notificacoesStyles} from '../styles/global';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Notifications() {
-    const {sessionDb} = useContext(UserContext);
+    const {sessionDb, sessionHost} = useContext(UserContext);
     const [notificationsData, setNotificationsData] = useState();
     const animation = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +49,8 @@ export default function Notifications() {
                input: id,
                solved: "1",
                db_name: sessionDb,
-               username: sessionDb
+               username: sessionDb,
+               host: sessionHost
              })
            
          });

@@ -10,7 +10,7 @@ import {getNotifications,wait} from '../functions/genericFunctions';
 const NotificationModal = (props) => {
     const animation = useRef(null);
     const [refreshing, setRefreshing] = useState(false);
-    const {sessionDb} = useContext(UserContext);
+    const {sessionDb, sessionHost} = useContext(UserContext);
     let notificationsExist = false;
     const [notificationsData, setNotificationsData] = useState(props.route.params.notificationsData);
 
@@ -55,7 +55,8 @@ const NotificationModal = (props) => {
           input: id,
           solved: "1",
           db_name: sessionDb,
-          username: sessionDb
+          username: sessionDb,
+          host: sessionHost
         })
       
     });
