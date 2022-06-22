@@ -171,3 +171,35 @@ export async function deleteItem(key){
         await SecureStore.deleteItemAsync(key);
     }
 
+        //converte o numero do mes para o seu respetivo nome
+export  const convertMonthNumberToText = (month) => {
+
+            switch (month) {
+              case '01':
+                 return "Jan";
+              case '02':
+                 return "Fev";
+              case '03':
+                 return "Mar";
+              case '04':
+                 return "Abr";
+              case '05':
+                 return "Maio";
+              case '06':
+                 return "Junho";
+              case '07':
+                 return "Julho";
+              case '08':
+                 return "Ago";
+              case '09':
+                 return "Setembro";
+              case '10':
+                 return "Outubro";
+              case '11':
+                 return "Novembro";
+              case '12':
+                 return "Dezembro";
+           }
+        
+          };
+
