@@ -18,7 +18,7 @@ const NotificationModal = (props) => {
 
     const refreshInformation = async () => {
         setRefreshing(true);
-        let notificationsFetchResult = await getNotifications(sessionDb);
+        let notificationsFetchResult = await getNotifications(sessionDb, sessionHost);
         setNotificationsData(notificationsFetchResult);
         wait(1600).then(() => setRefreshing(false));
     }

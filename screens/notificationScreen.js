@@ -61,7 +61,7 @@ export default function Notifications() {
 
     const refreshInformation = async () => {
         setRefreshing(true);
-        let notificationsFetchResult = await getNotifications(sessionDb);
+        let notificationsFetchResult = await getNotifications(sessionDb,sessionHost);
         setNotificationsData(notificationsFetchResult);
         wait(1600).then(() => setRefreshing(false));
     }
@@ -69,7 +69,7 @@ export default function Notifications() {
     useEffect(async () => {
         setIsLoading(true);
         console.log(sessionDb);
-        let notificationsFetchResult = await getNotifications(sessionDb);
+        let notificationsFetchResult = await getNotifications(sessionDb, sessionHost);
         console.log(notificationsFetchResult);
         setNotificationsData(notificationsFetchResult);
         setIsLoading(false);

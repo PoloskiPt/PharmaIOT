@@ -25,7 +25,7 @@ export default function Perfil(props) {
   const [btnEditColor,setBtnEditColor] = useState('#FFC222');
   const [editableState, setEditableState] = useState(false);
   const [animationState, setAnimationState] = useState(false);
-  const {sessionDb} = useContext(UserContext);
+  const {sessionDb,sessionHost} = useContext(UserContext);
   // use states updated values
  
   const [emailUpdate,setEmailUpdate] = useState();
@@ -82,7 +82,8 @@ export default function Perfil(props) {
           pass : password,
           input : userId,
           db_name: sessionDb,
-          username: sessionDb
+          username: sessionDb,
+          host:sessionHost
         })
     });
     const data = await response.json()
@@ -119,7 +120,8 @@ export default function Perfil(props) {
             email: email,
             pass: password,
             db_name: sessionDb,
-            username: sessionDb
+            username: sessionDb,
+            host:sessionHost
         })
     });
       const data = await response.json()
@@ -139,7 +141,7 @@ export default function Perfil(props) {
 
     
     fetchMyAPI();
-  },[sessionDb]);
+  },[sessionDb,sessionHost]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

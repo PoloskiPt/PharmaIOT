@@ -31,7 +31,7 @@ export default function Consulta() {
   const [yesterdayDate, setYesterdayDate] = useState(null);
   const [lastWeekDate, setLastWeekDate] = useState(null);
   const [lastMonthDate, setLastMonthDate] = useState(null);
-  const {sessionDb} = useContext(UserContext);
+  const {sessionDb, sessionHost} = useContext(UserContext);
   const [datasGrafico, setDatasGrafico] = useState();
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default function Consulta() {
   //passar a farmacia por parametro mais tarde.
   async function requestMeasurePoints(id) {
    
-    let resultMeasurePoints = await getMeasurePoints(sessionDb);
+    let resultMeasurePoints = await getMeasurePoints(sessionDb,sessionHost);
     setMeasurePoints(resultMeasurePoints);
     requestMeasurePointDataInterval(currentSn, datepickEnd, datepick);
      
@@ -105,7 +105,7 @@ export default function Consulta() {
   async function requestMeasurePointDataInterval(sn, dt, dt1) {
     
     setIsLoading(true);
-    let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1, sessionDb);
+    let measurePointInterval = await getMeasurePointDataInterval(sn, dt, dt1, sessionDb,sessionHost);
     let auxDatas = parseInt(measurePointInterval.length);
     let datas = [];
     
