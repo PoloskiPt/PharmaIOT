@@ -1,16 +1,16 @@
 import React, {useEffect, useState, useRef, useContext} from 'react';
-import { StyleSheet, View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback, Button } from 'react-native';
+import {View, Text,TouchableHighlight, TextInput, KeyboardAvoidingView, ScrollView, Keyboard,TouchableWithoutFeedback} from 'react-native';
 import { globalStyles,perfilStyles } from '../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Spinner from 'react-native-loading-spinner-overlay';
 import FlatButton from '../shared/button';
 import PerfilCard from '../shared/perfilCard';
+import LottieView from 'lottie-react-native';
 import * as SecureStore from 'expo-secure-store';
 import md5 from 'md5';
-import Spinner from 'react-native-loading-spinner-overlay';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {save} from '../functions/genericFunctions';
-import LottieView from 'lottie-react-native';
 import {UserContext} from '../store/userContext';
 
 export default function Perfil(props) {

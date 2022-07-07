@@ -29,7 +29,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/pharmaiot_app_icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.poloski.PharmaIoT",
