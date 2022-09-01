@@ -1,10 +1,11 @@
 <?php 
   class Database {
     // DB Params
-    private $host = 'app.pharmaiot.pt';
-    private $db_name = 'pharmaio_app';
-    private $username = 'pharmaio_app';
-    private $password = 'qFf25VZs2p355qTu';
+    //blank for security reasons;
+    private $host = '';
+    private $db_name = '';
+    private $username = '';
+    private $password = '' 
     private $conn;
 
   public function getDbName() {
